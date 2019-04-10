@@ -1,0 +1,10 @@
+node_modules
+coverage
+dist
+log
+.idea
+.opt-in
+.opt-out
+.DS_Store
+.eslintcache
+*.log

@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "es5",
+    "jsx": "react",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "removeComments": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "strict": true,
+    "outDir": "dist",
+    "lib": ["es5", "es6", "dom"],
+    "rootDirs": [
+      "src"
+    ],
+    "baseUrl": ".",
+    "types": [
+      "react",
+      "react-dom",
+      "jest"
+    ],
+    "paths": {
+      "*": [
+        "node_modules/@types/*",
+        "node_modules/*",
+        "src/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "build",
+    "node_modules",
+    "**/*.test.*",
+    "**/__mocks__",
+    "**/__tests__"
+  ]
+}

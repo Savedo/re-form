@@ -1,0 +1,22 @@
+
+{
+  "extends": [
+    "tslint-eslint-rules",
+    "tslint-react"
+  ],
+  "rules": {
+    "ter-indent": [true, 2],
+    "arrow-body-style": ["error", "as-needed"],
+    "object-curly-spacing": [true, "always", {"arraysInObjects": false, "objectsInObjects": false}],
+    "quotemark": [true, "single", "jsx-double"],
+    "jsx-curly-spacing": [true, "always"],
+    "jsx-no-multiline-js": false,
+    "semicolon": [true, "always"],
+    "no-consecutive-blank-lines": true
+  },
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.ts"
+    ]
+  }
+}
