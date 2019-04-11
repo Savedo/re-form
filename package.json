@@ -18,8 +18,11 @@
   ],
   "files": [
     "src",
-    "dist",
-    "index.d.ts"
+    "index.d.ts",
+    "jest.config.js",
+    "tsconfig.json",
+    "tslint.json",
+    "webpack.config.js"
   ],
   "scripts": {
     "clean": "rimraf dist",
