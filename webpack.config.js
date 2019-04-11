@@ -1,8 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = (env, argv) => {
   const { mode } = argv;
 
@@ -24,7 +22,7 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: ['.ts', '.tsx', '.js', 'jsx', '.json', '.css'],
       alias: {
-        components: path.resolve(__dirname, 'src/components/'),
+        '@reform': path.resolve(__dirname, 'index.d.ts')
       }
     },
     module: {
@@ -47,27 +45,10 @@ module.exports = (env, argv) => {
         commonjs2: 'react-dom'
       }
     },
-    devServer: {
-      contentBase: path.resolve(__dirname, 'dist'),
-      disableHostCheck: true,
-      host: "0.0.0.0",
-      port: 9010
-    },
     plugins: [
       new webpack.EnvironmentPlugin({
-        NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
+        NODE_ENV: 'development',
         DEBUG: false
-      }),
-      new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, 'public/index.html'),
-        minify: {
-          minifyJS: false,
-          minifyCSS: false,
-          removeComments: false,
-          useShortDoctype: true,
-          collapseWhitespace: true,
-          collapseInlineTagWhitespace: true
-        }
       })
     ]
   };
