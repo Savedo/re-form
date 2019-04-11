@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormBuilder component render matches last snapshot 1`] = `
+<div>
+  <div>
+    <label>
+      Name:
+      <input
+        name="name"
+        value="Erhan Gündoğan"
+      />
+    </label>
+  </div>
+  <div>
+    <label>
+      Your Age:
+      <input
+        name="age"
+        type="number"
+        value="44"
+      />
+    </label>
+  </div>
+</div>
+`;

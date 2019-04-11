@@ -13,7 +13,7 @@
     "noUnusedLocals": true,
     "strict": true,
     "outDir": "dist",
-    "lib": ["es5", "es6", "dom"],
+    "lib": ["es6", "dom"],
     "rootDirs": [
       "src"
     ],
@@ -21,13 +21,14 @@
     "types": [
       "react",
       "react-dom",
-      "jest"
+      "jest",
+      "yup"
     ],
     "paths": {
       "*": [
         "node_modules/@types/*",
         "node_modules/*",
-        "src/*"
+        "index.d.ts"
       ]
     }
   },
@@ -35,7 +36,7 @@
     "src/**/*"
   ],
   "exclude": [
-    "build",
+    "dist",
     "node_modules",
     "**/*.test.*",
     "**/__mocks__",

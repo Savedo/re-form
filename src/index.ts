@@ -1,3 +1,1 @@
-export default () => {
-  console.log('re-form');
-};
+export { default as FormBuilder } from './components/FormBuilder/FormBuilder';
