@@ -1,6 +1,4 @@
 node_modules
-coverage
-dist
 log
 .idea
 .opt-in

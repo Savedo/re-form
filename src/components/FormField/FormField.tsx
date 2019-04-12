@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler } from 'react';
 import { FormFieldType } from '@reform';
 
-const FormField: FormFieldType = ({ options, value, name, setValue }) => {
+const FormField: FormFieldType = ({ options = {}, value, name, setValue }) => {
   const { element, type, label } = options;
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {

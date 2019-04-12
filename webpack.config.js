@@ -15,10 +15,9 @@ module.exports = (env, argv) => {
     output: {
       path: path.join(__dirname, 'dist'),
       filename,
-      library: 'ReForm',
       libraryTarget: 'umd',
     },
-    devtool: mode === 'production' ? 'none' : 'cheap-module-eval-source-map',
+    devtool: mode === 'production' ? 'none' : 'eval-source-map',
     resolve: {
       extensions: ['.ts', '.tsx', '.js', 'jsx', '.json', '.css'],
       alias: {
