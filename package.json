@@ -1,9 +1,10 @@
 {
   "name": "re-form",
   "version": "0.2.0",
+  "private": true,
   "description": "react form library",
   "author": "Savedo GmbH. <it@savedo.de> (https://www.savedo.de)",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "homepage": "https://github.com/Savedo/re-form#readme",
   "main": "dist/re-form.js",
   "types": "./index.d.ts",
