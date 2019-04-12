@@ -1,3 +1,5 @@
+import { FunctionComponent, ReactElement } from 'react';
+
 export type FieldsType = Array<string>;
 
 export interface FieldOptionsValueType {
@@ -19,7 +21,7 @@ export interface FormBuilderPropsType {
 }
 
 export interface FormBuilderType {
-  (props: FormBuilderPropsType): JSX.Element;
+  (props: FormBuilderPropsType): ReactElement;
 }
 
 export interface FormFieldPropsType extends JSX.IntrinsicAttributes {
@@ -31,5 +33,8 @@ export interface FormFieldPropsType extends JSX.IntrinsicAttributes {
 }
 
 export interface FormFieldType {
-  (props: FormFieldPropsType): JSX.Element;
+  (props: FormFieldPropsType): ReactElement;
 }
+
+export const FormBuilder: FunctionComponent<FormBuilderPropsType>;
+export const FormField: FunctionComponent<FormFieldPropsType>;
