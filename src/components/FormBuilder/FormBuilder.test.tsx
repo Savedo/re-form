@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import FormBuilder from './FormBuilder';
+import FormBuilderContext from '../../FormBuilderContext';
+import * as yup from 'yup';
 
 describe('FormBuilder component', () => {
   const setup = () => {
@@ -12,19 +14,21 @@ describe('FormBuilder component', () => {
       name: {
         defaultValue: 'Erhan Gündoğan',
         label: 'Name:',
+        validation: yup.string().required()
       },
       age: {
         element: 'input',
         type: 'number',
         defaultValue: 44,
         label: 'Your Age:',
+        validation: yup.number().required().positive().integer().max(45)
       }
     };
-    const onDataChange = jest.fn();
+    const formBuilderContext = new FormBuilderContext({ fields, fieldOptions });
 
     return render(
       <div>
-        <FormBuilder { ...{ fields, fieldOptions, onDataChange } } />
+        <FormBuilder context={ formBuilderContext } />
       </div>
     );
   };
