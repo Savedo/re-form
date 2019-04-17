@@ -21,7 +21,7 @@ class FormBuilderContext implements FormBuilderContextType {
     this.fieldOptions = fieldOptions;
     this.validation = {
       ...{
-        isActive: false,
+        isActive: true,
         isValidForm: false,
         yupSchema: null,
         yupOptions: {
