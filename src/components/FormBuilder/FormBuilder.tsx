@@ -35,7 +35,7 @@ const FormBuilder: FormBuilderType = (props) => {
   const getFieldComponent = (field: string) => {
     const options = fieldOptions[field];
     const { component, label } = options;
-    const error = formErrors[field];
+    const error = formErrors && formErrors[field];
     const formFieldOptions = {
       name: field,
       label,
