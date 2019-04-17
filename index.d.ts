@@ -59,7 +59,7 @@ export interface FormFieldPropsType extends JSX.IntrinsicAttributes {
   defaultValue: any;
   name: string;
   label: string | undefined;
-  error: any;
+  error: string;
 }
 export interface FormFieldType {
   (props: FormFieldPropsType): ReactElement;
