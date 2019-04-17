@@ -18,8 +18,8 @@ export interface FormBuilderContextValidationType {
   yupOptions: ValidateOptions;
 }
 export interface FormBuilderContextConstructorType {
-  fields: string[];
-  fieldOptions: { [key: string]: FieldOptionsValueType };
+  fields?: string[];
+  fieldOptions?: { [key: string]: FieldOptionsValueType };
   validation?: Partial<FormBuilderContextValidationType>;
 }
 export interface FormBuilderContextType {
@@ -27,7 +27,7 @@ export interface FormBuilderContextType {
   fieldOptions: { [key: string]: FieldOptionsValueType };
   validation: FormBuilderContextValidationType;
   getDefaultValues: () => FormDataType;
-  getValidationSchema: () => any;
+  getValidationSchema: () => ObjectSchema<any>;
   extractErrors: (errors: ValidationError) => FormErrorsType | {} | null;
   validate: ValidateType;
   formData: FormDataType | null;

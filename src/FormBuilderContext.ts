@@ -17,8 +17,8 @@ class FormBuilderContext implements FormBuilderContextType {
 
   constructor(
     { fields, fieldOptions, validation = {} }: FormBuilderContextConstructorType) {
-    this.fields = fields;
-    this.fieldOptions = fieldOptions;
+    this.fields = fields || [];
+    this.fieldOptions = fieldOptions || {};
     this.validation = {
       ...{
         isActive: true,
