@@ -1,4 +1,4 @@
-import yup, { ValidationError } from 'yup';
+import * as yup from 'yup';
 import {
   FieldOptionsValueType,
   FormDataType,
@@ -62,7 +62,7 @@ class FormBuilderContext implements FormBuilderContextType {
     return this.validation.yupSchema;
   }
 
-  extractErrors = (errors: ValidationError) => {
+  extractErrors = (errors: yup.ValidationError) => {
     if (errors && errors.inner) {
       return errors.inner
         .reduce(
@@ -76,7 +76,6 @@ class FormBuilderContext implements FormBuilderContextType {
 
   validate = async (data: FormDataType) => {
     const schema = this.getValidationSchema();
-    //data = data || Object.assign({}, this.formData);
 
     try {
       await schema.validate(data, this.validation.yupOptions);
