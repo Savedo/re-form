@@ -104,7 +104,136 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = Object.assign || function(t) {\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\n            s = arguments[i];\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\n                t[p] = s[p];\n        }\n        return t;\n    };\n    return __assign.apply(this, arguments);\n};\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nvar __generator = (this && this.__generator) || function (thisArg, body) {\n    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;\n    return g = { next: verb(0), \"throw\": verb(1), \"return\": verb(2) }, typeof Symbol === \"function\" && (g[Symbol.iterator] = function() { return this; }), g;\n    function verb(n) { return function (v) { return step([n, v]); }; }\n    function step(op) {\n        if (f) throw new TypeError(\"Generator is already executing.\");\n        while (_) try {\n            if (f = 1, y && (t = op[0] & 2 ? y[\"return\"] : op[0] ? y[\"throw\"] || ((t = y[\"return\"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;\n            if (y = 0, t) op = [op[0] & 2, t.value];\n            switch (op[0]) {\n                case 0: case 1: t = op; break;\n                case 4: _.label++; return { value: op[1], done: false };\n                case 5: _.label++; y = op[1]; op = [0]; continue;\n                case 7: op = _.ops.pop(); _.trys.pop(); continue;\n                default:\n                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }\n                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }\n                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }\n                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }\n                    if (t[2]) _.ops.pop();\n                    _.trys.pop(); continue;\n            }\n            op = body.call(thisArg, _);\n        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }\n        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };\n    }\n};\nvar __importStar = (this && this.__importStar) || function (mod) {\n    if (mod && mod.__esModule) return mod;\n    var result = {};\n    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];\n    result[\"default\"] = mod;\n    return result;\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar yup = __importStar(__webpack_require__(/*! yup */ \"yup\"));\nvar FormBuilderContext = (function () {\n    function FormBuilderContext(_a) {\n        var _this = this;\n        var fields = _a.fields, fieldOptions = _a.fieldOptions, _b = _a.validation, validation = _b === void 0 ? {} : _b;\n        this.getDefaultValues = function () {\n            return Object\n                .keys(_this.fieldOptions)\n                .reduce(function (acc, key) {\n                var _a;\n                return (__assign({}, acc, (_a = {}, _a[key] = _this.fieldOptions[key].defaultValue, _a)));\n            }, {});\n        };\n        this.getValidationSchema = function () {\n            if (_this.validation.yupSchema) {\n                return _this.validation.yupSchema;\n            }\n            _this.validation.yupSchema = yup.object().shape(Object\n                .keys(_this.fieldOptions)\n                .reduce(function (acc, key) {\n                var _a;\n                return (__assign({}, acc, (_a = {}, _a[key] = _this.fieldOptions[key].validation, _a)));\n            }, {}));\n            return _this.validation.yupSchema;\n        };\n        this.extractErrors = function (errors) {\n            if (errors && errors.inner) {\n                return errors.inner\n                    .reduce(function (acc, _a) {\n                    var _b;\n                    var path = _a.path, message = _a.message;\n                    return (__assign({}, acc, (_b = {}, _b[path] = message, _b)));\n                }, {});\n            }\n            return {};\n        };\n        this.validate = function (data) { return __awaiter(_this, void 0, void 0, function () {\n            var schema, errors_1;\n            return __generator(this, function (_a) {\n                switch (_a.label) {\n                    case 0:\n                        schema = this.getValidationSchema();\n                        _a.label = 1;\n                    case 1:\n                        _a.trys.push([1, 3, , 4]);\n                        return [4, schema.validate(data, this.validation.yupOptions)];\n                    case 2:\n                        _a.sent();\n                        this.validation.isValidForm = true;\n                        return [2, null];\n                    case 3:\n                        errors_1 = _a.sent();\n                        this.validation.isValidForm = false;\n                        return [2, this.extractErrors(errors_1)];\n                    case 4: return [2];\n                }\n            });\n        }); };\n        this.fields = fields || [];\n        this.fieldOptions = fieldOptions || {};\n        this.validation = __assign({\n            isActive: true,\n            isValidForm: false,\n            yupSchema: null,\n            yupOptions: {\n                abortEarly: false\n            }\n        }, validation);\n        this.formData = null;\n        this.formErrors = null;\n    }\n    return FormBuilderContext;\n}());\nexports.default = FormBuilderContext;\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvRm9ybUJ1aWxkZXJDb250ZXh0LnRzP2JkMzgiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDhEQUEyQjtBQVUzQjtJQU9FLDRCQUNFLEVBQTRFO1FBRDlFLGlCQWtCQztZQWpCRyxrQkFBTSxFQUFFLDhCQUFZLEVBQUUsa0JBQWUsRUFBZixvQ0FBZTtRQW9CekMscUJBQWdCLEdBQUc7WUFDakIsT0FBTyxNQUFNO2lCQUNWLElBQUksQ0FBQyxLQUFJLENBQUMsWUFBWSxDQUFDO2lCQUN2QixNQUFNLENBQ0wsVUFBQyxHQUFHLEVBQUUsR0FBRzs7Z0JBQUsscUJBQ1QsR0FBRyxZQUNELEdBQUMsR0FBRyxJQUFHLEtBQUksQ0FBQyxZQUFZLENBQUMsR0FBRyxDQUFDLENBQUMsWUFBWSxPQUMvQztZQUhZLENBR1osRUFBRSxFQUFFLENBQUMsQ0FBQztRQUNkLENBQUM7UUFHRCx3QkFBbUIsR0FBRztZQUNwQixJQUFJLEtBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxFQUFFO2dCQUM3QixPQUFPLEtBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDO2FBQ2xDO1lBQ0QsS0FBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLEdBQUcsR0FBRyxDQUFDLE1BQU0sRUFBRSxDQUFDLEtBQUssQ0FDNUMsTUFBTTtpQkFDSCxJQUFJLENBQUMsS0FBSSxDQUFDLFlBQVksQ0FBQztpQkFDdkIsTUFBTSxDQUFDLFVBQUMsR0FBRyxFQUFFLEdBQUc7O2dCQUFLLHFCQUNqQixHQUFHLFlBQ0QsR0FBQyxHQUFHLElBQUcsS0FBSSxDQUFDLFlBQVksQ0FBQyxHQUFHLENBQUMsQ0FBQyxVQUFVLE9BQzdDO1lBSG9CLENBR3BCLEVBQUUsRUFBRSxDQUFDLENBQ1YsQ0FBQztZQUNGLE9BQU8sS0FBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUM7UUFDbkMsQ0FBQztRQUVELGtCQUFhLEdBQUcsVUFBQyxNQUEyQjtZQUMxQyxJQUFJLE1BQU0sSUFBSSxNQUFNLENBQUMsS0FBSyxFQUFFO2dCQUMxQixPQUFPLE1BQU0sQ0FBQyxLQUFLO3FCQUNoQixNQUFNLENBQ0wsVUFBQyxHQUFHLEVBQUUsRUFBaUI7O3dCQUFmLGNBQUksRUFBRSxvQkFBTztvQkFBTyxxQkFDdkIsR0FBRyxZQUNELEdBQUMsSUFBSSxJQUFHLE9BQU8sT0FDcEI7Z0JBSDBCLENBRzFCLEVBQUUsRUFBRSxDQUFDLENBQUM7YUFDYjtZQUNELE9BQU8sRUFBRSxDQUFDO1FBQ1osQ0FBQztRQUVELGFBQVEsR0FBRyxVQUFPLElBQWtCOzs7Ozt3QkFDNUIsTUFBTSxHQUFHLElBQUksQ0FBQyxtQkFBbUIsRUFBRSxDQUFDOzs7O3dCQUd4QyxXQUFNLE1BQU0sQ0FBQyxRQUFRLENBQUMsSUFBSSxFQUFFLElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDOzt3QkFBdkQsU0FBdUQsQ0FBQzt3QkFDeEQsSUFBSSxDQUFDLFVBQVUsQ0FBQyxXQUFXLEdBQUcsSUFBSSxDQUFDO3dCQUNuQyxXQUFPLElBQUksRUFBQzs7O3dCQUVaLElBQUksQ0FBQyxVQUFVLENBQUMsV0FBVyxHQUFHLEtBQUssQ0FBQzt3QkFDcEMsV0FBTyxJQUFJLENBQUMsYUFBYSxDQUFDLFFBQU0sQ0FBQyxFQUFDOzs7O2FBRXJDO1FBcEVDLElBQUksQ0FBQyxNQUFNLEdBQUcsTUFBTSxJQUFJLEVBQUUsQ0FBQztRQUMzQixJQUFJLENBQUMsWUFBWSxHQUFHLFlBQVksSUFBSSxFQUFFLENBQUM7UUFDdkMsSUFBSSxDQUFDLFVBQVUsWUFDVjtZQUNELFFBQVEsRUFBRSxJQUFJO1lBQ2QsV0FBVyxFQUFFLEtBQUs7WUFDbEIsU0FBUyxFQUFFLElBQUk7WUFDZixVQUFVLEVBQUU7Z0JBQ1YsVUFBVSxFQUFFLEtBQUs7YUFDbEI7U0FDRixFQUNFLFVBQVUsQ0FDZCxDQUFDO1FBRUYsSUFBSSxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUM7UUFDckIsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUM7SUFDekIsQ0FBQztJQXFESCx5QkFBQztBQUFELENBQUM7QUFFRCxrQkFBZSxrQkFBa0IsQ0FBQyIsImZpbGUiOiIuL3NyYy9Gb3JtQnVpbGRlckNvbnRleHQudHMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyB5dXAgZnJvbSAneXVwJztcbmltcG9ydCB7XG4gIEZpZWxkT3B0aW9uc1ZhbHVlVHlwZSxcbiAgRm9ybURhdGFUeXBlLFxuICBGb3JtRXJyb3JzVHlwZSxcbiAgRm9ybUJ1aWxkZXJDb250ZXh0VHlwZSxcbiAgRm9ybUJ1aWxkZXJDb250ZXh0VmFsaWRhdGlvblR5cGUsXG4gIEZvcm1CdWlsZGVyQ29udGV4dENvbnN0cnVjdG9yVHlwZVxufSBmcm9tICdAcmVmb3JtJztcblxuY2xhc3MgRm9ybUJ1aWxkZXJDb250ZXh0IGltcGxlbWVudHMgRm9ybUJ1aWxkZXJDb250ZXh0VHlwZSB7XG4gIGZpZWxkczogc3RyaW5nW107XG4gIGZpZWxkT3B0aW9uczogeyBba2V5OiBzdHJpbmddOiBGaWVsZE9wdGlvbnNWYWx1ZVR5cGUgfTtcbiAgdmFsaWRhdGlvbjogRm9ybUJ1aWxkZXJDb250ZXh0VmFsaWRhdGlvblR5cGU7XG4gIGZvcm1EYXRhOiBGb3JtRGF0YVR5cGUgfCBudWxsO1xuICBmb3JtRXJyb3JzOiBGb3JtRXJyb3JzVHlwZSB8IG51bGw7XG5cbiAgY29uc3RydWN0b3IoXG4gICAgeyBmaWVsZHMsIGZpZWxkT3B0aW9ucywgdmFsaWRhdGlvbiA9IHt9IH06IEZvcm1CdWlsZGVyQ29udGV4dENvbnN0cnVjdG9yVHlwZSkge1xuICAgIHRoaXMuZmllbGRzID0gZmllbGRzIHx8IFtdO1xuICAgIHRoaXMuZmllbGRPcHRpb25zID0gZmllbGRPcHRpb25zIHx8IHt9O1xuICAgIHRoaXMudmFsaWRhdGlvbiA9IHtcbiAgICAgIC4uLntcbiAgICAgICAgaXNBY3RpdmU6IHRydWUsXG4gICAgICAgIGlzVmFsaWRGb3JtOiBmYWxzZSxcbiAgICAgICAgeXVwU2NoZW1hOiBudWxsLFxuICAgICAgICB5dXBPcHRpb25zOiB7XG4gICAgICAgICAgYWJvcnRFYXJseTogZmFsc2VcbiAgICAgICAgfVxuICAgICAgfSxcbiAgICAgIC4uLnZhbGlkYXRpb25cbiAgICB9O1xuXG4gICAgdGhpcy5mb3JtRGF0YSA9IG51bGw7XG4gICAgdGhpcy5mb3JtRXJyb3JzID0gbnVsbDtcbiAgfVxuXG4gIC8vIGZpcnN0IGluaXQgb25seVxuICBnZXREZWZhdWx0VmFsdWVzID0gKCkgPT4ge1xuICAgIHJldHVybiBPYmplY3RcbiAgICAgIC5rZXlzKHRoaXMuZmllbGRPcHRpb25zKVxuICAgICAgLnJlZHVjZShcbiAgICAgICAgKGFjYywga2V5KSA9PiAoe1xuICAgICAgICAgIC4uLmFjYyxcbiAgICAgICAgICAuLi57IFtrZXldOiB0aGlzLmZpZWxkT3B0aW9uc1trZXldLmRlZmF1bHRWYWx1ZSB9XG4gICAgICAgIH0pLCB7fSk7XG4gIH1cblxuICAvLyByZXR1cm5zIHZhbGlkYXRpb24gZmllbGQgb2YgYWxsIGZpZWxkcyBhbmQgYmluZHMgeXVwIGVuZ2luZVxuICBnZXRWYWxpZGF0aW9uU2NoZW1hID0gKCkgPT4ge1xuICAgIGlmICh0aGlzLnZhbGlkYXRpb24ueXVwU2NoZW1hKSB7XG4gICAgICByZXR1cm4gdGhpcy52YWxpZGF0aW9uLnl1cFNjaGVtYTtcbiAgICB9XG4gICAgdGhpcy52YWxpZGF0aW9uLnl1cFNjaGVtYSA9IHl1cC5vYmplY3QoKS5zaGFwZShcbiAgICAgIE9iamVjdFxuICAgICAgICAua2V5cyh0aGlzLmZpZWxkT3B0aW9ucylcbiAgICAgICAgLnJlZHVjZSgoYWNjLCBrZXkpID0+ICh7XG4gICAgICAgICAgLi4uYWNjLFxuICAgICAgICAgIC4uLnsgW2tleV06IHRoaXMuZmllbGRPcHRpb25zW2tleV0udmFsaWRhdGlvbiB9XG4gICAgICAgIH0pLCB7fSlcbiAgICApO1xuICAgIHJldHVybiB0aGlzLnZhbGlkYXRpb24ueXVwU2NoZW1hO1xuICB9XG5cbiAgZXh0cmFjdEVycm9ycyA9IChlcnJvcnM6IHl1cC5WYWxpZGF0aW9uRXJyb3IpID0+IHtcbiAgICBpZiAoZXJyb3JzICYmIGVycm9ycy5pbm5lcikge1xuICAgICAgcmV0dXJuIGVycm9ycy5pbm5lclxuICAgICAgICAucmVkdWNlKFxuICAgICAgICAgIChhY2MsIHsgcGF0aCwgbWVzc2FnZSB9KSA9PiAoe1xuICAgICAgICAgICAgLi4uYWNjLFxuICAgICAgICAgICAgLi4ueyBbcGF0aF06IG1lc3NhZ2UgfVxuICAgICAgICAgIH0pLCB7fSk7XG4gICAgfVxuICAgIHJldHVybiB7fTtcbiAgfVxuXG4gIHZhbGlkYXRlID0gYXN5bmMgKGRhdGE6IEZvcm1EYXRhVHlwZSkgPT4ge1xuICAgIGNvbnN0IHNjaGVtYSA9IHRoaXMuZ2V0VmFsaWRhdGlvblNjaGVtYSgpO1xuXG4gICAgdHJ5IHtcbiAgICAgIGF3YWl0IHNjaGVtYS52YWxpZGF0ZShkYXRhLCB0aGlzLnZhbGlkYXRpb24ueXVwT3B0aW9ucyk7XG4gICAgICB0aGlzLnZhbGlkYXRpb24uaXNWYWxpZEZvcm0gPSB0cnVlO1xuICAgICAgcmV0dXJuIG51bGw7XG4gICAgfSBjYXRjaCAoZXJyb3JzKSB7XG4gICAgICB0aGlzLnZhbGlkYXRpb24uaXNWYWxpZEZvcm0gPSBmYWxzZTtcbiAgICAgIHJldHVybiB0aGlzLmV4dHJhY3RFcnJvcnMoZXJyb3JzKTtcbiAgICB9XG4gIH1cbn1cblxuZXhwb3J0IGRlZmF1bHQgRm9ybUJ1aWxkZXJDb250ZXh0O1xuIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/FormBuilderContext.ts\n");
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var yup = __importStar(__webpack_require__(/*! yup */ "yup"));
+var FormBuilderContext = (function () {
+    function FormBuilderContext(_a) {
+        var _this = this;
+        var fields = _a.fields, fieldOptions = _a.fieldOptions, _b = _a.validation, validation = _b === void 0 ? {} : _b;
+        this.getDefaultValues = function () {
+            return Object
+                .keys(_this.fieldOptions)
+                .reduce(function (acc, key) {
+                var _a;
+                return (__assign({}, acc, (_a = {}, _a[key] = _this.fieldOptions[key].defaultValue, _a)));
+            }, {});
+        };
+        this.getValidationSchema = function () {
+            if (_this.validation.yupSchema) {
+                return _this.validation.yupSchema;
+            }
+            _this.validation.yupSchema = yup.object().shape(Object
+                .keys(_this.fieldOptions)
+                .reduce(function (acc, key) {
+                var _a;
+                return (__assign({}, acc, (_a = {}, _a[key] = _this.fieldOptions[key].validation, _a)));
+            }, {}));
+            return _this.validation.yupSchema;
+        };
+        this.extractErrors = function (errors) {
+            if (errors && errors.inner) {
+                return errors.inner
+                    .reduce(function (acc, _a) {
+                    var _b;
+                    var path = _a.path, message = _a.message;
+                    return (__assign({}, acc, (_b = {}, _b[path] = message, _b)));
+                }, {});
+            }
+            return {};
+        };
+        this.validate = function (data) { return __awaiter(_this, void 0, void 0, function () {
+            var schema, errors_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        schema = this.getValidationSchema();
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, schema.validate(data, this.validation.yupOptions)];
+                    case 2:
+                        _a.sent();
+                        this.validation.isValidForm = true;
+                        return [2, null];
+                    case 3:
+                        errors_1 = _a.sent();
+                        this.validation.isValidForm = false;
+                        return [2, this.extractErrors(errors_1)];
+                    case 4: return [2];
+                }
+            });
+        }); };
+        this.fields = fields || [];
+        this.fieldOptions = fieldOptions || {};
+        this.validation = __assign({
+            isActive: true,
+            isValidForm: false,
+            yupSchema: null,
+            yupOptions: {
+                abortEarly: false
+            }
+        }, validation);
+        this.formData = null;
+        this.formErrors = null;
+    }
+    return FormBuilderContext;
+}());
+exports.default = FormBuilderContext;
+
 
 /***/ }),
 
@@ -116,7 +245,110 @@ eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = Object.assign || function(t) {\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\n            s = arguments[i];\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\n                t[p] = s[p];\n        }\n        return t;\n    };\n    return __assign.apply(this, arguments);\n};\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\nvar __generator = (this && this.__generator) || function (thisArg, body) {\n    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;\n    return g = { next: verb(0), \"throw\": verb(1), \"return\": verb(2) }, typeof Symbol === \"function\" && (g[Symbol.iterator] = function() { return this; }), g;\n    function verb(n) { return function (v) { return step([n, v]); }; }\n    function step(op) {\n        if (f) throw new TypeError(\"Generator is already executing.\");\n        while (_) try {\n            if (f = 1, y && (t = op[0] & 2 ? y[\"return\"] : op[0] ? y[\"throw\"] || ((t = y[\"return\"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;\n            if (y = 0, t) op = [op[0] & 2, t.value];\n            switch (op[0]) {\n                case 0: case 1: t = op; break;\n                case 4: _.label++; return { value: op[1], done: false };\n                case 5: _.label++; y = op[1]; op = [0]; continue;\n                case 7: op = _.ops.pop(); _.trys.pop(); continue;\n                default:\n                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }\n                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }\n                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }\n                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }\n                    if (t[2]) _.ops.pop();\n                    _.trys.pop(); continue;\n            }\n            op = body.call(thisArg, _);\n        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }\n        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };\n    }\n};\nvar __importStar = (this && this.__importStar) || function (mod) {\n    if (mod && mod.__esModule) return mod;\n    var result = {};\n    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];\n    result[\"default\"] = mod;\n    return result;\n};\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nvar _this = this;\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar react_1 = __importStar(__webpack_require__(/*! react */ \"react\"));\nvar FormField_1 = __importDefault(__webpack_require__(/*! ../FormField/FormField */ \"./src/components/FormField/FormField.tsx\"));\nvar FormBuilder = function (props) {\n    var context = props.context;\n    var fields = context.fields, fieldOptions = context.fieldOptions, getDefaultValues = context.getDefaultValues, validation = context.validation, validate = context.validate;\n    var defaultFormData = getDefaultValues();\n    var _a = react_1.useState(defaultFormData), formData = _a[0], setFormData = _a[1];\n    var _b = react_1.useState({}), formErrors = _b[0], setFormErrors = _b[1];\n    var setFormDataValue = function (field) {\n        return function (value) { return __awaiter(_this, void 0, void 0, function () {\n            var _a, newFormData, errors;\n            return __generator(this, function (_b) {\n                switch (_b.label) {\n                    case 0:\n                        newFormData = __assign({}, formData, (_a = {}, _a[field] = value, _a));\n                        setFormData(newFormData);\n                        if (!validation.isActive) return [3, 2];\n                        return [4, validate(newFormData)];\n                    case 1:\n                        errors = _b.sent();\n                        setFormErrors(errors);\n                        _b.label = 2;\n                    case 2: return [2];\n                }\n            });\n        }); };\n    };\n    var getFieldComponent = function (field) {\n        var options = fieldOptions[field];\n        var component = options.component, label = options.label;\n        var error = formErrors && formErrors[field];\n        var formFieldOptions = {\n            name: field,\n            label: label,\n            options: options,\n            defaultValue: formData[field],\n            setValue: setFormDataValue(field),\n            error: error\n        };\n        return (react_1.default.createElement(react_1.default.Fragment, { key: field }, component ? component(formFieldOptions) : react_1.default.createElement(FormField_1.default, __assign({}, formFieldOptions))));\n    };\n    return (react_1.default.createElement(react_1.default.Fragment, null, fields.map(function (field) { return getFieldComponent(field); })));\n};\nexports.default = FormBuilder;\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvY29tcG9uZW50cy9Gb3JtQnVpbGRlci9Gb3JtQnVpbGRlci50c3g/MjkzMyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxpQkE4REE7O0FBOURBLHNFQUF3QztBQUV4QyxpSUFBK0M7QUFFL0MsSUFBTSxXQUFXLEdBQW9CLFVBQUMsS0FBSztJQUNqQywyQkFBTyxDQUFXO0lBRXhCLDJCQUFNLEVBQ04sbUNBQVksRUFDWiwyQ0FBZ0IsRUFDaEIsK0JBQVUsRUFDViwyQkFBUSxDQUNFO0lBR1osSUFBTSxlQUFlLEdBQWlCLGdCQUFnQixFQUFFLENBQUM7SUFHbkQsMENBQW1ELEVBQWxELGdCQUFRLEVBQUUsbUJBQXdDLENBQUM7SUFDcEQsNkJBQTZGLEVBQTVGLGtCQUFVLEVBQUUscUJBQWdGLENBQUM7SUFHcEcsSUFBTSxnQkFBZ0IsR0FDcEIsVUFBQyxLQUFhO1FBQ1osaUJBQU8sS0FBVTs7Ozs7d0JBQ1QsV0FBVyxnQkFBUSxRQUFRLGVBQUcsS0FBSyxJQUFHLEtBQUssTUFBRSxDQUFDO3dCQUNwRCxXQUFXLENBQUMsV0FBVyxDQUFDLENBQUM7NkJBQ3JCLFVBQVUsQ0FBQyxRQUFRLEVBQW5CLGNBQW1CO3dCQUNOLFdBQU0sUUFBUSxDQUFDLFdBQVcsQ0FBQzs7d0JBQXBDLE1BQU0sR0FBRyxTQUEyQjt3QkFDMUMsYUFBYSxDQUFDLE1BQU0sQ0FBQyxDQUFDOzs7OzthQUV6QjtJQVBELENBT0MsQ0FBQztJQUdOLElBQU0saUJBQWlCLEdBQUcsVUFBQyxLQUFhO1FBQ3RDLElBQU0sT0FBTyxHQUFHLFlBQVksQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUM1QixpQ0FBUyxFQUFFLHFCQUFLLENBQWE7UUFDckMsSUFBTSxLQUFLLEdBQUcsVUFBVSxJQUFJLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUM5QyxJQUFNLGdCQUFnQixHQUFHO1lBQ3ZCLElBQUksRUFBRSxLQUFLO1lBQ1gsS0FBSztZQUNMLE9BQU87WUFDUCxZQUFZLEVBQUUsUUFBUSxDQUFDLEtBQUssQ0FBQztZQUM3QixRQUFRLEVBQUUsZ0JBQWdCLENBQUMsS0FBSyxDQUFDO1lBQ2pDLEtBQUs7U0FDTixDQUFDO1FBRUYsT0FBTyxDQUNMLDhCQUFDLGVBQUssQ0FBQyxRQUFRLElBQUMsR0FBRyxFQUFHLEtBQUssSUFDdkIsU0FBUyxDQUFDLENBQUMsQ0FBQyxTQUFTLENBQUMsZ0JBQWdCLENBQUMsQ0FBQyxDQUFDLENBQUMsOEJBQUMsbUJBQVMsZUFBTSxnQkFBZ0IsRUFBSyxDQUNsRSxDQUNsQixDQUFDO0lBQ0osQ0FBQyxDQUFDO0lBRUYsT0FBTyxDQUNMLDhEQUNJLE1BQU0sQ0FBQyxHQUFHLENBQUMsZUFBSyxJQUFJLHdCQUFpQixDQUFDLEtBQUssQ0FBQyxFQUF4QixDQUF3QixDQUFDLENBQzlDLENBQ0osQ0FBQztBQUNKLENBQUMsQ0FBQztBQUVGLGtCQUFlLFdBQVcsQ0FBQyIsImZpbGUiOiIuL3NyYy9jb21wb25lbnRzL0Zvcm1CdWlsZGVyL0Zvcm1CdWlsZGVyLnRzeC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCwgeyB1c2VTdGF0ZSB9IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IEZvcm1CdWlsZGVyVHlwZSwgRm9ybURhdGFUeXBlIH0gZnJvbSAnQHJlZm9ybSc7XG5pbXBvcnQgRm9ybUZpZWxkIGZyb20gJy4uL0Zvcm1GaWVsZC9Gb3JtRmllbGQnO1xuXG5jb25zdCBGb3JtQnVpbGRlcjogRm9ybUJ1aWxkZXJUeXBlID0gKHByb3BzKSA9PiB7XG4gIGNvbnN0IHsgY29udGV4dCB9ID0gcHJvcHM7XG4gIGNvbnN0IHtcbiAgICBmaWVsZHMsXG4gICAgZmllbGRPcHRpb25zLFxuICAgIGdldERlZmF1bHRWYWx1ZXMsXG4gICAgdmFsaWRhdGlvbixcbiAgICB2YWxpZGF0ZVxuICB9ID0gY29udGV4dDtcblxuICAvLyBjcmVhdGVzIGFuIG9iamVjdCB3aXRoIHRoZSBkZWZhdWx0IHZhbHVlcyBmb3IgaG9va1xuICBjb25zdCBkZWZhdWx0Rm9ybURhdGE6IEZvcm1EYXRhVHlwZSA9IGdldERlZmF1bHRWYWx1ZXMoKTtcblxuICAvLyBjcmVhdGUgaG9va3NcbiAgY29uc3QgW2Zvcm1EYXRhLCBzZXRGb3JtRGF0YV0gPSB1c2VTdGF0ZShkZWZhdWx0Rm9ybURhdGEpO1xuICBjb25zdCBbZm9ybUVycm9ycywgc2V0Rm9ybUVycm9yc106IFt7IFtrZXk6IHN0cmluZ106IHN0cmluZyB9LCAoZXJyb3JzOiBhbnkpID0+IGFueV0gPSB1c2VTdGF0ZSh7fSk7XG5cbiAgLy8gbWV0aG9kIHRvIHJ1biBzZXRGb3JtRGF0YSBob29rIGZyb20gb25DaGFuZ2UgZXZlbnQgb2YgdGhlIGdlbmVyYXRlZCBlbGVtZW50XG4gIGNvbnN0IHNldEZvcm1EYXRhVmFsdWUgPVxuICAgIChmaWVsZDogc3RyaW5nKSA9PlxuICAgICAgYXN5bmMgKHZhbHVlOiBhbnkpID0+IHtcbiAgICAgICAgY29uc3QgbmV3Rm9ybURhdGEgPSB7IC4uLmZvcm1EYXRhLCBbZmllbGRdOiB2YWx1ZSB9O1xuICAgICAgICBzZXRGb3JtRGF0YShuZXdGb3JtRGF0YSk7XG4gICAgICAgIGlmICh2YWxpZGF0aW9uLmlzQWN0aXZlKSB7XG4gICAgICAgICAgY29uc3QgZXJyb3JzID0gYXdhaXQgdmFsaWRhdGUobmV3Rm9ybURhdGEpO1xuICAgICAgICAgIHNldEZvcm1FcnJvcnMoZXJyb3JzKTtcbiAgICAgICAgfVxuICAgICAgfTtcblxuICAvLyByZXR1cm5zIGlmIHRoZXJlIGlzIGEgZmllbGRPcHRpb25zLmNvbXBvbmVudCBvdGhlcndpc2UgZmllbGRPcHRpb25zLmVsZW1lbnQgb3IgaW5wdXRbdHlwZT10ZXh0XVxuICBjb25zdCBnZXRGaWVsZENvbXBvbmVudCA9IChmaWVsZDogc3RyaW5nKSA9PiB7XG4gICAgY29uc3Qgb3B0aW9ucyA9IGZpZWxkT3B0aW9uc1tmaWVsZF07XG4gICAgY29uc3QgeyBjb21wb25lbnQsIGxhYmVsIH0gPSBvcHRpb25zO1xuICAgIGNvbnN0IGVycm9yID0gZm9ybUVycm9ycyAmJiBmb3JtRXJyb3JzW2ZpZWxkXTtcbiAgICBjb25zdCBmb3JtRmllbGRPcHRpb25zID0ge1xuICAgICAgbmFtZTogZmllbGQsXG4gICAgICBsYWJlbCxcbiAgICAgIG9wdGlvbnMsXG4gICAgICBkZWZhdWx0VmFsdWU6IGZvcm1EYXRhW2ZpZWxkXSxcbiAgICAgIHNldFZhbHVlOiBzZXRGb3JtRGF0YVZhbHVlKGZpZWxkKSxcbiAgICAgIGVycm9yXG4gICAgfTtcblxuICAgIHJldHVybiAoXG4gICAgICA8UmVhY3QuRnJhZ21lbnQga2V5PXsgZmllbGQgfT5cbiAgICAgICAgeyBjb21wb25lbnQgPyBjb21wb25lbnQoZm9ybUZpZWxkT3B0aW9ucykgOiA8Rm9ybUZpZWxkIHsgLi4uZm9ybUZpZWxkT3B0aW9ucyB9IC8+IH1cbiAgICAgIDwvUmVhY3QuRnJhZ21lbnQ+XG4gICAgKTtcbiAgfTtcblxuICByZXR1cm4gKFxuICAgIDw+XG4gICAgICB7IGZpZWxkcy5tYXAoZmllbGQgPT4gZ2V0RmllbGRDb21wb25lbnQoZmllbGQpKSB9XG4gICAgPC8+XG4gICk7XG59O1xuXG5leHBvcnQgZGVmYXVsdCBGb3JtQnVpbGRlcjtcbiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/components/FormBuilder/FormBuilder.tsx\n");
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var _this = this;
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
+var FormField_1 = __importDefault(__webpack_require__(/*! ../FormField/FormField */ "./src/components/FormField/FormField.tsx"));
+var FormBuilder = function (props) {
+    var context = props.context;
+    var fields = context.fields, fieldOptions = context.fieldOptions, getDefaultValues = context.getDefaultValues, validation = context.validation, validate = context.validate;
+    var defaultFormData = getDefaultValues();
+    var _a = react_1.useState(defaultFormData), formData = _a[0], setFormData = _a[1];
+    var _b = react_1.useState({}), formErrors = _b[0], setFormErrors = _b[1];
+    var setFormDataValue = function (field) {
+        return function (value) { return __awaiter(_this, void 0, void 0, function () {
+            var _a, newFormData, errors;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        newFormData = __assign({}, formData, (_a = {}, _a[field] = value, _a));
+                        setFormData(newFormData);
+                        if (!validation.isActive) return [3, 2];
+                        return [4, validate(newFormData)];
+                    case 1:
+                        errors = _b.sent();
+                        setFormErrors(errors);
+                        _b.label = 2;
+                    case 2: return [2];
+                }
+            });
+        }); };
+    };
+    var getFieldComponent = function (field) {
+        var options = fieldOptions[field];
+        var component = options.component, label = options.label;
+        var error = formErrors && formErrors[field];
+        var formFieldOptions = {
+            name: field,
+            label: label,
+            options: options,
+            defaultValue: formData[field],
+            setValue: setFormDataValue(field),
+            error: error
+        };
+        return (react_1.default.createElement(react_1.default.Fragment, { key: field }, component ? component(formFieldOptions) : react_1.default.createElement(FormField_1.default, __assign({}, formFieldOptions))));
+    };
+    return (react_1.default.createElement(react_1.default.Fragment, null, fields.map(function (field) { return getFieldComponent(field); })));
+};
+exports.default = FormBuilder;
+
 
 /***/ }),
 
@@ -128,7 +360,52 @@ eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = Object.assign || function(t) {\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\n            s = arguments[i];\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\n                t[p] = s[p];\n        }\n        return t;\n    };\n    return __assign.apply(this, arguments);\n};\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"react\"));\nvar FormField = function (_a) {\n    var options = _a.options, defaultValue = _a.defaultValue, name = _a.name, label = _a.label, setValue = _a.setValue, error = _a.error;\n    var _b = options || {}, _c = _b.element, element = _c === void 0 ? 'input' : _c, _d = _b.type, type = _d === void 0 ? 'text' : _d, _e = _b.keyValues, keyValues = _e === void 0 ? {} : _e;\n    var onChange = function (event) {\n        event.preventDefault();\n        setValue(event.currentTarget.value);\n    };\n    var getError = function (error) { return (react_1.default.createElement(\"div\", { className: \"error\" }, error)); };\n    switch (element) {\n        case 'select': {\n            return (react_1.default.createElement(\"div\", null,\n                react_1.default.createElement(\"label\", null,\n                    label,\n                    react_1.default.createElement(\"select\", __assign({}, { onChange: onChange, defaultValue: defaultValue }), Object.keys(keyValues).map(function (key) {\n                        return react_1.default.createElement(\"option\", { key: key, value: key }, keyValues[key]);\n                    }))),\n                error && getError(error)));\n        }\n        default: {\n            return (react_1.default.createElement(\"div\", null,\n                react_1.default.createElement(\"label\", null,\n                    label,\n                    react_1.default.createElement(\"input\", __assign({}, { type: type, name: name, defaultValue: defaultValue, onChange: onChange }))),\n                error && getError(error)));\n        }\n    }\n};\nexports.default = FormField;\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvY29tcG9uZW50cy9Gb3JtRmllbGQvRm9ybUZpZWxkLnRzeD8xMzU4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx5RUFBa0Q7QUFHbEQsSUFBTSxTQUFTLEdBQWtCLFVBQy9CLEVBT0M7UUFOQyxvQkFBTyxFQUNQLDhCQUFZLEVBQ1osY0FBSSxFQUNKLGdCQUFLLEVBQ0wsc0JBQVEsRUFDUixnQkFBSztJQUdELHNCQUlXLEVBSGYsZUFBaUIsRUFBakIsc0NBQWlCLEVBQ2pCLFlBQWEsRUFBYixrQ0FBYSxFQUNiLGlCQUFjLEVBQWQsbUNBQ2UsQ0FBQztJQUVsQixJQUFNLFFBQVEsR0FBNkQsVUFBQyxLQUFLO1FBQy9FLEtBQUssQ0FBQyxjQUFjLEVBQUUsQ0FBQztRQUN2QixRQUFRLENBQUMsS0FBSyxDQUFDLGFBQWEsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUN0QyxDQUFDLENBQUM7SUFFRixJQUFNLFFBQVEsR0FBRyxVQUFDLEtBQWEsSUFBSyxRQUNsQyx1Q0FBSyxTQUFTLEVBQUMsT0FBTyxJQUFHLEtBQUssQ0FBUSxDQUN2QyxFQUZtQyxDQUVuQyxDQUFDO0lBRUYsUUFBUSxPQUFPLEVBQUU7UUFDZixLQUFLLFFBQVEsQ0FBQyxDQUFDO1lBQ2IsT0FBTyxDQUNMO2dCQUNFO29CQUFTLEtBQUs7b0JBQ1oscURBQWEsRUFBRSxRQUFRLFlBQUUsWUFBWSxnQkFBRSxHQUVuQyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxVQUFDLEdBQVc7d0JBQ3JDLGlEQUFRLEdBQUcsRUFBRyxHQUFHLEVBQUcsS0FBSyxFQUFHLEdBQUcsSUFBSyxTQUFTLENBQUMsR0FBRyxDQUFDLENBQVc7b0JBQTdELENBQTZELENBQUMsQ0FFM0QsQ0FDSDtnQkFDTixLQUFLLElBQUksUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUN0QixDQUNQLENBQUM7U0FDSDtRQUNELE9BQU8sQ0FBQyxDQUFDO1lBQ1AsT0FBTyxDQUNMO2dCQUNFO29CQUFTLEtBQUs7b0JBQUUsb0RBQVksRUFBRSxJQUFJLFFBQUUsSUFBSSxRQUFFLFlBQVksZ0JBQUUsUUFBUSxZQUFFLEVBQUssQ0FBUTtnQkFDN0UsS0FBSyxJQUFJLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FDdEIsQ0FDUCxDQUFDO1NBQ0g7S0FDRjtBQUNILENBQUMsQ0FBQztBQUVGLGtCQUFlLFNBQVMsQ0FBQyIsImZpbGUiOiIuL3NyYy9jb21wb25lbnRzL0Zvcm1GaWVsZC9Gb3JtRmllbGQudHN4LmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0LCB7IENoYW5nZUV2ZW50SGFuZGxlciB9IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IEZvcm1GaWVsZFR5cGUgfSBmcm9tICdAcmVmb3JtJztcblxuY29uc3QgRm9ybUZpZWxkOiBGb3JtRmllbGRUeXBlID0gKFxuICB7XG4gICAgb3B0aW9ucyxcbiAgICBkZWZhdWx0VmFsdWUsXG4gICAgbmFtZSxcbiAgICBsYWJlbCxcbiAgICBzZXRWYWx1ZSxcbiAgICBlcnJvclxuICB9XG4pID0+IHtcbiAgY29uc3Qge1xuICAgIGVsZW1lbnQgPSAnaW5wdXQnLFxuICAgIHR5cGUgPSAndGV4dCcsXG4gICAga2V5VmFsdWVzID0ge31cbiAgfSA9IG9wdGlvbnMgfHwge307XG5cbiAgY29uc3Qgb25DaGFuZ2U6IENoYW5nZUV2ZW50SGFuZGxlcjxIVE1MSW5wdXRFbGVtZW50IHwgSFRNTFNlbGVjdEVsZW1lbnQ+ID0gKGV2ZW50KSA9PiB7XG4gICAgZXZlbnQucHJldmVudERlZmF1bHQoKTtcbiAgICBzZXRWYWx1ZShldmVudC5jdXJyZW50VGFyZ2V0LnZhbHVlKTtcbiAgfTtcblxuICBjb25zdCBnZXRFcnJvciA9IChlcnJvcjogc3RyaW5nKSA9PiAoXG4gICAgPGRpdiBjbGFzc05hbWU9XCJlcnJvclwiPnsgZXJyb3IgfTwvZGl2PlxuICApO1xuXG4gIHN3aXRjaCAoZWxlbWVudCkge1xuICAgIGNhc2UgJ3NlbGVjdCc6IHtcbiAgICAgIHJldHVybiAoXG4gICAgICAgIDxkaXY+XG4gICAgICAgICAgPGxhYmVsPnsgbGFiZWwgfVxuICAgICAgICAgICAgPHNlbGVjdCB7IC4uLnsgb25DaGFuZ2UsIGRlZmF1bHRWYWx1ZSB9IH0+XG4gICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICBPYmplY3Qua2V5cyhrZXlWYWx1ZXMpLm1hcCgoa2V5OiBzdHJpbmcpID0+XG4gICAgICAgICAgICAgICAgICA8b3B0aW9uIGtleT17IGtleSB9IHZhbHVlPXsga2V5IH0+eyBrZXlWYWx1ZXNba2V5XSB9PC9vcHRpb24+KVxuICAgICAgICAgICAgICB9XG4gICAgICAgICAgICA8L3NlbGVjdD5cbiAgICAgICAgICA8L2xhYmVsPlxuICAgICAgICAgIHsgZXJyb3IgJiYgZ2V0RXJyb3IoZXJyb3IpIH1cbiAgICAgICAgPC9kaXY+XG4gICAgICApO1xuICAgIH1cbiAgICBkZWZhdWx0OiB7XG4gICAgICByZXR1cm4gKFxuICAgICAgICA8ZGl2PlxuICAgICAgICAgIDxsYWJlbD57IGxhYmVsIH08aW5wdXQgeyAuLi57IHR5cGUsIG5hbWUsIGRlZmF1bHRWYWx1ZSwgb25DaGFuZ2UgfSB9IC8+PC9sYWJlbD5cbiAgICAgICAgICB7IGVycm9yICYmIGdldEVycm9yKGVycm9yKSB9XG4gICAgICAgIDwvZGl2PlxuICAgICAgKTtcbiAgICB9XG4gIH1cbn07XG5cbmV4cG9ydCBkZWZhdWx0IEZvcm1GaWVsZDtcbiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/components/FormField/FormField.tsx\n");
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var FormField = function (_a) {
+    var options = _a.options, defaultValue = _a.defaultValue, name = _a.name, label = _a.label, setValue = _a.setValue, error = _a.error;
+    var _b = options || {}, _c = _b.element, element = _c === void 0 ? 'input' : _c, _d = _b.type, type = _d === void 0 ? 'text' : _d, _e = _b.keyValues, keyValues = _e === void 0 ? {} : _e;
+    var onChange = function (event) {
+        event.preventDefault();
+        setValue(event.currentTarget.value);
+    };
+    var getError = function (error) { return (react_1.default.createElement("div", { className: "error" }, error)); };
+    switch (element) {
+        case 'select': {
+            return (react_1.default.createElement("div", null,
+                react_1.default.createElement("label", null,
+                    label,
+                    react_1.default.createElement("select", __assign({}, { onChange: onChange, defaultValue: defaultValue }), Object.keys(keyValues).map(function (key) {
+                        return react_1.default.createElement("option", { key: key, value: key }, keyValues[key]);
+                    }))),
+                error && getError(error)));
+        }
+        default: {
+            return (react_1.default.createElement("div", null,
+                react_1.default.createElement("label", null,
+                    label,
+                    react_1.default.createElement("input", __assign({}, { type: type, name: name, defaultValue: defaultValue, onChange: onChange }))),
+                error && getError(error)));
+        }
+    }
+};
+exports.default = FormField;
+
 
 /***/ }),
 
@@ -140,7 +417,15 @@ eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar FormField_1 = __webpack_require__(/*! ./components/FormField/FormField */ \"./src/components/FormField/FormField.tsx\");\nexports.FormField = FormField_1.default;\nvar FormBuilder_1 = __webpack_require__(/*! ./components/FormBuilder/FormBuilder */ \"./src/components/FormBuilder/FormBuilder.tsx\");\nexports.FormBuilder = FormBuilder_1.default;\nvar FormBuilderContext_1 = __webpack_require__(/*! ./FormBuilderContext */ \"./src/FormBuilderContext.ts\");\nexports.FormBuilderContext = FormBuilderContext_1.default;\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvaW5kZXgudHM/ZmZiNCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDBIQUF3RTtBQUEvRCx1Q0FBTyxDQUFhO0FBQzdCLG9JQUE4RTtBQUFyRSwyQ0FBTyxDQUFlO0FBQy9CLDBHQUFxRTtBQUE1RCx5REFBTyxDQUFzQiIsImZpbGUiOiIuL3NyYy9pbmRleC50cy5qcyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IGRlZmF1bHQgYXMgRm9ybUZpZWxkIH0gZnJvbSAnLi9jb21wb25lbnRzL0Zvcm1GaWVsZC9Gb3JtRmllbGQnO1xuZXhwb3J0IHsgZGVmYXVsdCBhcyBGb3JtQnVpbGRlciB9IGZyb20gJy4vY29tcG9uZW50cy9Gb3JtQnVpbGRlci9Gb3JtQnVpbGRlcic7XG5leHBvcnQgeyBkZWZhdWx0IGFzIEZvcm1CdWlsZGVyQ29udGV4dCB9IGZyb20gJy4vRm9ybUJ1aWxkZXJDb250ZXh0JztcbiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/index.ts\n");
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var FormField_1 = __webpack_require__(/*! ./components/FormField/FormField */ "./src/components/FormField/FormField.tsx");
+exports.FormField = FormField_1.default;
+var FormBuilder_1 = __webpack_require__(/*! ./components/FormBuilder/FormBuilder */ "./src/components/FormBuilder/FormBuilder.tsx");
+exports.FormBuilder = FormBuilder_1.default;
+var FormBuilderContext_1 = __webpack_require__(/*! ./FormBuilderContext */ "./src/FormBuilderContext.ts");
+exports.FormBuilderContext = FormBuilderContext_1.default;
+
 
 /***/ }),
 
@@ -151,7 +436,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Fo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("module.exports = __WEBPACK_EXTERNAL_MODULE_react__;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vZXh0ZXJuYWwge1wicm9vdFwiOlwiUmVhY3RcIixcImNvbW1vbmpzXCI6XCJyZWFjdFwiLFwiY29tbW9uanMyXCI6XCJyZWFjdFwifT82MWRlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBIiwiZmlsZSI6InJlYWN0LmpzIiwic291cmNlc0NvbnRlbnQiOlsibW9kdWxlLmV4cG9ydHMgPSBfX1dFQlBBQ0tfRVhURVJOQUxfTU9EVUxFX3JlYWN0X187Il0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///react\n");
+module.exports = __WEBPACK_EXTERNAL_MODULE_react__;
 
 /***/ }),
 
@@ -162,7 +447,7 @@ eval("module.exports = __WEBPACK_EXTERNAL_MODULE_react__;//# sourceURL=[module]\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("module.exports = __WEBPACK_EXTERNAL_MODULE_yup__;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vZXh0ZXJuYWwge1wicm9vdFwiOlwieXVwXCIsXCJjb21tb25qc1wiOlwieXVwXCIsXCJjb21tb25qczJcIjpcInl1cFwifT9kYzdlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBIiwiZmlsZSI6Inl1cC5qcyIsInNvdXJjZXNDb250ZW50IjpbIm1vZHVsZS5leHBvcnRzID0gX19XRUJQQUNLX0VYVEVSTkFMX01PRFVMRV95dXBfXzsiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///yup\n");
+module.exports = __WEBPACK_EXTERNAL_MODULE_yup__;
 
 /***/ })
 

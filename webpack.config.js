@@ -17,7 +17,7 @@ module.exports = (env, argv) => {
       filename,
       libraryTarget: 'umd',
     },
-    devtool: mode === 'production' ? 'none' : 'eval-source-map',
+    devtool: 'none',
     resolve: {
       extensions: ['.ts', '.tsx', '.js', 'jsx', '.json', '.css'],
       alias: {
