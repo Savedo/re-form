@@ -42,6 +42,11 @@ module.exports = (env, argv) => {
         root: 'ReactDOM',
         commonjs: 'react-dom',
         commonjs2: 'react-dom'
+      },
+      'yup': {
+        root: 'yup',
+        commonjs: 'yup',
+        commonjs2: 'yup'
       }
     },
     plugins: [

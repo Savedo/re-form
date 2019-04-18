@@ -18,7 +18,7 @@
     "hooks"
   ],
   "files": [
-    "dist",
+    "/dist",
     "index.d.ts"
   ],
   "scripts": {
@@ -54,7 +54,8 @@
     "webpack-cli": "^3.3.0"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*"
+    "react": ">=16.8",
+    "react-dom": ">=16.8",
+    "yup": ">=0.27"
   }
 }
