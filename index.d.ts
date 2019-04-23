@@ -1,6 +1,8 @@
 import { FunctionComponent, ReactElement } from 'react';
 import { ObjectSchema, ValidateOptions, ValidationError } from 'yup';
 
+export { default as FormBuilderContext } from './src/FormBuilderContext';
+
 // FormBuilderContext
 export interface FieldOptionsValueType {
   defaultValue?: any;
