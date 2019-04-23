@@ -329,7 +329,6 @@ var FormBuilder = function (props) {
                         setFormErrors(errors);
                         if (!errors) {
                             handleSubmit(newFormData);
-                            return [2];
                         }
                         _b.label = 2;
                     case 2: return [2];

@@ -31,7 +31,6 @@ const FormBuilder: FormBuilderType = (props) => {
           setFormErrors(errors);
           if (!errors) {
             handleSubmit(newFormData);
-            return;
           }
         }
       };
