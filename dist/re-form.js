@@ -207,11 +207,9 @@ var FormBuilderContext = (function () {
                         return [4, schema.validate(data, this.validation.yupOptions)];
                     case 2:
                         _a.sent();
-                        this.validation.isValidForm = true;
                         return [2, null];
                     case 3:
                         errors_1 = _a.sent();
-                        this.validation.isValidForm = false;
                         return [2, this.extractErrors(errors_1)];
                     case 4: return [2];
                 }
@@ -221,7 +219,6 @@ var FormBuilderContext = (function () {
         this.fieldOptions = fieldOptions || {};
         this.validation = __assign({
             isActive: true,
-            isValidForm: false,
             yupSchema: null,
             yupOptions: {
                 abortEarly: false
@@ -393,6 +390,13 @@ var FormField = function (_a) {
                     react_1.default.createElement("select", __assign({}, { onChange: onChange, defaultValue: defaultValue }), Object.keys(keyValues).map(function (key) {
                         return react_1.default.createElement("option", { key: key, value: key }, keyValues[key]);
                     }))),
+                error && getError(error)));
+        }
+        case 'textarea': {
+            return (react_1.default.createElement("div", null,
+                react_1.default.createElement("label", null,
+                    label,
+                    react_1.default.createElement("textarea", __assign({}, { name: name, defaultValue: defaultValue, onChange: onChange }))),
                 error && getError(error)));
         }
         default: {

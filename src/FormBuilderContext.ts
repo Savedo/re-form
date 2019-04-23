@@ -22,7 +22,6 @@ class FormBuilderContext implements FormBuilderContextType {
     this.validation = {
       ...{
         isActive: true,
-        isValidForm: false,
         yupSchema: null,
         yupOptions: {
           abortEarly: false
@@ -79,10 +78,8 @@ class FormBuilderContext implements FormBuilderContextType {
 
     try {
       await schema.validate(data, this.validation.yupOptions);
-      this.validation.isValidForm = true;
       return null;
     } catch (errors) {
-      this.validation.isValidForm = false;
       return this.extractErrors(errors);
     }
   }

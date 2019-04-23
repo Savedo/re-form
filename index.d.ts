@@ -13,7 +13,6 @@ export interface FieldOptionsValueType {
 }
 export interface FormBuilderContextValidationType {
   isActive: boolean;
-  isValidForm: boolean;
   yupSchema: ObjectSchema<any> | null;
   yupOptions: ValidateOptions;
 }

@@ -67,7 +67,6 @@ describe('FormBuilderContext class', () => {
       expect(formBuilderContext.formErrors).toEqual(null);
       expect(formBuilderContext.validation).toEqual({
         isActive: true,
-        isValidForm: false,
         yupSchema: null,
         yupOptions: { abortEarly: false }
       });
