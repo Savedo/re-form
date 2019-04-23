@@ -61,7 +61,7 @@ describe('FormBuilderContext class', () => {
         'validation',
         'handleSubmit',
         'formData',
-        'formErrors',
+        'formErrors'
       ]);
 
       expect(formBuilderContext.fields).toEqual([]);

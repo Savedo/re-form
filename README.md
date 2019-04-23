@@ -17,7 +17,8 @@ or
 Usage
 =====
 
-You would like to create a react form component with the three input fields (name, age, email) having their own validations. There you go:
+Example case: Creating a react form component with three input fields (name, age, email) with their own validation.
+
 
 ```jsx
 import React from 'react';
@@ -59,7 +60,7 @@ const MyForm = ({ handleSubmit }) => {
 export default MyForm;
 ```
 
-and use your component
+Usage:
 
 ```jsx
 const App = () => {
