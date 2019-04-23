@@ -25,7 +25,7 @@ import { FormBuilder, FormBuilderContext } from 're-form';
 import * as yup from 'yup';
 
 const MyForm = ({ handleSubmit }) => {
-  const formBuilderConfig = new FormBuilderContext({
+  const formBuilderContext = new FormBuilderContext({
     fields: [
       'name',
       'age',
@@ -51,7 +51,7 @@ const MyForm = ({ handleSubmit }) => {
 
   return (
     <div>
-      <FormBuilder context={ formBuilderConfig } />
+      <FormBuilder context={ formBuilderContext } />
     </div>
   );
 };
