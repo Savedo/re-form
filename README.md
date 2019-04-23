@@ -6,7 +6,10 @@ React form builder library.
 Installation
 =======
 
-re-form requires React 16.8.3 or later.
+re-form requires
+
+* react/react-dom 16.8.3 or later to build your form.
+* [yup](https://github.com/jquense/yup) for the validations.
 
 `$ npm install --save savedo/re-form`
 
