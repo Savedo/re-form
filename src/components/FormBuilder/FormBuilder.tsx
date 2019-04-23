@@ -26,9 +26,11 @@ const FormBuilder: FormBuilderType = (props) => {
       async (value: any) => {
         const newFormData = { ...formData, [field]: value };
         setFormData(newFormData);
+        context.formData = Object.assign({}, newFormData);
         if (validation.isActive) {
           const errors = await validate(newFormData);
           setFormErrors(errors);
+          context.formErrors = Object.assign({}, errors);
           if (!errors) {
             handleSubmit(newFormData);
           }

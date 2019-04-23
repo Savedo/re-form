@@ -79,3 +79,28 @@ const App = () => {
 
 export default App;
 ```
+
+Configuration
+=============
+
+`FormBuilder` component uses one prop called `context`. It should be an instance of `FormBuilderContext` class.
+
+#### FormBuilderContext Class
+
+Property | Type | Description
+--- | --- | ---
+fields | string[] | Defines unique field keys and orders fields to be shown.
+fieldOptions | object | Field configuration object having fields (above string[]) as keys (See table below for individual field's properties)
+handleSubmit | function | Form submit behaviour
+
+#### fieldOptions
+
+Property | Type | Default | Optional | Description
+--- | --- | --- | --- | ---
+defaultValue | string, number | N/A | true | default value for the field
+label | string | field key name | true | label for the form element
+element | input, select, textarea | input[type=text] | true | HTML element for the field
+type | input types (eg. text, number, email etc) | text | true | type for HTMLInputElement
+component | FunctionalComponent | N/A | true | Pass your FunctionalComponent with props (FormFieldPropsType) 
+keyValues |  { [key: string]: any } | N/A | true | HTMLSelectElement options
+validation | yup.ObjectSchema<any> | N/A | true | yup schema for validation of field. If you omit field doesn't have any validation.
