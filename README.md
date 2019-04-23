@@ -101,9 +101,9 @@ handleSubmit | function | Form submit behaviour
 Property | Type | Default | Optional | Description
 --- | --- | --- | --- | ---
 defaultValue | string, number | N/A | true | default value for the field
-label | string | field key name | true | label for the form element
-element | input, select, textarea | input[type=text] | true | HTML element for the field
-type | input types (eg. text, number, email etc) | text | true | type for HTMLInputElement
-component | FunctionalComponent | N/A | true | Pass your FunctionalComponent with props (FormFieldPropsType) 
-keyValues |  { [key: string]: any } | N/A | true | HTMLSelectElement options
-validation | yup.ObjectSchema<any> | N/A | true | yup schema for validation of field. If you omit field doesn't have any validation.
+label | string | field key name | true | label for the form field
+element | input, select, textarea | input[type=text] | true | HTML tag for the form field
+type | input types (eg. text, number, email etc) | text | true | type attribute for HTMLInputElement
+component | FunctionalComponent | N/A | true | Pass your FunctionalComponent with props (FormFieldPropsType). `element` and `type` becomes redundant when `component` is used.  
+keyValues |  { [key: string]: any } | N/A | true | Only viable when element is `select`. This object provides the list of `<option value="key">value</option>` 
+validation | yup.ObjectSchema<any> | N/A | true | yup ObjectSchema for field validation. If you omit this field then no validation required for the field.
