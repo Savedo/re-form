@@ -228,7 +228,7 @@ var FormBuilderContext = (function () {
                 abortEarly: false
             }
         }, validation);
-        this.handleSubmit = handleSubmit || (function () { return console.log('no callback specified!'); });
+        this.handleSubmit = handleSubmit || (function () { return console.warn('form submission not handled!'); });
         this.formData = null;
         this.formErrors = null;
     }
@@ -326,11 +326,11 @@ var FormBuilder = function (props) {
                         return [4, validate(newFormData)];
                     case 1:
                         errors = _b.sent();
+                        setFormErrors(errors);
                         if (!errors) {
                             handleSubmit(newFormData);
                             return [2];
                         }
-                        setFormErrors(errors);
                         _b.label = 2;
                     case 2: return [2];
                 }

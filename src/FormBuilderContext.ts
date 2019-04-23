@@ -30,7 +30,7 @@ class FormBuilderContext implements FormBuilderContextType {
       },
       ...validation
     };
-    this.handleSubmit = handleSubmit || (() => console.log('no callback specified!'));
+    this.handleSubmit = handleSubmit || (() => console.warn('form submission not handled!'));
     this.formData = null;
     this.formErrors = null;
   }

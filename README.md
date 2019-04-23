@@ -24,7 +24,7 @@ import React from 'react';
 import { FormBuilder, FormBuilderContext } from 're-form';
 import * as yup from 'yup';
 
-const MyForm = () => {
+const MyForm = ({ handleSubmit }) => {
   const formBuilderConfig = new FormBuilderContext({
     fields: [
       'name',
@@ -46,10 +46,7 @@ const MyForm = () => {
         validation: yup.string().required().email(),
       }
     },
-    handleSubmit: (formData) => {
-      // when validation passed do whatever you want with the form data
-      console.log(formData);
-    }
+    handleSubmit
   });
 
   return (
@@ -65,5 +62,16 @@ export default MyForm;
 and use your component
 
 ```jsx
-<MyForm />
+const App = () => {
+  const handleSubmit = (formData) => {
+    // do whatever you want with the validated form data
+    console.log(formData)
+  };
+  
+  return (
+    <MyForm handleSubmit={ handleSubmit } />
+  );
+};
+
+export default App;
 ```

@@ -28,11 +28,11 @@ const FormBuilder: FormBuilderType = (props) => {
         setFormData(newFormData);
         if (validation.isActive) {
           const errors = await validate(newFormData);
+          setFormErrors(errors);
           if (!errors) {
             handleSubmit(newFormData);
             return;
           }
-          setFormErrors(errors);
         }
       };
 
