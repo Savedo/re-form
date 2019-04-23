@@ -9,7 +9,8 @@ const FormBuilder: FormBuilderType = (props) => {
     fieldOptions,
     getDefaultValues,
     validation,
-    validate
+    validate,
+    handleSubmit
   } = context;
 
   // creates an object with the default values for hook
@@ -28,6 +29,9 @@ const FormBuilder: FormBuilderType = (props) => {
         if (validation.isActive) {
           const errors = await validate(newFormData);
           setFormErrors(errors);
+          if (!errors) {
+            handleSubmit(newFormData);
+          }
         }
       };
 

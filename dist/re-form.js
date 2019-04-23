@@ -163,7 +163,7 @@ var yup = __importStar(__webpack_require__(/*! yup */ "yup"));
 var FormBuilderContext = (function () {
     function FormBuilderContext(_a) {
         var _this = this;
-        var fields = _a.fields, fieldOptions = _a.fieldOptions, _b = _a.validation, validation = _b === void 0 ? {} : _b;
+        var fields = _a.fields, fieldOptions = _a.fieldOptions, _b = _a.validation, validation = _b === void 0 ? {} : _b, handleSubmit = _a.handleSubmit;
         this.getDefaultValues = function () {
             return Object
                 .keys(_this.fieldOptions)
@@ -176,12 +176,16 @@ var FormBuilderContext = (function () {
             if (_this.validation.yupSchema) {
                 return _this.validation.yupSchema;
             }
-            _this.validation.yupSchema = yup.object().shape(Object
+            var yupSchema = Object
                 .keys(_this.fieldOptions)
                 .reduce(function (acc, key) {
                 var _a;
-                return (__assign({}, acc, (_a = {}, _a[key] = _this.fieldOptions[key].validation, _a)));
-            }, {}));
+                if (_this.fieldOptions[key].validation) {
+                    return __assign({}, acc, (_a = {}, _a[key] = _this.fieldOptions[key].validation, _a));
+                }
+                return acc;
+            }, {});
+            _this.validation.yupSchema = yup.object().shape(yupSchema);
             return _this.validation.yupSchema;
         };
         this.extractErrors = function (errors) {
@@ -224,6 +228,7 @@ var FormBuilderContext = (function () {
                 abortEarly: false
             }
         }, validation);
+        this.handleSubmit = handleSubmit || (function () { return console.warn('form submission not handled!'); });
         this.formData = null;
         this.formErrors = null;
     }
@@ -305,7 +310,7 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var FormField_1 = __importDefault(__webpack_require__(/*! ../FormField/FormField */ "./src/components/FormField/FormField.tsx"));
 var FormBuilder = function (props) {
     var context = props.context;
-    var fields = context.fields, fieldOptions = context.fieldOptions, getDefaultValues = context.getDefaultValues, validation = context.validation, validate = context.validate;
+    var fields = context.fields, fieldOptions = context.fieldOptions, getDefaultValues = context.getDefaultValues, validation = context.validation, validate = context.validate, handleSubmit = context.handleSubmit;
     var defaultFormData = getDefaultValues();
     var _a = react_1.useState(defaultFormData), formData = _a[0], setFormData = _a[1];
     var _b = react_1.useState({}), formErrors = _b[0], setFormErrors = _b[1];
@@ -322,6 +327,9 @@ var FormBuilder = function (props) {
                     case 1:
                         errors = _b.sent();
                         setFormErrors(errors);
+                        if (!errors) {
+                            handleSubmit(newFormData);
+                        }
                         _b.label = 2;
                     case 2: return [2];
                 }

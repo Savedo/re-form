@@ -22,15 +22,17 @@ export interface FormBuilderContextConstructorType {
   fields?: string[];
   fieldOptions?: { [key: string]: FieldOptionsValueType };
   validation?: Partial<FormBuilderContextValidationType>;
+  handleSubmit: (formData: any) => void;
 }
 export interface FormBuilderContextType {
   fields: string[];
   fieldOptions: { [key: string]: FieldOptionsValueType };
   validation: FormBuilderContextValidationType;
   getDefaultValues: () => FormDataType;
-  getValidationSchema: () => ObjectSchema<any>;
+  getValidationSchema: () => ObjectSchema<any> | {};
   extractErrors: (errors: ValidationError) => FormErrorsType | {} | null;
   validate: ValidateType;
+  handleSubmit: (formData: any) => void;
   formData: FormDataType | null;
   formErrors: FormErrorsType | null;
 }

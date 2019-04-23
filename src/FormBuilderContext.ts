@@ -14,9 +14,10 @@ class FormBuilderContext implements FormBuilderContextType {
   validation: FormBuilderContextValidationType;
   formData: FormDataType | null;
   formErrors: FormErrorsType | null;
+  handleSubmit: (formData: any) => void;
 
   constructor(
-    { fields, fieldOptions, validation = {} }: FormBuilderContextConstructorType) {
+    { fields, fieldOptions, validation = {}, handleSubmit }: FormBuilderContextConstructorType) {
     this.fields = fields || [];
     this.fieldOptions = fieldOptions || {};
     this.validation = {
@@ -29,12 +30,12 @@ class FormBuilderContext implements FormBuilderContextType {
       },
       ...validation
     };
-
+    this.handleSubmit = handleSubmit || (() => console.warn('form submission not handled!'));
     this.formData = null;
     this.formErrors = null;
   }
 
-  // first init only
+  // returns defaultValue fields for the first init only
   getDefaultValues = () => {
     return Object
       .keys(this.fieldOptions)
@@ -45,22 +46,28 @@ class FormBuilderContext implements FormBuilderContextType {
         }), {});
   }
 
-  // returns validation field of all fields and binds yup engine
+  // returns validation field of all fields (if they exists) and binds yup validator
   getValidationSchema = () => {
     if (this.validation.yupSchema) {
       return this.validation.yupSchema;
     }
-    this.validation.yupSchema = yup.object().shape(
-      Object
-        .keys(this.fieldOptions)
-        .reduce((acc, key) => ({
-          ...acc,
-          ...{ [key]: this.fieldOptions[key].validation }
-        }), {})
-    );
+    const yupSchema = Object
+      .keys(this.fieldOptions)
+      .reduce((acc, key) => {
+        if (this.fieldOptions[key].validation) {
+          return {
+            ...acc,
+            ...{ [key]: this.fieldOptions[key].validation }
+          };
+        }
+        return acc;
+      }, {});
+
+    this.validation.yupSchema = yup.object().shape(yupSchema);
     return this.validation.yupSchema;
   }
 
+  // extracts error key/values from yup validation errors
   extractErrors = (errors: yup.ValidationError) => {
     if (errors && errors.inner) {
       return errors.inner

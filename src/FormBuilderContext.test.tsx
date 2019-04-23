@@ -37,7 +37,8 @@ describe('FormBuilderContext class', () => {
         }
       }
     };
-    return new FormBuilderContext({ fields, fieldOptions });
+    const handleSubmit = jest.fn();
+    return new FormBuilderContext({ fields, fieldOptions, handleSubmit });
   };
 
   describe('constructor', () => {
@@ -47,7 +48,8 @@ describe('FormBuilderContext class', () => {
     });
 
     it('sets up default properties', () => {
-      const formBuilderContext = new FormBuilderContext({});
+      const handleSubmit = jest.fn();
+      const formBuilderContext = new FormBuilderContext({ handleSubmit });
 
       expect(Object.keys(formBuilderContext)).toEqual([
         'getDefaultValues',
@@ -57,6 +59,7 @@ describe('FormBuilderContext class', () => {
         'fields',
         'fieldOptions',
         'validation',
+        'handleSubmit',
         'formData',
         'formErrors'
       ]);
@@ -84,7 +87,8 @@ describe('FormBuilderContext class', () => {
           company: {
             defaultValue: 'Savedo'
           }
-        }
+        },
+        handleSubmit: jest.fn()
       });
 
       expect(formBuilderContext.getDefaultValues()).toEqual({
