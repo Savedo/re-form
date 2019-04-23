@@ -17,7 +17,7 @@ const FormField: FormFieldType = (
     keyValues = {}
   } = options || {};
 
-  const onChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (event) => {
+  const onChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> = (event) => {
     event.preventDefault();
     setValue(event.currentTarget.value);
   };
@@ -37,6 +37,16 @@ const FormField: FormFieldType = (
                   <option key={ key } value={ key }>{ keyValues[key] }</option>)
               }
             </select>
+          </label>
+          { error && getError(error) }
+        </div>
+      );
+    }
+    case 'textarea': {
+      return (
+        <div>
+          <label>{ label }
+            <textarea { ...{ name, defaultValue, onChange } } />
           </label>
           { error && getError(error) }
         </div>
