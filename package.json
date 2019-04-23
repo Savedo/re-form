@@ -1,6 +1,6 @@
 {
   "name": "re-form",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "react form library",
   "author": "Savedo GmbH. <it@savedo.de> (https://www.savedo.de)",
@@ -18,14 +18,14 @@
     "hooks"
   ],
   "files": [
-    "dist",
+    "/dist",
     "index.d.ts"
   ],
   "scripts": {
     "clean": "rimraf dist",
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json 'src/**/*.ts?(x)'",
     "test": "./node_modules/jest/bin/jest.js -u --config=jest.config.js",
-    "build": "yarn clean && yarn lint && yarn test && yarn build:umd && yarn build:umd:min",
+    "build": "yarn clean && yarn build:umd && yarn build:umd:min",
     "build:umd": "webpack --mode=development",
     "build:umd:min": "webpack --mode=production"
   },
@@ -54,7 +54,8 @@
     "webpack-cli": "^3.3.0"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*"
+    "react": ">=16.8",
+    "react-dom": ">=16.8",
+    "yup": ">=0.27"
   }
 }

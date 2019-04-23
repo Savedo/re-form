@@ -17,7 +17,7 @@ module.exports = (env, argv) => {
       filename,
       libraryTarget: 'umd',
     },
-    devtool: mode === 'production' ? 'none' : 'eval-source-map',
+    devtool: 'none',
     resolve: {
       extensions: ['.ts', '.tsx', '.js', 'jsx', '.json', '.css'],
       alias: {
@@ -42,6 +42,11 @@ module.exports = (env, argv) => {
         root: 'ReactDOM',
         commonjs: 'react-dom',
         commonjs2: 'react-dom'
+      },
+      'yup': {
+        root: 'yup',
+        commonjs: 'yup',
+        commonjs2: 'yup'
       }
     },
     plugins: [
