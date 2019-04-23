@@ -63,6 +63,9 @@ export default MyForm;
 Usage:
 
 ```jsx
+import React from 'react';
+import MyForm from './MyForm';
+
 const App = () => {
   const handleSubmit = (formData) => {
     // do whatever you want with the validated form data
