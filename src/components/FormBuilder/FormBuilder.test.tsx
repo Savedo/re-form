@@ -27,24 +27,28 @@ describe('FormBuilder component', () => {
     return new FormBuilderContext({ fields, fieldOptions, handleSubmit });
   };
 
-  const setup = (context: FormBuilderContext) => {
+  const setup = (formBuilderContext: FormBuilderContext) => {
     return render(
       <div>
-        <FormBuilder context={ context } />
+        <FormBuilder context={ formBuilderContext } />
       </div>
     );
   };
 
+  let context = createFormBuilderContext();
+  let container: HTMLElement = setup(context).container;
+
+  beforeEach(() => {
+    context = createFormBuilderContext();
+    container = setup(context).container;
+  });
+
   describe('renders', () => {
     it('matches last snapshot', () => {
-      const context = createFormBuilderContext();
-      const { container } = setup(context);
       expect(container.firstChild).toMatchSnapshot();
     });
 
     it('validated form', async () => {
-      const context = createFormBuilderContext();
-      const { container } = setup(context);
       const nameInput = container.querySelector('input[name=name]');
       const ageInput = container.querySelector('input[name=age]');
 
@@ -71,8 +75,6 @@ describe('FormBuilder component', () => {
 
     describe('validation error', () => {
       it('on required', async () => {
-        const context = createFormBuilderContext();
-        const { container } = setup(context);
         const nameInput = container.querySelector('input[name=name]');
 
         expect(context.handleSubmit).toHaveBeenCalledTimes(0);
@@ -88,8 +90,6 @@ describe('FormBuilder component', () => {
       });
 
       it('on min', async () => {
-        const context = createFormBuilderContext();
-        const { container } = setup(context);
         const nameInput = container.querySelector('input[name=name]');
         const ageInput = container.querySelector('input[name=age]');
 

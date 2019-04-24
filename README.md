@@ -100,7 +100,7 @@ handleSubmit | function | Form submit behaviour
 
 Property | Type | Default | Optional | Description
 --- | --- | --- | --- | ---
-defaultValue | string, number | N/A | true | default value for the field
+defaultValue | string, number, boolean | N/A | true | default value for the field
 label | string | field key name | true | label for the form field
 element | input, select, textarea | input[type=text] | true | HTML tag for the form field
 type | input types (eg. text, number, email etc) | text | true | type attribute for HTMLInputElement
