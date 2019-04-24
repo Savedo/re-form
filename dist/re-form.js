@@ -322,11 +322,13 @@ var FormBuilder = function (props) {
                     case 0:
                         newFormData = __assign({}, formData, (_a = {}, _a[field] = value, _a));
                         setFormData(newFormData);
+                        context.formData = Object.assign({}, newFormData);
                         if (!validation.isActive) return [3, 2];
                         return [4, validate(newFormData)];
                     case 1:
                         errors = _b.sent();
                         setFormErrors(errors);
+                        context.formErrors = Object.assign({}, errors);
                         if (!errors) {
                             handleSubmit(newFormData);
                         }
