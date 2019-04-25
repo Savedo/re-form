@@ -46,7 +46,7 @@ const FormBuilder: FormBuilderType = (props) => {
       name: field,
       label,
       options,
-      defaultValue: formData[field],
+      value: formData[field],
       setValue: setFormDataValue(field),
       error
     };

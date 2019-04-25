@@ -9,7 +9,7 @@ export interface FieldOptionsValueType {
   label?: string;
   type?: string;
   element?: string;
-  component?: (props: any) => ReactElement;
+  component?: (props: FormFieldPropsType) => ReactElement;
   keyValues?: { [key: string]: any };
   validation?: any;
 }
@@ -59,7 +59,7 @@ export const FormBuilder: FunctionComponent<FormBuilderPropsType>;
 export interface FormFieldPropsType extends JSX.IntrinsicAttributes {
   options: FieldOptionsValueType;
   setValue: ((value: any) => void);
-  defaultValue: any;
+  value: string | string[] | undefined;
   name: string;
   label: string | undefined;
   error: string;

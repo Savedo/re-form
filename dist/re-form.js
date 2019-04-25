@@ -346,7 +346,7 @@ var FormBuilder = function (props) {
             name: field,
             label: label,
             options: options,
-            defaultValue: formData[field],
+            value: formData[field],
             setValue: setFormDataValue(field),
             error: error
         };
@@ -385,7 +385,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var FormField = function (_a) {
-    var options = _a.options, defaultValue = _a.defaultValue, name = _a.name, label = _a.label, setValue = _a.setValue, error = _a.error;
+    var options = _a.options, value = _a.value, name = _a.name, label = _a.label, setValue = _a.setValue, error = _a.error;
     var _b = options || {}, _c = _b.element, element = _c === void 0 ? 'input' : _c, _d = _b.type, type = _d === void 0 ? 'text' : _d, _e = _b.keyValues, keyValues = _e === void 0 ? {} : _e;
     var onChange = function (event) {
         event.preventDefault();
@@ -397,7 +397,7 @@ var FormField = function (_a) {
             return (react_1.default.createElement("div", null,
                 react_1.default.createElement("label", null,
                     label,
-                    react_1.default.createElement("select", __assign({}, { onChange: onChange, defaultValue: defaultValue }), Object.keys(keyValues).map(function (key) {
+                    react_1.default.createElement("select", __assign({}, { onChange: onChange, defaultValue: value }), Object.keys(keyValues).map(function (key) {
                         return react_1.default.createElement("option", { key: key, value: key }, keyValues[key]);
                     }))),
                 error && getError(error)));
@@ -406,14 +406,14 @@ var FormField = function (_a) {
             return (react_1.default.createElement("div", null,
                 react_1.default.createElement("label", null,
                     label,
-                    react_1.default.createElement("textarea", __assign({}, { name: name, defaultValue: defaultValue, onChange: onChange }))),
+                    react_1.default.createElement("textarea", __assign({}, { name: name, defaultValue: value, onChange: onChange }))),
                 error && getError(error)));
         }
         default: {
             return (react_1.default.createElement("div", null,
                 react_1.default.createElement("label", null,
                     label,
-                    react_1.default.createElement("input", __assign({}, { type: type, name: name, defaultValue: defaultValue, onChange: onChange }))),
+                    react_1.default.createElement("input", __assign({}, { type: type, name: name, defaultValue: value, onChange: onChange }))),
                 error && getError(error)));
         }
     }
