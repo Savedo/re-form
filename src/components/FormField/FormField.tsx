@@ -4,7 +4,7 @@ import { FormFieldType } from '@reform';
 const FormField: FormFieldType = (
   {
     options,
-    defaultValue,
+    value,
     name,
     label,
     setValue,
@@ -31,7 +31,7 @@ const FormField: FormFieldType = (
       return (
         <div>
           <label>{ label }
-            <select { ...{ onChange, defaultValue } }>
+            <select { ...{ onChange, defaultValue: value } }>
               {
                 Object.keys(keyValues).map((key: string) =>
                   <option key={ key } value={ key }>{ keyValues[key] }</option>)
@@ -46,7 +46,7 @@ const FormField: FormFieldType = (
       return (
         <div>
           <label>{ label }
-            <textarea { ...{ name, defaultValue, onChange } } />
+            <textarea { ...{ name, defaultValue: value, onChange } } />
           </label>
           { error && getError(error) }
         </div>
@@ -55,7 +55,7 @@ const FormField: FormFieldType = (
     default: {
       return (
         <div>
-          <label>{ label }<input { ...{ type, name, defaultValue, onChange } } /></label>
+          <label>{ label }<input { ...{ type, name, defaultValue: value, onChange } } /></label>
           { error && getError(error) }
         </div>
       );
