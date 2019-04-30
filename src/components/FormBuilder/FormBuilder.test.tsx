@@ -8,7 +8,7 @@ describe('FormBuilder component', () => {
   const validate = jest.fn();
   const handleSubmit = jest.fn();
 
-  const setupProps = (): any => {
+  const setup = () => {
     const fields = [
       'name',
       'age'
@@ -26,12 +26,6 @@ describe('FormBuilder component', () => {
       name: 'Erhan',
       age: 44
     };
-
-    return { fields, fieldOptions, values };
-  };
-
-  const setup = () => {
-    const { fields, fieldOptions, values } = setupProps();
 
     return render(
       <div>
