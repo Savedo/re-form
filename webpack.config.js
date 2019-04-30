@@ -67,10 +67,7 @@ module.exports = (env, argv) => {
     },
     devServer: {
       contentBase: './dist',
-      port: 9100,
-      disableHostCheck: true,
-      host: '0.0.0.0',
-      public: 'local.savedo.ch:9100'
+      port: 9100
     },
     module: {
       rules: [

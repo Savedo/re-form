@@ -74,7 +74,7 @@ const App = () => {
     // do whatever you want with the validated form data
     console.log(formData)
   };
-  
+
   return (
     <MyForm handleSubmit={ handleSubmit } />
   );
@@ -104,6 +104,18 @@ defaultValue | string, number, boolean | N/A | true | default value for the fiel
 label | string | field key name | true | label for the form field
 element | input, select, textarea | input[type=text] | true | HTML tag for the form field
 type | input types (eg. text, number, email etc) | text | true | type attribute for HTMLInputElement
-component | FunctionalComponent | N/A | true | Pass your FunctionalComponent with props (FormFieldPropsType). `element` and `type` becomes redundant when `component` is used.  
-keyValues |  { [key: string]: any } | N/A | true | Only viable when element is `select`. This object provides the list of `<option value="key">value</option>` 
+component | FunctionalComponent | N/A | true | Pass your FunctionalComponent with props (FormFieldPropsType). `element` and `type` becomes redundant when `component` is used.
+keyValues |  { [key: string]: any } | N/A | true | Only viable when element is `select`. This object provides the list of `<option value="key">value</option>`
 validation | yup.ObjectSchema<any> | N/A | true | yup ObjectSchema for field validation. If you omit this field then no validation required for the field.
+
+
+Development
+=============
+
+In order to start dev server, type
+
+```
+yarn develop
+```
+
+it opens your browser with url `http://localhost:9100/`
