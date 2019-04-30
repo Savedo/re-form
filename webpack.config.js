@@ -13,8 +13,8 @@ let plugins = [
 
 const devServerPlugins = [
   new HtmlWebpackPlugin({
-  title: 'Re-form library',
-  template: './demo/template.html'
+    title: 'Re-form library demos',
+    template: './examples/template.html'
   })
 ];
 
@@ -47,7 +47,7 @@ module.exports = (env, argv) => {
   if (typeof devServer !== 'undefined') {
     plugins = plugins.concat(devServerPlugins);
     externals = {};
-    entry ='./demo/index.tsx';
+    entry ='./examples/index.tsx';
   }
 
   return {
