@@ -1,8 +1,8 @@
 {
   "name": "re-form",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "private": true,
-  "description": "react form library",
+  "description": "react form builder library",
   "author": "Savedo GmbH. <it@savedo.de> (https://www.savedo.de)",
   "license": "MIT",
   "homepage": "https://github.com/Savedo/re-form#readme",
@@ -15,7 +15,9 @@
   "keywords": [
     "react",
     "form",
-    "hooks"
+    "hooks",
+    "validation",
+    "form-builder"
   ],
   "files": [
     "/dist",
@@ -31,15 +33,13 @@
   },
   "dependencies": {
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "yup": "^0.27.0"
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@types/jest": "^24.0.11",
     "@types/react": "^16.8.13",
     "@types/react-dom": "^16.8.3",
-    "@types/yup": "^0.26.12",
     "babel-loader": "^8.0.5",
     "jest": "^24.7.1",
     "react-testing-library": "^6.1.2",
@@ -55,7 +55,6 @@
   },
   "peerDependencies": {
     "react": ">=16.8.3",
-    "react-dom": ">=16.8.3",
-    "yup": ">=0.27"
+    "react-dom": ">=16.8.3"
   }
 }

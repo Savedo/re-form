@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler } from 'react';
 import { FormFieldType } from '@reform';
 
-const FormField: FormFieldType = (
+const FormField: FormFieldType<string> = (
   {
     options,
     value,
@@ -18,6 +18,7 @@ const FormField: FormFieldType = (
   } = options || {};
 
   const onChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> = (event) => {
+    // event.persist();
     event.preventDefault();
     setValue(event.currentTarget.value);
   };

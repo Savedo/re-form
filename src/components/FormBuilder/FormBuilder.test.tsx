@@ -1,46 +1,49 @@
 import React from 'react';
-import { render, fireEvent, wait, cleanup } from 'react-testing-library';
+import { render, fireEvent, cleanup } from 'react-testing-library';
 import FormBuilder from './FormBuilder';
-import FormBuilderContext from '../../FormBuilderContext';
-import * as yup from 'yup';
 
 describe('FormBuilder component', () => {
   afterEach(cleanup);
 
-  const createFormBuilderContext = (): FormBuilderContext => {
+  const validate = jest.fn();
+  const handleSubmit = jest.fn();
+
+  const setupProps = (): any => {
     const fields = [
       'name',
       'age'
     ];
     const fieldOptions = {
       name: {
-        label: 'Name:',
-        validation: yup.string().required()
+        label: 'Name:'
       },
       age: {
         type: 'number',
-        label: 'Your Age:',
-        validation: yup.number().required().positive().integer().min(18)
+        label: 'Your Age:'
       }
     };
-    const handleSubmit = jest.fn();
-    return new FormBuilderContext({ fields, fieldOptions, handleSubmit });
+    const values = {
+      name: 'Erhan',
+      age: 44
+    };
+
+    return { fields, fieldOptions, values };
   };
 
-  const setup = (formBuilderContext: FormBuilderContext) => {
+  const setup = () => {
+    const { fields, fieldOptions, values } = setupProps();
+
     return render(
       <div>
-        <FormBuilder context={ formBuilderContext } />
+        <FormBuilder { ...{ fields, fieldOptions, values, validate, handleSubmit } } />
       </div>
     );
   };
 
-  let context = createFormBuilderContext();
-  let container: HTMLElement = setup(context).container;
+  let container: HTMLElement = setup().container;
 
   beforeEach(() => {
-    context = createFormBuilderContext();
-    container = setup(context).container;
+    container = setup().container;
   });
 
   describe('renders', () => {
@@ -48,11 +51,12 @@ describe('FormBuilder component', () => {
       expect(container.firstChild).toMatchSnapshot();
     });
 
-    it('validated form', async () => {
+    it('validates form', () => {
       const nameInput = container.querySelector('input[name=name]');
       const ageInput = container.querySelector('input[name=age]');
+      const submitButton = container.querySelector('button[type=submit]');
 
-      expect(context.handleSubmit).toHaveBeenCalledTimes(0);
+      expect(handleSubmit).toHaveBeenCalledTimes(0);
 
       fireEvent.change(nameInput as HTMLInputElement, {
         target: { value: 'Erhan Gundogan' }
@@ -60,52 +64,13 @@ describe('FormBuilder component', () => {
       fireEvent.change(ageInput as HTMLInputElement, {
         target: { value: '18' }
       });
+      fireEvent.click(submitButton as HTMLButtonElement);
 
-      await wait(() => {
-        const formData = {
-          name: 'Erhan Gundogan',
-          age: '18'
-        };
-        expect(container.firstChild).toMatchSnapshot();
-        expect(context.handleSubmit).toHaveBeenCalledTimes(1);
-        expect(context.handleSubmit).toHaveBeenCalledWith(formData);
-        expect(context.formData).toEqual(formData);
-      });
-    });
-
-    describe('validation error', () => {
-      it('on required', async () => {
-        const nameInput = container.querySelector('input[name=name]');
-
-        expect(context.handleSubmit).toHaveBeenCalledTimes(0);
-
-        fireEvent.change(nameInput as HTMLInputElement, {
-          target: { value: 'Erhan Gundogan' }
-        });
-
-        await wait(() => {
-          expect(container.firstChild).toMatchSnapshot();
-          expect(context.handleSubmit).toHaveBeenCalledTimes(0);
-        });
-      });
-
-      it('on min', async () => {
-        const nameInput = container.querySelector('input[name=name]');
-        const ageInput = container.querySelector('input[name=age]');
-
-        expect(context.handleSubmit).toHaveBeenCalledTimes(0);
-
-        fireEvent.change(nameInput as HTMLInputElement, {
-          target: { value: 'Erhan Gundogan' }
-        });
-        fireEvent.change(ageInput as HTMLInputElement, {
-          target: { value: '17' }
-        });
-
-        await wait(() => {
-          expect(container.firstChild).toMatchSnapshot();
-          expect(context.handleSubmit).toHaveBeenCalledTimes(0);
-        });
+      expect(container.firstChild).toMatchSnapshot();
+      expect(validate).toHaveBeenCalledTimes(1);
+      expect(validate).toHaveBeenCalledWith({
+        name: 'Erhan Gundogan',
+        age: '18'
       });
     });
   });
