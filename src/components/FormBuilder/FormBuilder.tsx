@@ -2,7 +2,7 @@ import React, { FormEventHandler, useEffect, useState } from 'react';
 import { FieldOptionsValueType, FormBuilderType, FormDataType } from '@reform';
 import FormField from '../FormField/FormField';
 
-const FormBuilder: FormBuilderType<string> = ({ fields, fieldOptions = {}, values, validate, handleSubmit }) => {
+const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, validate, handleSubmit }) => {
 
   const [formData, setFormData] = useState(values || {});
   const [formErrors, setFormErrors]: [ { [key: string]: string }, any ] = useState({});
