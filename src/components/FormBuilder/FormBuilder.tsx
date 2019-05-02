@@ -13,14 +13,18 @@ const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, 
     if (Object.keys(formErrors).length === 0 && isValidating && isSubmitting) {
       handleSubmit && handleSubmit(formData);
     }
-    setIsSubmitting(false);
+    if (isSubmitting) {
+      setIsSubmitting(false);
+    }
   }, [formErrors]);
 
   const validateFormData = (newFormData: FormDataType) => {
     if (validate && typeof validate === 'function') {
       const errors = validate(newFormData);
       if (errors && Object.keys(errors).length > 0) {
-        setFormErrors(errors);
+        if (errors !== formErrors) {
+          setFormErrors(errors);
+        }
         return;
       }
     }
@@ -31,9 +35,11 @@ const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, 
     (field: string) =>
       (value: any) => {
         const newFormData = { ...formData, [field]: value };
-        setFormData(newFormData);
-        if (isValidating) {
-          validateFormData(newFormData);
+        if (newFormData !== formData) {
+          setFormData(newFormData);
+          if (isValidating) {
+            validateFormData(newFormData);
+          }
         }
       };
 

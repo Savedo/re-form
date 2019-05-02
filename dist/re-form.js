@@ -139,13 +139,17 @@ var FormBuilder = function (_a) {
         if (Object.keys(formErrors).length === 0 && isValidating && isSubmitting) {
             handleSubmit && handleSubmit(formData);
         }
-        setIsSubmitting(false);
+        if (isSubmitting) {
+            setIsSubmitting(false);
+        }
     }, [formErrors]);
     var validateFormData = function (newFormData) {
         if (validate && typeof validate === 'function') {
             var errors = validate(newFormData);
             if (errors && Object.keys(errors).length > 0) {
-                setFormErrors(errors);
+                if (errors !== formErrors) {
+                    setFormErrors(errors);
+                }
                 return;
             }
         }
@@ -155,9 +159,11 @@ var FormBuilder = function (_a) {
         return function (value) {
             var _a;
             var newFormData = __assign({}, formData, (_a = {}, _a[field] = value, _a));
-            setFormData(newFormData);
-            if (isValidating) {
-                validateFormData(newFormData);
+            if (newFormData !== formData) {
+                setFormData(newFormData);
+                if (isValidating) {
+                    validateFormData(newFormData);
+                }
             }
         };
     };
