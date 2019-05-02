@@ -19,7 +19,7 @@ or
 Usage
 =====
 
-Example case: Creating a react form component with three input fields (name, age, email).
+Simple case: Creating a react form component with three input fields (name, age, email).
 
 
 ```jsx
@@ -112,3 +112,8 @@ yarn develop
 ```
 
 it opens your browser with url `http://localhost:9100/`
+
+License
+=============
+
+MIT

@@ -4,7 +4,12 @@ import FormField from '../FormField/FormField';
 
 const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, validate, handleSubmit }) => {
 
-  const [formData, setFormData] = useState(values || {});
+  const setFormObject = (currentValues?: any) => {
+    const defaults = fields.reduce((acc, field) => ({ ...acc, [field]: null }), {});
+    return Object.assign(defaults, values, (currentValues || {}));
+  };
+
+  const [formData, setFormData] = useState(setFormObject() || {});
   const [formErrors, setFormErrors]: [ { [key: string]: string }, any ] = useState({});
   const [isValidating, setIsValidating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,19 +29,17 @@ const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, 
       if (errors && Object.keys(errors).length > 0) {
         if (errors !== formErrors) {
           setFormErrors(errors);
+          return;
         }
-        return;
-      }
-      if (formErrors !== {}) {
-        setFormErrors({});
       }
     }
+    setFormErrors({});
   };
 
   const setFormDataValue =
     (field: string) =>
       (value: any) => {
-        const newFormData = { ...formData, [field]: value };
+        const newFormData = setFormObject({ ...formData, [field]: value });
         if (newFormData !== formData) {
           setFormData(newFormData);
           if (isValidating) {

@@ -131,7 +131,14 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var FormField_1 = __importDefault(__webpack_require__(/*! ../FormField/FormField */ "./src/components/FormField/FormField.tsx"));
 var FormBuilder = function (_a) {
     var fields = _a.fields, _b = _a.fieldOptions, fieldOptions = _b === void 0 ? {} : _b, values = _a.values, validate = _a.validate, handleSubmit = _a.handleSubmit;
-    var _c = react_1.useState(values || {}), formData = _c[0], setFormData = _c[1];
+    var setFormObject = function (currentValues) {
+        var defaults = fields.reduce(function (acc, field) {
+            var _a;
+            return (__assign({}, acc, (_a = {}, _a[field] = null, _a)));
+        }, {});
+        return Object.assign(defaults, values, (currentValues || {}));
+    };
+    var _c = react_1.useState(setFormObject() || {}), formData = _c[0], setFormData = _c[1];
     var _d = react_1.useState({}), formErrors = _d[0], setFormErrors = _d[1];
     var _e = react_1.useState(false), isValidating = _e[0], setIsValidating = _e[1];
     var _f = react_1.useState(false), isSubmitting = _f[0], setIsSubmitting = _f[1];
@@ -149,18 +156,16 @@ var FormBuilder = function (_a) {
             if (errors && Object.keys(errors).length > 0) {
                 if (errors !== formErrors) {
                     setFormErrors(errors);
+                    return;
                 }
-                return;
-            }
-            if (formErrors !== {}) {
-                setFormErrors({});
             }
         }
+        setFormErrors({});
     };
     var setFormDataValue = function (field) {
         return function (value) {
             var _a;
-            var newFormData = __assign({}, formData, (_a = {}, _a[field] = value, _a));
+            var newFormData = setFormObject(__assign({}, formData, (_a = {}, _a[field] = value, _a)));
             if (newFormData !== formData) {
                 setFormData(newFormData);
                 if (isValidating) {
