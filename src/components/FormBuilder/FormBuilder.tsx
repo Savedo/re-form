@@ -29,11 +29,13 @@ const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, 
       if (errors && Object.keys(errors).length > 0) {
         if (errors !== formErrors) {
           setFormErrors(errors);
-          return;
         }
+        return;
       }
     }
-    setFormErrors({});
+    if (formErrors !== {}) {
+      setFormErrors({});
+    }
   };
 
   const setFormDataValue =

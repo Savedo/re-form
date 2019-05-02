@@ -156,11 +156,13 @@ var FormBuilder = function (_a) {
             if (errors && Object.keys(errors).length > 0) {
                 if (errors !== formErrors) {
                     setFormErrors(errors);
-                    return;
                 }
+                return;
             }
         }
-        setFormErrors({});
+        if (formErrors !== {}) {
+            setFormErrors({});
+        }
     };
     var setFormDataValue = function (field) {
         return function (value) {
