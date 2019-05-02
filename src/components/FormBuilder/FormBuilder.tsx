@@ -4,12 +4,12 @@ import FormField from '../FormField/FormField';
 
 const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, validate, handleSubmit }) => {
 
-  const setFormObject = (currentValues?: any) => {
+  const setFormObject = (currentValues: any = {}) => {
     const defaults = fields.reduce((acc, field) => ({ ...acc, [field]: null }), {});
-    return Object.assign(defaults, values, (currentValues || {}));
+    return Object.assign(defaults, values, currentValues);
   };
 
-  const [formData, setFormData] = useState(setFormObject() || {});
+  const [formData, setFormData] = useState(setFormObject());
   const [formErrors, setFormErrors]: [ { [key: string]: string }, any ] = useState({});
   const [isValidating, setIsValidating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
