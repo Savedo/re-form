@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { FormBuilder, FormBuilderPropsType } from '..';
+import { FormBuilder } from '../src';
+import { FormBuilderPropsType } from '../';
 
 type MyFormFieldsType = 'name' | 'age' | 'email';
 
