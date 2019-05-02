@@ -2,110 +2,70 @@
 
 exports[`FormBuilder component renders matches last snapshot 1`] = `
 <div>
-  <div>
-    <label>
-      Name:
-      <input
-        name="name"
-        type="text"
-        value=""
-      />
-    </label>
-  </div>
-  <div>
-    <label>
-      Your Age:
-      <input
-        name="age"
-        type="number"
-        value=""
-      />
-    </label>
-  </div>
-</div>
-`;
-
-exports[`FormBuilder component renders validated form 1`] = `
-<div>
-  <div>
-    <label>
-      Name:
-      <input
-        name="name"
-        type="text"
-        value="Erhan Gundogan"
-      />
-    </label>
-  </div>
-  <div>
-    <label>
-      Your Age:
-      <input
-        name="age"
-        type="number"
-        value="18"
-      />
-    </label>
-  </div>
-</div>
-`;
-
-exports[`FormBuilder component renders validation error on min 1`] = `
-<div>
-  <div>
-    <label>
-      Name:
-      <input
-        name="name"
-        type="text"
-        value="Erhan Gundogan"
-      />
-    </label>
-  </div>
-  <div>
-    <label>
-      Your Age:
-      <input
-        name="age"
-        type="number"
-        value="17"
-      />
-    </label>
-    <div
-      class="error"
-    >
-      age must be greater than or equal to 18
+  <form
+    novalidate=""
+  >
+    <div>
+      <label>
+        Name:
+        <input
+          name="name"
+          type="text"
+          value="Erhan"
+        />
+      </label>
     </div>
-  </div>
+    <div>
+      <label>
+        Your Age:
+        <input
+          name="age"
+          type="number"
+          value="44"
+        />
+      </label>
+    </div>
+    <button
+      class="submit-button"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
 </div>
 `;
 
-exports[`FormBuilder component renders validation error on required 1`] = `
+exports[`FormBuilder component renders validates form 1`] = `
 <div>
-  <div>
-    <label>
-      Name:
-      <input
-        name="name"
-        type="text"
-        value="Erhan Gundogan"
-      />
-    </label>
-  </div>
-  <div>
-    <label>
-      Your Age:
-      <input
-        name="age"
-        type="number"
-        value=""
-      />
-    </label>
-    <div
-      class="error"
-    >
-      age is a required field
+  <form
+    novalidate=""
+  >
+    <div>
+      <label>
+        Name:
+        <input
+          name="name"
+          type="text"
+          value="Erhan Gundogan"
+        />
+      </label>
     </div>
-  </div>
+    <div>
+      <label>
+        Your Age:
+        <input
+          name="age"
+          type="number"
+          value="18"
+        />
+      </label>
+    </div>
+    <button
+      class="submit-button"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
 </div>
 `;

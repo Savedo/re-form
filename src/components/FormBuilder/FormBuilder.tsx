@@ -1,48 +1,55 @@
-import React, { useState } from 'react';
-import { FormBuilderType, FormDataType } from '@reform';
+import React, { FormEventHandler, useEffect, useState } from 'react';
+import { FieldOptionsValueType, FormBuilderType, FormDataType } from '@reform';
 import FormField from '../FormField/FormField';
 
-const FormBuilder: FormBuilderType = (props) => {
-  const { context } = props;
-  const {
-    fields,
-    fieldOptions,
-    getDefaultValues,
-    validation,
-    validate,
-    handleSubmit
-  } = context;
+const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, validate, handleSubmit }) => {
 
-  // creates an object with the default values for hook
-  const defaultFormData: FormDataType = getDefaultValues();
+  const [formData, setFormData] = useState(values || {});
+  const [formErrors, setFormErrors]: [ { [key: string]: string }, any ] = useState({});
+  const [isValidating, setIsValidating] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // create hooks
-  const [formData, setFormData] = useState(defaultFormData);
-  const [formErrors, setFormErrors]: [{ [key: string]: string }, (errors: any) => any] = useState({});
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isValidating && isSubmitting) {
+      handleSubmit && handleSubmit(formData);
+    }
+    if (isSubmitting) {
+      setIsSubmitting(false);
+    }
+  }, [formErrors]);
 
-  // method to run setFormData hook from onChange event of the generated element
+  const validateFormData = (newFormData: FormDataType) => {
+    if (validate && typeof validate === 'function') {
+      const errors = validate(newFormData);
+      if (errors && Object.keys(errors).length > 0) {
+        if (errors !== formErrors) {
+          setFormErrors(errors);
+        }
+        return;
+      }
+      if (formErrors !== {}) {
+        setFormErrors({});
+      }
+    }
+  };
+
   const setFormDataValue =
     (field: string) =>
-      async (value: any) => {
+      (value: any) => {
         const newFormData = { ...formData, [field]: value };
-        setFormData(newFormData);
-        context.formData = Object.assign({}, newFormData);
-        if (validation.isActive) {
-          const errors = await validate(newFormData);
-          setFormErrors(errors);
-          context.formErrors = Object.assign({}, errors);
-          if (!errors) {
-            handleSubmit(newFormData);
+        if (newFormData !== formData) {
+          setFormData(newFormData);
+          if (isValidating) {
+            validateFormData(newFormData);
           }
         }
       };
 
-  // returns if there is a fieldOptions.component otherwise fieldOptions.element or input[type=text]
   const getFieldComponent = (field: string) => {
-    const options = fieldOptions[field];
+    const options: FieldOptionsValueType<string> = fieldOptions[field] as FieldOptionsValueType<string>;
     const { component, label } = options;
-    const error = formErrors && formErrors[field];
-    const formFieldOptions = {
+    const error = formErrors && formErrors[field] as string;
+    const componentOptions = {
       name: field,
       label,
       options,
@@ -53,15 +60,25 @@ const FormBuilder: FormBuilderType = (props) => {
 
     return (
       <React.Fragment key={ field }>
-        { component ? component(formFieldOptions) : <FormField { ...formFieldOptions } /> }
+        { component ? component(componentOptions) : <FormField { ...componentOptions } /> }
       </React.Fragment>
     );
   };
 
+  const onSubmit: FormEventHandler = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+    setIsSubmitting(true);
+    setIsValidating(true);
+    validateFormData(formData);
+  };
+
   return (
-    <>
-      { fields.map(field => getFieldComponent(field)) }
-    </>
+    <form onSubmit={ onSubmit } noValidate={ true }>
+      { fields.map(field => fieldOptions[field] && getFieldComponent(field)) }
+      <button type="submit" className="submit-button">Submit</button>
+    </form>
   );
 };
 

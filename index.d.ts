@@ -1,43 +1,12 @@
-import { FunctionComponent, ReactElement } from 'react';
-import { ObjectSchema, ValidateOptions, ValidationError } from 'yup';
+import { FunctionComponent, ReactElement, ReactNode } from 'react';
 
-export { default as FormBuilderContext } from './src/FormBuilderContext';
-
-// FormBuilderContext
-export interface FieldOptionsValueType {
-  defaultValue?: any;
+export interface FieldOptionsValueType<T extends string> {
+  name?: T;
   label?: string;
   type?: string;
   element?: string;
-  component?: (props: FormFieldPropsType) => ReactElement;
+  component?: (props: FormFieldPropsType<T>) => ReactElement;
   keyValues?: { [key: string]: any };
-  validation?: any;
-}
-export interface FormBuilderContextValidationType {
-  isActive: boolean;
-  yupSchema: ObjectSchema<any> | null;
-  yupOptions: ValidateOptions;
-}
-export interface FormBuilderContextConstructorType {
-  fields?: string[];
-  fieldOptions?: { [key: string]: FieldOptionsValueType };
-  validation?: Partial<FormBuilderContextValidationType>;
-  handleSubmit: (formData: any) => void;
-}
-export interface FormBuilderContextType {
-  fields: string[];
-  fieldOptions: { [key: string]: FieldOptionsValueType };
-  validation: FormBuilderContextValidationType;
-  getDefaultValues: () => FormDataType;
-  getValidationSchema: () => ObjectSchema<any> | {};
-  extractErrors: (errors: ValidationError) => FormErrorsType | {} | null;
-  validate: ValidateType;
-  handleSubmit: (formData: any) => void;
-  formData: FormDataType | null;
-  formErrors: FormErrorsType | null;
-}
-export interface ValidateType {
-  (data: FormDataType): Promise<FormErrorsType | {} | null>;
 }
 export interface FormDataType {
   [key: string]: any;
@@ -47,24 +16,28 @@ export interface FormErrorsType {
 }
 
 // <FormBuilder />
-export interface FormBuilderPropsType {
-  context: FormBuilderContextType;
+export interface FormBuilderPropsType<T extends string> {
+  fields: T[];
+  fieldOptions?: { [K in T]?: FieldOptionsValueType<T> };
+  values?: { [K in T]?: any };
+  validate?: (values: { [K in T]?: any}) => null | { [K in T]?: string };
+  handleSubmit?: (formData: any) => void;
 }
-export interface FormBuilderType {
-  (props: FormBuilderPropsType): ReactElement;
+export interface FormBuilderType<T extends string> {
+  (props: FormBuilderPropsType<T>): ReactElement;
 }
-export const FormBuilder: FunctionComponent<FormBuilderPropsType>;
+export const FormBuilder: FunctionComponent<FormBuilderPropsType<any>>;
 
 // <FormField />
-export interface FormFieldPropsType extends JSX.IntrinsicAttributes {
-  options: FieldOptionsValueType;
+export interface FormFieldPropsType<T extends string> extends JSX.IntrinsicAttributes {
+  options: FieldOptionsValueType<T>;
   setValue: ((value: any) => void);
   value: string | string[] | undefined;
   name: string;
   label: string | undefined;
   error: string;
 }
-export interface FormFieldType {
-  (props: FormFieldPropsType): ReactElement;
+export interface FormFieldType<T extends string> {
+  (props: FormFieldPropsType<T>): ReactElement;
 }
-export const FormField: FunctionComponent<FormFieldPropsType>;
+export const FormField: FunctionComponent;
