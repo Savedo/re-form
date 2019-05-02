@@ -152,8 +152,10 @@ var FormBuilder = function (_a) {
                 }
                 return;
             }
+            if (formErrors !== {}) {
+                setFormErrors({});
+            }
         }
-        setFormErrors({});
     };
     var setFormDataValue = function (field) {
         return function (value) {
