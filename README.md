@@ -19,7 +19,7 @@ or
 Usage
 =====
 
-Simple case: Creating a react form component with three input fields (name, age, email).
+Basic usage: Creating a react form component with three input fields (name, age, email) without any validation and no default form values.
 
 
 ```jsx
