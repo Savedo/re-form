@@ -10,11 +10,11 @@ re-form requires
 
 * react/react-dom 16.8.3 or later to build your form.
 
-`$ npm install --save savedo/re-form`
+`$ npm install --save @savedo/re-form`
 
 or
 
-`$ yarn add savedo/re-form`
+`$ yarn add @savedo/re-form`
 
 Usage
 =====
