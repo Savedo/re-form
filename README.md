@@ -19,12 +19,13 @@ or
 Usage
 =====
 
-Basic usage: Creating a react form component with three input fields (name, age, email) without any validation and no default form values.
+Basic usage: Creating a react form component with three input fields (name, age, email) validation and values assignment.
 
+Create your form component:
 
 ```jsx
 import React from 'react';
-import { FormBuilder } from 're-form';
+import { FormBuilder } from '@savedo/re-form';
 
 const MyForm = ({ handleSubmit }) => {
   const fields = [
@@ -32,8 +33,8 @@ const MyForm = ({ handleSubmit }) => {
     'age',
     'email'
   ];
-  
-  const fieldOptions: {
+
+  const fieldOptions = {
     name: {
       label: 'Name:'
     },
@@ -46,17 +47,38 @@ const MyForm = ({ handleSubmit }) => {
     }
   };
 
+  const values = {
+    name: 'John Smith'
+  };
+
+  const validate = (formData) => {
+    const errors = {};
+    const { name, age } = formData;
+
+    if (!name) {
+      errors.name = 'Name is required!';
+    }
+    if (!age) {
+      errors.age = 'Age is required!';
+    } else if (Number(age) < 18) {
+      errors.age = 'You should be 18 years old or older!';
+    }
+
+    return errors;
+  };
+
   return (
     <div>
-      <FormBuilder { ...{ fields, fieldOptions, handleSubmit } } />
+      <FormBuilder { ...{ fields, fieldOptions, handleSubmit, values, validate } } />
     </div>
   );
 };
 
 export default MyForm;
+
 ```
 
-Usage:
+And use form component elsewhere:
 
 ```jsx
 import React from 'react';
@@ -64,7 +86,6 @@ import MyForm from './MyForm';
 
 const App = () => {
   const handleSubmit = (formData) => {
-    // do whatever you want with the validated form data
     console.log(formData)
   };
 
