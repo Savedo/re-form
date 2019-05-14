@@ -28,11 +28,6 @@ let externals = {
     root: 'ReactDOM',
     commonjs: 'react-dom',
     commonjs2: 'react-dom'
-  },
-  'yup': {
-    root: 'yup',
-    commonjs: 'yup',
-    commonjs2: 'yup'
   }
 };
 
@@ -67,7 +62,7 @@ module.exports = (env, argv) => {
     },
     devServer: {
       contentBase: './dist',
-      port: 9100,
+      port: 9100
     },
     module: {
       rules: [
