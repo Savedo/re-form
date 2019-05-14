@@ -2,7 +2,8 @@ import React, { FormEventHandler, useEffect, useState } from 'react';
 import { FieldOptionsValueType, FormBuilderType, FormDataType } from '@reform';
 import FormField from '../FormField/FormField';
 
-const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, validate, handleSubmit }) => {
+const FormBuilder: FormBuilderType<any> = (
+  { fields, fieldOptions = {}, values, validate, handleSubmit, submitSection }) => {
 
   const setFormObject = (currentValues: any = {}) => {
     const defaults = fields.reduce((acc, field) => ({ ...acc, [field]: null }), {});
@@ -52,7 +53,7 @@ const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, 
 
   const getFieldComponent = (field: string) => {
     const options: FieldOptionsValueType<string> = fieldOptions[field] as FieldOptionsValueType<string>;
-    const { component, label } = options;
+    const { component, label, className } = options;
     const error = formErrors && formErrors[field] as string;
     const componentOptions = {
       name: field,
@@ -60,7 +61,8 @@ const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, 
       options,
       value: formData[field],
       setValue: setFormDataValue(field),
-      error
+      error,
+      className
     };
 
     return (
@@ -82,7 +84,7 @@ const FormBuilder: FormBuilderType<any> = ({ fields, fieldOptions = {}, values, 
   return (
     <form onSubmit={ onSubmit } noValidate={ true }>
       { fields.map(field => fieldOptions[field] && getFieldComponent(field)) }
-      <button type="submit" className="submit-button">Submit</button>
+      { (submitSection && submitSection({})) || <button type="submit" className="submit">Submit</button> }
     </form>
   );
 };

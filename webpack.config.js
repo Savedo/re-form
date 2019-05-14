@@ -28,11 +28,6 @@ let externals = {
     root: 'ReactDOM',
     commonjs: 'react-dom',
     commonjs2: 'react-dom'
-  },
-  'yup': {
-    root: 'yup',
-    commonjs: 'yup',
-    commonjs2: 'yup'
   }
 };
 
@@ -74,6 +69,15 @@ module.exports = (env, argv) => {
         {
           test: /\.tsx?$/,
           loader: 'ts-loader'
+        },
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader'
+            }
+          ]
         }
       ]
     },

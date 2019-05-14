@@ -9,6 +9,7 @@ exports[`FormBuilder component renders matches last snapshot 1`] = `
       <label>
         Name:
         <input
+          class=""
           name="name"
           type="text"
           value="Erhan"
@@ -19,6 +20,7 @@ exports[`FormBuilder component renders matches last snapshot 1`] = `
       <label>
         Your Age:
         <input
+          class=""
           name="age"
           type="number"
           value="44"
@@ -26,7 +28,7 @@ exports[`FormBuilder component renders matches last snapshot 1`] = `
       </label>
     </div>
     <button
-      class="submit-button"
+      class="submit"
       type="submit"
     >
       Submit
@@ -44,6 +46,7 @@ exports[`FormBuilder component renders validates form 1`] = `
       <label>
         Name:
         <input
+          class=""
           name="name"
           type="text"
           value="Erhan Gundogan"
@@ -54,6 +57,7 @@ exports[`FormBuilder component renders validates form 1`] = `
       <label>
         Your Age:
         <input
+          class=""
           name="age"
           type="number"
           value="18"
@@ -61,7 +65,7 @@ exports[`FormBuilder component renders validates form 1`] = `
       </label>
     </div>
     <button
-      class="submit-button"
+      class="submit"
       type="submit"
     >
       Submit
