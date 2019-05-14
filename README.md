@@ -1,7 +1,9 @@
 re-form
 =======
 
-React form builder library.
+React form library.
+
+![re-form](http://g.recordit.co/rA3YW8gMsf.gif)
 
 Installation
 =======
@@ -47,10 +49,6 @@ const MyForm = ({ handleSubmit }) => {
     }
   };
 
-  const values = {
-    name: 'John Smith'
-  };
-
   const validate = (formData) => {
     const errors = {};
     const { name, age } = formData;
@@ -69,7 +67,7 @@ const MyForm = ({ handleSubmit }) => {
 
   return (
     <div>
-      <FormBuilder { ...{ fields, fieldOptions, handleSubmit, values, validate } } />
+      <FormBuilder { ...{ fields, fieldOptions, handleSubmit, validate } } />
     </div>
   );
 };
@@ -111,6 +109,7 @@ fieldOptions | object | Field configuration object having fields (above string[]
 values | object | Default values for the fields
 handleSubmit | function | Form submit behaviour
 validate | method | Validation method for the form data
+submitSection | React.FC | React component to provide submit button or submit event
 
 #### fieldOptions
 
@@ -121,7 +120,7 @@ element | input, select, textarea | input[type=text] | true | HTML tag for the f
 type | input types (eg. text, number, email etc) | text | true | type attribute for HTMLInputElement
 component | FunctionalComponent | N/A | true | Pass your FunctionalComponent with props (FormFieldPropsType). `element` and `type` becomes redundant when `component` is used.
 keyValues |  { [key: string]: any } | N/A | true | Only viable when element is `select`. This object provides the list of `<option value="key">value</option>`
-
+className | string | N/A | true | CSS class(es) for the element
 
 Development
 =============

@@ -67,13 +67,22 @@ module.exports = (env, argv) => {
     },
     devServer: {
       contentBase: './dist',
-      port: 9100
+      port: 9100,
     },
     module: {
       rules: [
         {
           test: /\.tsx?$/,
           loader: 'ts-loader'
+        },
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader'
+            }
+          ]
         }
       ]
     },

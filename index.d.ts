@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactElement, ReactNode } from 'react';
+import { FC, FunctionComponent, ReactElement, ReactNode } from 'react';
 
 export interface FieldOptionsValueType<T extends string> {
   name?: T;
@@ -7,6 +7,7 @@ export interface FieldOptionsValueType<T extends string> {
   element?: string;
   component?: (props: FormFieldPropsType<T>) => ReactElement;
   keyValues?: { [key: string]: any };
+  className?: string;
 }
 export interface FormDataType {
   [key: string]: any;
@@ -22,6 +23,7 @@ export interface FormBuilderPropsType<T extends string> {
   values?: { [K in T]?: any };
   validate?: (values: { [K in T]?: any}) => null | { [K in T]?: string };
   handleSubmit?: (formData: any) => void;
+  submitSection?: FC<any>;
 }
 export interface FormBuilderType<T extends string> {
   (props: FormBuilderPropsType<T>): ReactElement;
