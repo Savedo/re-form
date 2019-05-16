@@ -49,9 +49,6 @@ const SimpleForm = () => {
 
   return (
     <>
-      <div>
-        <h1 className="text-xl text-center mt-4">re-form & tailwind css</h1>
-      </div>
       <div className="form-container">
         <div className="pure-form pure-form-stacked">
           <FormBuilder { ...props } />
