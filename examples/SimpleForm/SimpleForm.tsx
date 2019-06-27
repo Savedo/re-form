@@ -3,6 +3,7 @@ import { FormBuilderPropsType } from '../../index';
 import FormBuilder from '../../src/components/FormBuilder/FormBuilder';
 import validate from './validate';
 import './styles.css';
+import { NAME, EMAIL, AGE } from './constants';
 
 type SimpleFormFieldsType = 'name' | 'age' | 'email';
 
@@ -16,16 +17,16 @@ const SimpleForm = () => {
   const submitClass = 'shadow mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline';
 
   const fieldOptions = {
-    name: {
+    [NAME]: {
       label: 'Name:',
       className: inputClass
     },
-    age: {
+    [AGE]: {
       label: 'Age:',
       type: 'number',
       className: inputClass
     },
-    email: {
+    [EMAIL]: {
       label: 'E-mail:',
       className: inputClass
     }
