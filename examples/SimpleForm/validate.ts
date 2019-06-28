@@ -1,51 +1,27 @@
-/**
- * This file contains Form Validation using validate.js (https://validatejs.org) for validating
- * our Simple Form. 
- * 
- * You can validate your form using any validation library and write your own implementation 
- * in this file.
- */
-
-
-import { NAME, AGE, EMAIL } from "./constants";
-
-/**
- * @param object containing formFields.
- * @returns Form Errors agains each key in an object.
- */
 const validate = (props: any) => {
-  const constraint = {
-    [NAME]: {
-      presence: true
-    },
-    [AGE]: {
-      presence: true,
-      numericality: { greaterThanOrEqualTo: 18, message:'should be greater than or equal to 18' }
-    },
-    [EMAIL]: {
-      presence: true,
-      email: true
+  const { name, age, email } = props;
+
+  let errors: any = {};
+
+  if (!name) {
+    errors.name = 'Name is a required field!';
+  }
+  if (!age) {
+    errors.age = 'Age is a required field!';
+  }
+  if (Number(age) < 18) {
+    errors.age = 'You should be older than 18 years old!';
+  }
+  if (!email) {
+    errors.email = 'Email is required!';
+  } else {
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!emailRegex.test(String(email).toLowerCase())) {
+      errors.email = 'Email is invalid!';
     }
   }
-  const windowObj:any = window
-  const validationObj = windowObj.validate( props, constraint, {})
-  return toFormErrors(validationObj)
 
+  return errors;
 };
-
-// To do: Move this function to some high level directory.
-/**
- * @param 'Validation Object from validate function of validate.js'
- * @returns 'Errors object having fields which are not validated'
- */
-const toFormErrors = (validationObj: any) => {
-  let errors: any = {};
-  if (validationObj) {
-    Object.keys(validationObj).map((key) => {
-      errors[key] = validationObj[key]
-    })
-  }
-  return errors
-}
 
 export default validate;

@@ -10,10 +10,8 @@ const FormBuilder: FormBuilderType<any> = (
     return Object.assign(defaults, values, currentValues);
   };
 
-  // Array of {Key:value} for all form elements. 
-  const [formData, setFormData] = useState(setFormObject()); 
-  // Array of {key:'error message'} for invalid fields
-  const [formErrors, setFormErrors]: [ { [key: string]: string }, any ] = useState({}); 
+  const [formData, setFormData] = useState(setFormObject());
+  const [formErrors, setFormErrors]: [ { [key: string]: string }, any ] = useState({});
   const [isValidating, setIsValidating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -27,9 +25,9 @@ const FormBuilder: FormBuilderType<any> = (
   }, [formErrors]);
 
   /**
-   * Validates the form data using a validate function.
+   * calls validate function with form data if it's defined.
    * Updates the  form Errors with lates errors.
-   * @param newFormData the latest update form data 
+   * @param newFormData the latest update form data
    */
   const validateFormData = (newFormData: FormDataType) => {
     if (validate && typeof validate === 'function') {
@@ -47,9 +45,9 @@ const FormBuilder: FormBuilderType<any> = (
   };
 
   /**
-   * Updates the formData(state var) and also validate it. 
-   * Usually called as a handler(onChange etc) for updating a form element.
-   * @param field 
+   * Updates form state if any field value has changed. It forwards form data to validation method,
+   * if the validation is in affect.
+   * @param field
    */
   const setFormDataValue =
     (field: string) =>
@@ -62,11 +60,11 @@ const FormBuilder: FormBuilderType<any> = (
           }
         }
       };
-  
+
   /**
-   * Generates a Form Element 
+   * Renders form field component
    * @param field Name of the Field
-   * @return A Form Element, Instance of FormField  
+   * @return A Form Element, Instance of FormField
    */
   const getFieldComponent = (field: string) => {
     const options: FieldOptionsValueType<string> = fieldOptions[field] as FieldOptionsValueType<string>;
