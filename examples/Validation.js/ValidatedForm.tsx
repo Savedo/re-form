@@ -1,13 +1,13 @@
 import React from 'react';
-import { FormBuilderPropsType } from '../../index';
+import { FormBuilderPropsType } from '@reform';
 import FormBuilder from '../../src/components/FormBuilder/FormBuilder';
 import validate from './validate';
 import './styles.css';
 
-type SimpleFormFieldsType = 'name' | 'age' | 'email';
+type FieldsType = 'name' | 'age' | 'email';
 
-const SimpleForm = () => {
-  const fields: SimpleFormFieldsType[] = [
+const ValidatedForm = () => {
+  const fields: FieldsType[] = [
     'name',
     'age',
     'email'
@@ -39,7 +39,7 @@ const SimpleForm = () => {
     alert(JSON.stringify(formData));
   };
 
-  const props: FormBuilderPropsType<SimpleFormFieldsType> = {
+  const props: FormBuilderPropsType<FieldsType> = {
     fields,
     fieldOptions,
     handleSubmit,
@@ -56,4 +56,4 @@ const SimpleForm = () => {
   );
 };
 
-export default SimpleForm;
+export default ValidatedForm;

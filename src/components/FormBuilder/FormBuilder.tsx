@@ -24,6 +24,11 @@ const FormBuilder: FormBuilderType<any> = (
     }
   }, [formErrors]);
 
+  /**
+   * calls validate function with form data if it's defined.
+   * Updates the  form Errors with lates errors.
+   * @param newFormData the latest update form data
+   */
   const validateFormData = (newFormData: FormDataType) => {
     if (validate && typeof validate === 'function') {
       const errors = validate(newFormData);
@@ -39,6 +44,11 @@ const FormBuilder: FormBuilderType<any> = (
     }
   };
 
+  /**
+   * Updates form state if any field value has changed. It forwards form data to validation method,
+   * if the validation is in affect.
+   * @param field
+   */
   const setFormDataValue =
     (field: string) =>
       (value: any) => {
@@ -51,6 +61,11 @@ const FormBuilder: FormBuilderType<any> = (
         }
       };
 
+  /**
+   * Renders form field component
+   * @param field Name of the Field
+   * @return A Form Element, Instance of FormField
+   */
   const getFieldComponent = (field: string) => {
     const options: FieldOptionsValueType<string> = fieldOptions[field] as FieldOptionsValueType<string>;
     const { component, label, className } = options;
