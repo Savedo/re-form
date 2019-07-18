@@ -37,7 +37,8 @@ module.exports = (env, argv) => {
   process.env.NODE_ENV = env || mode;
 
   const { NODE_ENV } = process.env;
-  const filename = `re-form${NODE_ENV === 'production' ? '.min' : ''}.js`;
+  const isProduction = NODE_ENV === 'production';
+  const filename = `re-form${isProduction ? '.min' : ''}.js`;
 
   if (typeof devServer !== 'undefined') {
     plugins = plugins.concat(devServerPlugins);
@@ -53,7 +54,7 @@ module.exports = (env, argv) => {
       filename,
       libraryTarget: 'umd',
     },
-    devtool: 'source-map',
+    devtool: isProduction ? 'hidden-source-map' : 'cheap-module-eval-source-map',
     resolve: {
       extensions: ['.ts', '.tsx', '.js', 'jsx', '.json', '.css'],
       alias: {

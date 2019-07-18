@@ -15,7 +15,7 @@ import { validate as Validate } from 'validate.js';
 const validate = (props: any) => {
   const constraint = {
     name: {
-      presence: { allowEmpty:false }
+      presence: { allowEmpty: false }
     },
     age: {
       presence: true,

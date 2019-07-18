@@ -1,6 +1,6 @@
 {
   "name": "@savedo/re-form",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "react form builder library",
   "author": "Savedo GmbH. <it@savedo.de> (https://www.savedo.de)",
   "license": "MIT",
@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "lint": "./node_modules/tslint/bin/tslint -c tslint.json 'src/**/*.ts?(x)'",
+    "lint": "./node_modules/tslint/bin/tslint -c tslint.json '**/*.ts?(x)'",
     "test": "./node_modules/jest/bin/jest.js -u --config=jest.config.js",
     "build": "yarn clean && yarn build:umd && yarn build:umd:min",
     "build:umd": "webpack --mode=development",

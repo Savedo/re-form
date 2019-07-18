@@ -98,29 +98,42 @@ export default App;
 Configuration
 =============
 
-`FormBuilder` component uses one prop called `context`. It should be an instance of `FormBuilderContext` class.
+The `FormBuilder` component has props as shown below. It has `FormBuilderPropsType<T>` type. T refers to your object type having key (Field name, <string>) / values (Field options <FieldOptionsValueType>).
 
-#### FormBuilderContext Class
+#### FormBuilderPropsType
 
 Property | Type | Description
 --- | --- | ---
-fields | string[] | Defines unique field keys and orders fields to be shown.
-fieldOptions | object | Field configuration object having fields (above string[]) as keys (See table below for individual field's properties)
-values | object | Default values for the fields
-handleSubmit | function | Form submit behaviour
-validate | method | Validation method for the form data
+fields | string[] | Unique field names
+fieldOptions | { key (string): options (FieldOptionsValueType) } | Field/Component options (See table below)
+values | object | Init values for the fields
+handleSubmit | function | Callback function to handle submit behaviour if validation successful
+validate | method | Callback function for validation (form data will be passed as an argument)
 submitSection | React.FC | React component to provide submit button or submit event
 
-#### fieldOptions
+#### FieldOptionsValueType
 
 Property | Type | Default | Optional | Description
 --- | --- | --- | --- | ---
+name | string | field key name | true | name of the field
 label | string | field key name | true | label for the form field
 element | input, select, textarea | input[type=text] | true | HTML tag for the form field
 type | input types (eg. text, number, email etc) | text | true | type attribute for HTMLInputElement
 component | FunctionalComponent | N/A | true | Pass your FunctionalComponent with props (FormFieldPropsType). `element` and `type` becomes redundant when `component` is used.
 keyValues |  { [key: string]: any } | N/A | true | Only viable when element is `select`. This object provides the list of `<option value="key">value</option>`
 className | string | N/A | true | CSS class(es) for the element
+
+#### FormFieldPropsType
+
+Props below will be passed to your custom component. 
+
+Property | Type | Description
+--- | --- | ---
+options | FieldOptionsValueType | Options defined for field (See table above)
+error | string | Error message to pass into component if the input is not valid 
+setValue | Function | N/A. For internal usage
+value | any | N/A. For internal usage
+name | string | N/A. For internal usage
 
 Development
 =============

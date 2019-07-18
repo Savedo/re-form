@@ -46,9 +46,9 @@ const BulmaForm = () => {
 
   const submitSection = () => {
     return (
-      <div className='field'>
-        <div className='control'>
-          <button type='submit' className='button is-link'>
+      <div className="field">
+        <div className="control">
+          <button type="submit" className="button is-link">
             Submit
           </button>
         </div>
@@ -58,7 +58,7 @@ const BulmaForm = () => {
 
   return (
     <FormBuilder
-      {...{ fields, fieldOptions, handleSubmit, validate, submitSection }}
+      { ...{ fields, fieldOptions, handleSubmit, validate, submitSection } }
     />
   );
 };

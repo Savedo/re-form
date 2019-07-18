@@ -6,7 +6,6 @@ const FormField: FormFieldType<string> = (
     options,
     value,
     name,
-    label,
     setValue,
     error
   }
@@ -15,11 +14,11 @@ const FormField: FormFieldType<string> = (
     element = 'input',
     type = 'text',
     keyValues = {},
-    className = ''
+    className = '',
+    label = ''
   } = options || {};
 
   const onChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> = (event) => {
-    // event.persist();
     event.preventDefault();
     setValue(event.currentTarget.value);
   };
