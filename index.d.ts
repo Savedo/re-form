@@ -1,4 +1,4 @@
-import { FC, FunctionComponent, ReactElement, ReactNode } from 'react';
+import { FC, FunctionComponent, ReactElement } from 'react';
 
 export interface FieldOptionsValueType<T extends string> {
   name?: T;
@@ -36,7 +36,6 @@ export interface FormFieldPropsType<T extends string> extends JSX.IntrinsicAttri
   setValue: ((value: any) => void);
   value: string | string[] | undefined;
   name: string;
-  label: string | undefined;
   error: string;
 }
 export interface FormFieldType<T extends string> {

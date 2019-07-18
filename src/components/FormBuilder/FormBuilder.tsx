@@ -68,16 +68,14 @@ const FormBuilder: FormBuilderType<any> = (
    */
   const getFieldComponent = (field: string) => {
     const options: FieldOptionsValueType<string> = fieldOptions[field] as FieldOptionsValueType<string>;
-    const { component, label, className } = options;
     const error = formErrors && formErrors[field] as string;
+    const { component } = options;
     const componentOptions = {
       name: field,
-      label,
       options,
       value: formData[field],
       setValue: setFormDataValue(field),
-      error,
-      className
+      error
     };
 
     return (

@@ -1,16 +1,19 @@
 const validate = (props: any) => {
-  const { name, city, email } = props;
-  let errors: any = {};
+  const errorMessages: any = {
+    name: 'Name is a required field!',
+    city: 'City is a required field!',
+    email: 'Email is required!'
+  };
 
-  if (!name) {
-    errors.name = 'Name is a required field!';
-  }
-  if (!city) {
-    errors.city = 'City is a required field!';
-  }
-  if (!email) {
-    errors.email = 'Email is required!';
-  }
+  const errors = Object.keys(errorMessages).reduce((memo: object, key: string) => {
+    if (!!props[key]) {
+      return memo;
+    }
+    return {
+      ...memo,
+      ...{ [key]: errorMessages[key] }
+    };
+  }, {});
 
   return errors;
 };
