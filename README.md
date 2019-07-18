@@ -98,7 +98,7 @@ export default App;
 Configuration
 =============
 
-`FormBuilder` component has props below. It should be a type of `FormBuilderPropsType<T>`. T refers to your object type having key (Field name, <string>) / values (Field options <FieldOptionsValueType>)
+The `FormBuilder` component has props as shown below. It has `FormBuilderPropsType<T>` type. T refers to your object type having key (Field name, <string>) / values (Field options <FieldOptionsValueType>).
 
 #### FormBuilderPropsType
 
