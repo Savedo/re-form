@@ -9,6 +9,7 @@ export interface FieldOptionsValueType<T extends string> {
   keyValues?: { [key: string]: any };
   className?: string;
   disabled?: boolean;
+  defaultValue?: string;
 }
 export interface FormDataType {
   [key: string]: any;

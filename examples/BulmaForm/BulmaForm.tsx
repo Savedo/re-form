@@ -25,7 +25,8 @@ const BulmaForm = () => {
       type: 'text',
       className: inputClass,
       component: BulmaInput,
-      disabled: true
+      disabled: true,
+      defaultValue: 'default value'
     },
     city: {
       label: 'City:',
