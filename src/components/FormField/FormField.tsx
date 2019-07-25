@@ -15,8 +15,7 @@ const FormField: FormFieldType<string> = (
     type = 'text',
     keyValues = {},
     className = '',
-    label = '',
-    defaultValue = ''
+    label = ''
   } = options || {};
 
   const onChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> = (event) => {
@@ -33,7 +32,7 @@ const FormField: FormFieldType<string> = (
       return (
         <div>
           <label>{ label }
-            <select { ...{ className, onChange, defaultValue: value || defaultValue } }>
+            <select { ...{ className, onChange, defaultValue: value } }>
               {
                 Object.keys(keyValues).map((key: string) =>
                   <option key={ key } value={ key }>{ keyValues[key] }</option>)
@@ -48,7 +47,7 @@ const FormField: FormFieldType<string> = (
       return (
         <div>
           <label>{ label }
-            <textarea { ...{ className, name, defaultValue: value || defaultValue, onChange } } />
+            <textarea { ...{ className, name, defaultValue: value, onChange } } />
           </label>
           { error && getError(error) }
         </div>
@@ -57,7 +56,7 @@ const FormField: FormFieldType<string> = (
     default: {
       return (
         <div>
-          <label>{ label }<input { ...{ type, className, name, defaultValue: value || defaultValue, onChange } } /></label>
+          <label>{ label }<input { ...{ type, className, name, defaultValue: value, onChange } } /></label>
           { error && getError(error) }
         </div>
       );
