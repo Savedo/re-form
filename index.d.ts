@@ -8,6 +8,7 @@ export interface FieldOptionsValueType<T extends string> {
   component?: (props: FormFieldPropsType<T>) => ReactElement;
   keyValues?: { [key: string]: any };
   className?: string;
+  defaultValue?: string;
 }
 export interface FormDataType {
   [key: string]: any;

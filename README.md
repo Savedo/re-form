@@ -122,15 +122,16 @@ type | input types (eg. text, number, email etc) | text | true | type attribute 
 component | FunctionalComponent | N/A | true | Pass your FunctionalComponent with props (FormFieldPropsType). `element` and `type` becomes redundant when `component` is used.
 keyValues |  { [key: string]: any } | N/A | true | Only viable when element is `select`. This object provides the list of `<option value="key">value</option>`
 className | string | N/A | true | CSS class(es) for the element
+defaultValue | string | N/A | true | Default value for a field.
 
 #### FormFieldPropsType
 
-Props below will be passed to your custom component. 
+Props below will be passed to your custom component.
 
 Property | Type | Description
 --- | --- | ---
 options | FieldOptionsValueType | Options defined for field (See table above)
-error | string | Error message to pass into component if the input is not valid 
+error | string | Error message to pass into component if the input is not valid
 setValue | Function | N/A. For internal usage
 value | any | N/A. For internal usage
 name | string | N/A. For internal usage
