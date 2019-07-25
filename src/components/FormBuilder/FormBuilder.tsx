@@ -6,13 +6,11 @@ const FormBuilder: FormBuilderType<any> = (
   { fields, fieldOptions = {}, values, validate, handleSubmit, submitSection }) => {
 
   const setFormObject = (currentValues: any = {}) => {
-    const defaultValues = Object.keys(fieldOptions).reduce((defaultsObject, key) => {
-      const current = fieldOptions[key] || { defaultValue: null };
-
-      return { ...defaultsObject, [key]: current.defaultValue };
+    const defaults = fields.reduce((acc, field) => {
+      const { defaultValue = null } = fieldOptions[field] as FieldOptionsValueType<any>;
+      return { ...acc, [field]: defaultValue };
     }, {});
-
-    return Object.assign( defaultValues, values, currentValues);
+    return Object.assign(defaults, values, currentValues);
   };
 
   const [formData, setFormData] = useState(setFormObject());

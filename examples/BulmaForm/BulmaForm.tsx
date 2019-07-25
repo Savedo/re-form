@@ -30,13 +30,15 @@ const BulmaForm = () => {
       label: 'City:',
       keyValues: selectOptions,
       className: selectClass,
-      component: BulmaSelect
+      component: BulmaSelect,
+      disabled: true
     },
     email: {
       label: 'E-mail:',
       type: 'email',
       className: inputClass,
-      component: BulmaInput
+      component: BulmaInput,
+      defaultValue: 'wrong email'
     }
   };
 

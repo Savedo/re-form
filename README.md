@@ -123,6 +123,7 @@ component | FunctionalComponent | N/A | true | Pass your FunctionalComponent wit
 keyValues |  { [key: string]: any } | N/A | true | Only viable when element is `select`. This object provides the list of `<option value="key">value</option>`
 className | string | N/A | true | CSS class(es) for the element
 defaultValue | string | N/A | true | Default value for a field.
+disabled | boolean | N/A | false | Disabled prop for inputs.
 
 #### FormFieldPropsType
 

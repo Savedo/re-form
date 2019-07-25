@@ -2,7 +2,7 @@ import React, { ChangeEventHandler } from 'react';
 import { FormFieldPropsType } from '../../../index';
 
 const BulmaSelect = ({ options: {
-  keyValues, className, label }, value, name, error, setValue
+  keyValues, className, label, disabled }, value, name, error, setValue
 }: FormFieldPropsType<string>) => {
 
   const onChange: ChangeEventHandler<HTMLSelectElement> = event => {
@@ -16,7 +16,7 @@ const BulmaSelect = ({ options: {
       <div className="field">
         <div className="control is-expanded">
           <div className={ className }>
-            <select onChange={ onChange } defaultValue={ value } id={ name }>
+            <select onChange={ onChange } defaultValue={ value } id={ name } disabled={ disabled }>
               <option value="">Please select an option...</option>
               { keyValues && Object.keys(keyValues).map((option: any, index: any) => (
                 <option key={ index } value={ option }>

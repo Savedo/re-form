@@ -19,7 +19,8 @@ const SimpleForm = () => {
     name: {
       label: 'Name:',
       className: inputClass,
-      defaultValue: 'default name'
+      defaultValue: 'default name',
+      disabled: true
     },
     age: {
       label: 'Age:',
