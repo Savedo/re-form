@@ -18,7 +18,8 @@ const SimpleForm = () => {
   const fieldOptions = {
     name: {
       label: 'Name:',
-      className: inputClass
+      className: inputClass,
+      defaultValue: 'default name'
     },
     age: {
       label: 'Age:',
