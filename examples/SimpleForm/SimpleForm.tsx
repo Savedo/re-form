@@ -29,7 +29,8 @@ const SimpleForm = () => {
     },
     email: {
       label: 'E-mail:',
-      className: inputClass
+      className: inputClass,
+      placeholder: 'name@example.com'
     }
   };
   const submitSection = () => {
