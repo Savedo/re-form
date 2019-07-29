@@ -2,7 +2,7 @@ import React, { ChangeEventHandler } from 'react';
 import { FormFieldPropsType } from '../../../index';
 
 const BulmaInput = ({
-  setValue, options: { className, type, label, disabled }, name, value, error
+  setValue, options: { className, type, label, disabled, placeholder }, name, value, error
 }: FormFieldPropsType<string>) => {
 
   const onChange: ChangeEventHandler<HTMLInputElement> = event => {
@@ -17,7 +17,7 @@ const BulmaInput = ({
         <input
           className={ className }
           type={ type }
-          placeholder={ `write your ${ name } here` }
+          placeholder={ placeholder }
           onChange={ onChange }
           name={ name }
           defaultValue={ value }

@@ -8,10 +8,11 @@ describe('FormBuilder component', () => {
   const validate = jest.fn();
   const handleSubmit = jest.fn();
 
-  const setup = () => {
+  const setup = (disabled?: boolean, placeholder?: string, defaultValue?:string ) => {
     const fields = [
       'name',
-      'age'
+      'age',
+      'country'
     ];
     const fieldOptions = {
       name: {
@@ -20,6 +21,13 @@ describe('FormBuilder component', () => {
       age: {
         type: 'number',
         label: 'Your Age:'
+      },
+      country: {
+        label: 'Country:',
+        type:'text',
+        disabled: disabled,
+        placeholder: placeholder,
+        defaultValue: defaultValue
       }
     };
     const values = {
@@ -64,8 +72,26 @@ describe('FormBuilder component', () => {
       expect(validate).toHaveBeenCalledTimes(1);
       expect(validate).toHaveBeenCalledWith({
         name: 'Erhan Gundogan',
-        age: '18'
+        age: '18',
+        country: null,
       });
+    });
+  });
+
+  describe('renders optional props', () => {
+    container = setup(true, 'placeholder text', 'default country').container;
+    const country = container.querySelector('input[name=country]');
+
+    it('displays input as disabled',() => {
+      expect(country).toHaveProperty('disabled', true);
+    });
+
+    it('displays a placeholder', () => {
+      expect(country).toHaveProperty('placeholder', 'placeholder text');
+    });
+
+    it('displays a default Value', () => {
+      expect(country).toHaveProperty('value', 'default country');
     });
   });
 });

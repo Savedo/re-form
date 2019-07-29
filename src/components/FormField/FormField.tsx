@@ -48,7 +48,7 @@ const FormField: FormFieldType<string> = (
       return (
         <div>
           <label>{ label }
-            <textarea { ...{ disabled, className, name, defaultValue: value, onChange } } />
+            <textarea { ...{ disabled, className, name, defaultValue: value, onChange, placeholder: options.placeholder } } />
           </label>
           { error && getError(error) }
         </div>
@@ -57,7 +57,7 @@ const FormField: FormFieldType<string> = (
     default: {
       return (
         <div>
-          <label>{ label }<input { ...{ disabled, type, className, name, defaultValue: value, onChange } } /></label>
+          <label>{ label }<input { ...{ disabled, type, className, name, defaultValue: value, onChange, placeholder: options.placeholder } } /></label>
           { error && getError(error) }
         </div>
       );
