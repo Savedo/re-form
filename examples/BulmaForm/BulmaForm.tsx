@@ -25,7 +25,7 @@ const BulmaForm = () => {
       type: 'text',
       className: inputClass,
       component: BulmaInput,
-      placeholder: "type in your name"
+      placeholder: 'type in your name'
     },
     city: {
       label: 'City:',

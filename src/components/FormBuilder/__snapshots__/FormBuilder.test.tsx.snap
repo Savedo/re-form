@@ -27,6 +27,17 @@ exports[`FormBuilder component renders matches last snapshot 1`] = `
         />
       </label>
     </div>
+    <div>
+      <label>
+        Country:
+        <input
+          class=""
+          name="country"
+          type="text"
+          value=""
+        />
+      </label>
+    </div>
     <button
       class="submit"
       type="submit"
@@ -61,6 +72,17 @@ exports[`FormBuilder component renders validates form 1`] = `
           name="age"
           type="number"
           value="18"
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Country:
+        <input
+          class=""
+          name="country"
+          type="text"
+          value=""
         />
       </label>
     </div>
