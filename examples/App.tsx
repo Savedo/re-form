@@ -2,6 +2,7 @@ import React from 'react';
 import SimpleForm from './SimpleForm/SimpleForm';
 import BulmaForm from './BulmaForm/BulmaForm';
 import ValidatedForm from './Validation.js/ValidatedForm';
+import AsyncForm from './AsyncForm/AsyncForm';
 
 const App = () => {
   return (
@@ -45,7 +46,7 @@ const App = () => {
         </div>
         <div className="tile is-12">
           <div className="tile is-2" />
-          <div className="tile is-parent is-8">
+          <div className="tile is-parent is-4">
             <div className="tile is-child">
               <div className="box">
                 <p className="subtitle has-text-centered">
@@ -55,6 +56,16 @@ const App = () => {
                   </a>
                 </p>
                 <ValidatedForm />
+              </div>
+            </div>
+          </div>
+          <div className="tile is-parent is-4">
+            <div className="tile is-child">
+              <div className="box">
+                <p className="subtitle has-text-centered">
+                  Async Validation
+                </p>
+                <AsyncForm />
               </div>
             </div>
           </div>
