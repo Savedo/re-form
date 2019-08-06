@@ -4,7 +4,6 @@ import FormField from '../FormField/FormField';
 
 const FormBuilder: FormBuilderType<any> = (
   { fields, fieldOptions = {}, values, validate, handleSubmit, submitSection }) => {
-
   const setFormObject = (currentValues: any = {}) => {
     const defaults = fields.reduce((acc, field) => {
       const { defaultValue = null } = fieldOptions[field] as FieldOptionsValueType<any>;
@@ -32,19 +31,23 @@ const FormBuilder: FormBuilderType<any> = (
    * Updates the  form Errors with lates errors.
    * @param newFormData the latest update form data
    */
-  const validateFormData = async (newFormData: FormDataType) => {
-    if (validate && typeof validate === 'function') {
-      const errors = await validate(newFormData);
 
-      if (errors && Object.keys(errors).length > 0) {
-        if (errors !== formErrors) {
-          setFormErrors(errors);
-        }
-        return;
+  const setErrors = (errors: any) => {
+    if (errors && Object.keys(errors).length > 0) {
+      if (errors !== formErrors) {
+        setFormErrors(errors);
       }
+      return;
     }
     if (formErrors !== {}) {
       setFormErrors({});
+    }
+  }
+
+  const validateFormData = (newFormData: FormDataType) => {
+    if (validate && typeof validate === 'function') {
+      const errors = validate(newFormData);
+      errors && Promise.resolve(errors) === errors ? errors.then(setErrors) : setErrors(errors);
     }
   };
 
@@ -89,13 +92,13 @@ const FormBuilder: FormBuilderType<any> = (
     );
   };
 
-  const onSubmit: FormEventHandler = async (event) => {
+  const onSubmit: FormEventHandler = (event) => {
     if (event) {
       event.preventDefault();
     }
     setIsSubmitting(true);
     setIsValidating(true);
-    await validateFormData(formData);
+    validateFormData(formData);
   };
 
   return (
