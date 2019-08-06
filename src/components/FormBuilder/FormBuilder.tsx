@@ -32,9 +32,10 @@ const FormBuilder: FormBuilderType<any> = (
    * Updates the  form Errors with lates errors.
    * @param newFormData the latest update form data
    */
-  const validateFormData = (newFormData: FormDataType) => {
+  const validateFormData = async (newFormData: FormDataType) => {
     if (validate && typeof validate === 'function') {
-      const errors = validate(newFormData);
+      const errors = await validate(newFormData);
+
       if (errors && Object.keys(errors).length > 0) {
         if (errors !== formErrors) {
           setFormErrors(errors);
@@ -88,13 +89,13 @@ const FormBuilder: FormBuilderType<any> = (
     );
   };
 
-  const onSubmit: FormEventHandler = (event) => {
+  const onSubmit: FormEventHandler = async (event) => {
     if (event) {
       event.preventDefault();
     }
     setIsSubmitting(true);
     setIsValidating(true);
-    validateFormData(formData);
+    await validateFormData(formData);
   };
 
   return (

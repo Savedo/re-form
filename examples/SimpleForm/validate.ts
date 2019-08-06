@@ -1,12 +1,12 @@
-const validate = (props: any) => {
+const validate = async (props: any) => {
   const { name, age, email } = props;
-
   let errors: any = {};
 
   if (!name) {
     errors.name = 'Name is a required field!';
+    errors.tada = 'Name is a required field!';
   }
-  if (!age) {
+  if (!age && await Promise.resolve(false)) {
     errors.age = 'Age is a required field!';
   }
   if (Number(age) < 18) {
