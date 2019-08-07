@@ -4,10 +4,10 @@ import FormBuilder from '../../src/components/FormBuilder/FormBuilder';
 import validate from './validate';
 import './styles.css';
 
-type AsyncFormFieldsType = 'iban' | 'receipient' | 'reference';
+type IbanFormFieldsType = 'iban' | 'receipient' | 'reference';
 
-const AsyncForm = () => {
-  const fields: AsyncFormFieldsType[] = ['iban', 'receipient', 'reference'];
+const AsyncIbanForm = () => {
+  const fields: IbanFormFieldsType[] = ['iban', 'receipient', 'reference'];
   const inputClass =
     'shadow mb-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline';
   const submitClass =
@@ -27,7 +27,7 @@ const AsyncForm = () => {
     reference: {
       label: 'Reference:',
       className: inputClass,
-      placeholder: 'CUSTOMER REFFERENCE'
+      placeholder: 'Customer Reference'
     }
   };
   const submitSection = () => {
@@ -41,7 +41,7 @@ const AsyncForm = () => {
     alert(JSON.stringify(formData));
   };
 
-  const props: FormBuilderPropsType<AsyncFormFieldsType> = {
+  const props: FormBuilderPropsType<IbanFormFieldsType> = {
     fields,
     fieldOptions,
     handleSubmit,
@@ -58,4 +58,4 @@ const AsyncForm = () => {
   );
 };
 
-export default AsyncForm;
+export default AsyncIbanForm;

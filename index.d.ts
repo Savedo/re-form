@@ -16,7 +16,7 @@ export interface FormDataType {
   [key: string]: any;
 }
 export interface FormErrorsType {
-  [key: string]: string;
+  [key: string]: string | undefined;
 }
 
 // <FormBuilder />
