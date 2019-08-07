@@ -1,10 +1,14 @@
 import React, { FormEventHandler, useEffect, useState } from 'react';
-import { FieldOptionsValueType, FormBuilderType, FormDataType } from '@reform';
 import FormField from '../FormField/FormField';
+import {
+  FieldOptionsValueType,
+  FormBuilderType,
+  FormDataType,
+  FormErrorsType
+} from '@reform';
 
 const FormBuilder: FormBuilderType<any> = (
   { fields, fieldOptions = {}, values, validate, handleSubmit, submitSection }) => {
-
   const setFormObject = (currentValues: any = {}) => {
     const defaults = fields.reduce((acc, field) => {
       const { defaultValue = null } = fieldOptions[field] as FieldOptionsValueType<any>;
@@ -14,10 +18,9 @@ const FormBuilder: FormBuilderType<any> = (
   };
 
   const [formData, setFormData] = useState(setFormObject());
-  const [formErrors, setFormErrors]: [ { [key: string]: string }, any ] = useState({});
+  const [formErrors, setFormErrors]: [FormErrorsType, any ] = useState({});
   const [isValidating, setIsValidating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isValidating && isSubmitting) {
       handleSubmit && handleSubmit(formData);
@@ -32,18 +35,23 @@ const FormBuilder: FormBuilderType<any> = (
    * Updates the  form Errors with lates errors.
    * @param newFormData the latest update form data
    */
-  const validateFormData = (newFormData: FormDataType) => {
-    if (validate && typeof validate === 'function') {
-      const errors = validate(newFormData);
-      if (errors && Object.keys(errors).length > 0) {
-        if (errors !== formErrors) {
-          setFormErrors(errors);
-        }
-        return;
+
+  const setErrors = (errors: FormErrorsType | Promise<FormErrorsType>) => {
+    if (Object.keys(errors).length > 0) {
+      if (errors !== formErrors) {
+        setFormErrors(errors);
       }
+      return;
     }
     if (formErrors !== {}) {
       setFormErrors({});
+    }
+  };
+
+  const validateFormData = (newFormData: FormDataType) => {
+    if (validate && typeof validate === 'function') {
+      const errors = validate(newFormData);
+      errors && ((Promise.resolve(errors) === errors) ? errors.then(setErrors) : setErrors(errors));
     }
   };
 

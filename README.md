@@ -108,7 +108,7 @@ fields | string[] | Unique field names
 fieldOptions | { key (string): options (FieldOptionsValueType) } | Field/Component options (See table below)
 values | object | Init values for the fields
 handleSubmit | function | Callback function to handle submit behaviour if validation successful
-validate | method | Callback function for validation (form data will be passed as an argument)
+validate | method | Callback function for validation (form data will be passed as an argument), supports sync/async functions.
 submitSection | React.FC | React component to provide submit button or submit event
 
 #### FieldOptionsValueType

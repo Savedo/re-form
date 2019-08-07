@@ -16,7 +16,7 @@ export interface FormDataType {
   [key: string]: any;
 }
 export interface FormErrorsType {
-  [key: string]: string;
+  [key: string]: string | undefined;
 }
 
 // <FormBuilder />
@@ -24,7 +24,7 @@ export interface FormBuilderPropsType<T extends string> {
   fields: T[];
   fieldOptions?: { [K in T]?: FieldOptionsValueType<T> };
   values?: { [K in T]?: any };
-  validate?: (values: { [K in T]?: any}) => null | { [K in T]?: string };
+  validate?: (values: { [K in T]?: any }) => null | { [K in T]?: string } | Promise<{ [K in T]?: string }>;
   handleSubmit?: (formData: any) => void;
   submitSection?: FC<any>;
 }
