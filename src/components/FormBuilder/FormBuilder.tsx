@@ -2,6 +2,7 @@ import React, { FormEventHandler, useEffect, useState } from 'react';
 import FormField from '../FormField/FormField';
 import {
   FieldOptionsValueType,
+  FormFieldPropsType,
   FormBuilderType,
   FormDataType,
   FormErrorsType
@@ -11,7 +12,11 @@ const FormBuilder: FormBuilderType<any> = (
   { fields, fieldOptions = {}, values, validate, handleSubmit, submitSection }) => {
   const setFormObject = (currentValues: any = {}) => {
     const defaults = fields.reduce((acc, field) => {
-      const { defaultValue = null } = fieldOptions[field] as FieldOptionsValueType<any>;
+      let fieldOptForField = fieldOptions[field];
+      if (fieldOptForField && fieldOptForField.type && fieldOptForField.type === 'checkbox') {
+        return { ...acc, [field]: fieldOptForField.checked as FieldOptionsValueType<any> };
+      }
+      const { defaultValue = null } = fieldOptForField as FieldOptionsValueType<any>;
       return { ...acc, [field]: defaultValue };
     }, {});
     return Object.assign(defaults, values, currentValues);
@@ -81,13 +86,20 @@ const FormBuilder: FormBuilderType<any> = (
     const options: FieldOptionsValueType<string> = fieldOptions[field] as FieldOptionsValueType<string>;
     const error = formErrors && formErrors[field] as string;
     const { component } = options;
-    const componentOptions = {
+    const commonComponentOptions: FormFieldPropsType<string>  = {
       name: field,
       options,
-      value: formData[field],
       setValue: setFormDataValue(field),
       error
     };
+    let componentOptions: FormFieldPropsType<string>;
+
+    if (options.type === 'checkbox') {
+      componentOptions = { ...commonComponentOptions, checked: formData[field] };
+    }
+    else {
+      componentOptions = { ...commonComponentOptions, value: formData[field] };
+    }
 
     return (
       <React.Fragment key={ field }>
