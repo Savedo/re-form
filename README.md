@@ -118,13 +118,14 @@ Property | Type | Default | Optional | Description
 name | string | field key name | true | name of the field
 label | string | field key name | true | label for the form field
 element | input, select, textarea | input[type=text] | true | HTML tag for the form field
-type | input types (eg. text, number, email etc) | text | true | type attribute for HTMLInputElement
+type | input types (eg. text, number, email, checkbox etc) | text | true | type attribute for HTMLInputElement
 component | FunctionalComponent | N/A | true | Pass your FunctionalComponent with props (FormFieldPropsType). `element` and `type` becomes redundant when `component` is used.
 keyValues |  { [key: string]: any } | N/A | true | Only viable when element is `select`. This object provides the list of `<option value="key">value</option>`
 className | string | N/A | true | CSS class(es) for the element
 defaultValue | string | N/A | true | Default value for a field.
 disabled | boolean | N/A | true | Disabled prop for inputs.
 placeholder | string | N/A | true | Placeholder text for the input.
+checked | boolean | N/A | true | Used for checkboxes to pass default value when type is `checkbox`.
 
 #### FormFieldPropsType
 
@@ -136,6 +137,7 @@ options | FieldOptionsValueType | Options defined for field (See table above)
 error | string | Error message to pass into component if the input is not valid
 setValue | Function | N/A. For internal usage
 value | any | N/A. For internal usage
+checked | boolean | Passed when type is checkbox in place of Value.
 name | string | N/A. For internal usage
 
 Development

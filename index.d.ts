@@ -11,6 +11,8 @@ export interface FieldOptionsValueType<T extends string> {
   defaultValue?: string;
   disabled?: boolean;
   placeholder?: string;
+  checkboxText?: string;
+  checked?: boolean;
 }
 export interface FormDataType {
   [key: string]: any;
@@ -36,8 +38,9 @@ export const FormBuilder: FunctionComponent<FormBuilderPropsType<any>>;
 // <FormField />
 export interface FormFieldPropsType<T extends string> extends JSX.IntrinsicAttributes {
   options: FieldOptionsValueType<T>;
-  setValue: ((value: any) => void);
-  value: string | string[] | undefined;
+  setValue: (value: any) => void;
+  value?: string | string[] | undefined;
+  checked?: boolean;
   name: string;
   error: string;
 }

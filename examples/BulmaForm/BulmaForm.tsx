@@ -1,13 +1,14 @@
 import React from 'react';
 import BulmaSelect from './components/BulmaSelect';
 import BulmaInput from './components/BulmaInput';
+import BulmaCheckbox from './components/BulmaCheckbox';
 import FormBuilder from '../../src/components/FormBuilder/FormBuilder';
 import validate from './validate';
 
-type FieldsType = 'name' | 'city' | 'email';
+type FieldsType = 'name' | 'city' | 'email' | 'termsAndConditions';
 
 const BulmaForm = () => {
-  const fields: FieldsType[] = ['name', 'city', 'email'];
+  const fields: FieldsType[] = ['name', 'city', 'email', 'termsAndConditions'];
   const inputClass = 'input is-primary';
   const selectClass = 'select is-primary';
 
@@ -31,8 +32,7 @@ const BulmaForm = () => {
       label: 'City:',
       keyValues: selectOptions,
       className: selectClass,
-      component: BulmaSelect,
-      disabled: true
+      component: BulmaSelect
     },
     email: {
       label: 'E-mail:',
@@ -40,6 +40,13 @@ const BulmaForm = () => {
       className: inputClass,
       component: BulmaInput,
       defaultValue: 'wrong email'
+    },
+    termsAndConditions: {
+      label: 'Terms And Conditions:',
+      component: BulmaCheckbox,
+      checked: false,
+      type: 'checkbox',
+      checkboxText: 'I agree to the terms and conditions'
     }
   };
 
