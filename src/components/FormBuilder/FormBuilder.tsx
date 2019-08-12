@@ -95,14 +95,10 @@ const FormBuilder: FormBuilderType<any> = (
     let componentOptions: FormFieldPropsType<string>;
 
     if (options.type === 'checkbox') {
-      componentOptions = {
-        ...commonComponentOptions, checked: formData[field],
-      };
+      componentOptions = { ...commonComponentOptions, checked: formData[field] };
     }
     else {
-      componentOptions = {
-        ...commonComponentOptions, value: formData[field],
-      };
+      componentOptions = { ...commonComponentOptions, value: formData[field] };
     }
 
     return (

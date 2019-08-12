@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import { FormFieldPropsType } from '../../../index';
 
 const BulmaCheckbox = ({
@@ -8,8 +8,7 @@ const BulmaCheckbox = ({
   setValue,
   checked
 }: FormFieldPropsType<string>) => {
-
-  const onChange = (event: React.MouseEvent<HTMLElement>) => setValue(!checked);
+  const onChange: ChangeEventHandler<HTMLInputElement> = event => setValue(!checked);
 
   return (
     <>
@@ -17,9 +16,9 @@ const BulmaCheckbox = ({
       <div className="field">
         <div className="control is-expanded">
           <div className={ className }>
-            <div onClick={ onChange }>
+            <div>
               <label className="checkbox">
-                <input type="checkbox" id="termsAndCondition" { ...{ name, disabled, checked } } />
+                <input type="checkbox" id="termsAndCondition" { ...{ name, disabled, checked, onChange } } />
                 { ' ' + checkboxText }
               </label>
             </div>

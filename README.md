@@ -126,6 +126,7 @@ defaultValue | string | N/A | true | Default value for a field.
 disabled | boolean | N/A | true | Disabled prop for inputs.
 placeholder | string | N/A | true | Placeholder text for the input.
 checked | boolean | N/A | true | Used for checkboxes to pass default value when type is `checkbox`.
+checkboxText | string | N/A | true | Used for pass label for chebox element, normal label is being used for input lable.
 
 #### FormFieldPropsType
 
