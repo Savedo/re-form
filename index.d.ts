@@ -1,4 +1,4 @@
-import { FC, FunctionComponent, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 
 export interface FieldOptionsValueType<T extends string> {
   name?: T;
@@ -26,12 +26,11 @@ export interface FormBuilderPropsType<T extends string> {
   values?: { [K in T]?: any };
   validate?: (values: { [K in T]?: any }) => null | { [K in T]?: string } | Promise<{ [K in T]?: string }>;
   handleSubmit?: (formData: any) => void;
-  submitSection?: FC<any>;
+  submitSection?: FC<any> | null;
 }
 export interface FormBuilderType<T extends string> {
   (props: FormBuilderPropsType<T>): ReactElement;
 }
-export const FormBuilder: FunctionComponent<FormBuilderPropsType<any>>;
 
 // <FormField />
 export interface FormFieldPropsType<T extends string> extends JSX.IntrinsicAttributes {
@@ -44,4 +43,7 @@ export interface FormFieldPropsType<T extends string> extends JSX.IntrinsicAttri
 export interface FormFieldType<T extends string> {
   (props: FormFieldPropsType<T>): ReactElement;
 }
-export const FormField: FunctionComponent;
+
+export { default as FormField } from './src/components/FormField/FormField';
+export { default as FormBuilder } from './src/components/FormBuilder/FormBuilder';
+export { default as FormContext } from './src/components/FormContext/FormContext';
