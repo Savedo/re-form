@@ -2,7 +2,7 @@ import React from 'react';
 import { FormBuilder, FormBuilderPropsType } from '@reform';
 import validate from './validate';
 
-type ContactDetailsFieldsType = 'address' | 'city' | 'postcode' | 'country';
+type ContactDetailsFieldsType = 'address' | 'city' | 'postcode' | 'countryCode';
 
 const ContactDetailsForm = ({ handleSubmit }: { handleSubmit?: (data: any) => any }) => {
   const inputClass = `shadow mb-2 appearance-none border rounded w-full \
@@ -11,29 +11,30 @@ const ContactDetailsForm = ({ handleSubmit }: { handleSubmit?: (data: any) => an
     'address',
     'city',
     'postcode',
-    'country'
+    'countryCode'
   ];
 
   const fieldOptions = {
     address: {
-      label: 'Address',
+      label: 'Address:',
       className: inputClass
     },
     city: {
-      label: 'City',
+      label: 'City:',
       className: inputClass
     },
     postcode: {
-      label: 'PostCode',
+      label: 'PostCode:',
       className: inputClass
     },
-    country: {
-      label: 'Country',
+    countryCode: {
+      label: 'ISO Country Code:',
       className: inputClass
     }
   };
 
   const props: FormBuilderPropsType<ContactDetailsFieldsType> = {
+    id: 'contactDetails',
     fields,
     fieldOptions,
     handleSubmit,

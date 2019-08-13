@@ -15,21 +15,23 @@ const OtherDetailsForm = ({ handleSubmit }: { handleSubmit?: (data: any) => any 
   const fieldOptions = {
     idCard: {
       label: 'ID Card Type:',
-      defaultValue: 'passport',
       className: inputClass
     },
     idNumber: {
       label: 'ID Number:',
-      type: 'number',
-      defaultValue: '12345',
       className: inputClass
     }
   };
 
   const props: FormBuilderPropsType<OtherDetailsFieldsType> = {
+    id: 'otherDetails',
     fields,
     fieldOptions,
     handleSubmit,
+    values: {
+      idCard: 'Passport',
+      idNumber: 'U1234567890'
+    },
     validate
   };
 

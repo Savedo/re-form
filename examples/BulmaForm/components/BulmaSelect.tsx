@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler } from 'react';
-import { FormFieldPropsType } from '../../../index';
+import { FormFieldPropsType } from '@reform';
 
 const BulmaSelect = ({ options: {
   keyValues, className, label, disabled }, value, name, error, setValue

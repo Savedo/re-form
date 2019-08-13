@@ -1,6 +1,5 @@
 import React from 'react';
-import { FormBuilderPropsType } from '../../index';
-import FormBuilder from '../../src/components/FormBuilder/FormBuilder';
+import { FormBuilderPropsType, FormBuilder } from '@reform';
 import validate from './validate';
 import './styles.css';
 

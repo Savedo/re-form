@@ -131,13 +131,17 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var FormField_1 = __importDefault(__webpack_require__(/*! ../FormField/FormField */ "./src/components/FormField/FormField.tsx"));
 var FormContext_1 = __webpack_require__(/*! ../FormContext/FormContext */ "./src/components/FormContext/FormContext.tsx");
 var FormBuilder = function (_a) {
-    var fields = _a.fields, _b = _a.fieldOptions, fieldOptions = _b === void 0 ? {} : _b, values = _a.values, validate = _a.validate, handleSubmit = _a.handleSubmit, submitSection = _a.submitSection;
+    var id = _a.id, fields = _a.fields, _b = _a.fieldOptions, fieldOptions = _b === void 0 ? {} : _b, values = _a.values, validate = _a.validate, handleSubmit = _a.handleSubmit, submitSection = _a.submitSection;
     var setFormObject = function (currentValues) {
         if (currentValues === void 0) { currentValues = {}; }
         var defaults = fields.reduce(function (acc, field) {
-            var _a;
-            var _b = fieldOptions[field].defaultValue, defaultValue = _b === void 0 ? null : _b;
-            return __assign({}, acc, (_a = {}, _a[field] = defaultValue, _a));
+            var _a, _b;
+            var fieldOptForField = fieldOptions[field];
+            if (fieldOptForField && fieldOptForField.type && fieldOptForField.type === 'checkbox') {
+                return __assign({}, acc, (_a = {}, _a[field] = fieldOptForField.checked, _a));
+            }
+            var _c = fieldOptForField.defaultValue, defaultValue = _c === void 0 ? null : _c;
+            return __assign({}, acc, (_b = {}, _b[field] = defaultValue, _b));
         }, {});
         return Object.assign(defaults, values, currentValues);
     };
@@ -145,17 +149,21 @@ var FormBuilder = function (_a) {
     var _d = react_1.useState({}), formErrors = _d[0], setFormErrors = _d[1];
     var _e = react_1.useState({
         isValidating: false,
-        isSubmitting: false,
-        hasSubmitted: false
+        isSubmitting: false
     }), formOptions = _e[0], setFormOptions = _e[1];
     var formContext = react_1.useContext(FormContext_1.FormContextScope);
     react_1.useEffect(function () {
-        var isValidating = formOptions.isValidating, isSubmitting = formOptions.isSubmitting, hasSubmitted = formOptions.hasSubmitted;
-        if (Object.keys(formErrors).length === 0 && isValidating && isSubmitting && !hasSubmitted) {
+        var isValidating = formOptions.isValidating, isSubmitting = formOptions.isSubmitting;
+        if (Object.keys(formErrors).length === 0 && isValidating && isSubmitting) {
             handleSubmit && handleSubmit(formData);
-            setFormOptions(__assign({}, formOptions, { hasSubmitted: true }));
         }
     }, [formErrors]);
+    react_1.useEffect(function () {
+        var isSubmitting = formContext.isSubmitting;
+        if (isSubmitting && !formOptions.isSubmitting) {
+            activateFormSubmission();
+        }
+    }, [formContext]);
     var setErrors = function (errors) {
         if (Object.keys(errors).length > 0) {
             if (errors !== formErrors) {
@@ -189,17 +197,23 @@ var FormBuilder = function (_a) {
         var options = fieldOptions[field];
         var error = formErrors && formErrors[field];
         var component = options.component;
-        var componentOptions = {
+        var commonComponentOptions = {
             name: field,
             options: options,
-            value: formData[field],
             setValue: setFormDataValue(field),
             error: error
         };
+        var componentOptions;
+        if (options.type === 'checkbox') {
+            componentOptions = __assign({}, commonComponentOptions, { checked: formData[field] });
+        }
+        else {
+            componentOptions = __assign({}, commonComponentOptions, { value: formData[field] });
+        }
         return (react_1.default.createElement(react_1.default.Fragment, { key: field }, component ? component(componentOptions) : react_1.default.createElement(FormField_1.default, __assign({}, componentOptions))));
     };
     var activateFormSubmission = function () {
-        setFormOptions(__assign({}, formOptions, { isValidating: true, isSubmitting: true }));
+        setFormOptions({ isValidating: true, isSubmitting: true });
         validateFormData(formData);
     };
     var onSubmit = function (event) {
@@ -208,9 +222,6 @@ var FormBuilder = function (_a) {
         }
         activateFormSubmission();
     };
-    if (formContext.isSubmitting === true && formOptions.isSubmitting !== formContext.isSubmitting) {
-        activateFormSubmission();
-    }
     return (react_1.default.createElement("form", { onSubmit: onSubmit, noValidate: true },
         fields.map(function (field) { return fieldOptions[field] && getFieldComponent(field); }),
         submitSection && submitSection({})));

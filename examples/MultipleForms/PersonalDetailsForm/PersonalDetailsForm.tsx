@@ -16,7 +16,6 @@ const PersonalDetailsForm = ({ handleSubmit }: { handleSubmit?: (data: any) => a
   const fieldOptions = {
     name: {
       label: 'Name:',
-      defaultValue: 'default name',
       className: inputClass
     },
     age: {
@@ -32,6 +31,7 @@ const PersonalDetailsForm = ({ handleSubmit }: { handleSubmit?: (data: any) => a
   };
 
   const props: FormBuilderPropsType<PersonalDetailsFieldsType> = {
+    id: 'personalDetails',
     fields,
     fieldOptions,
     handleSubmit,

@@ -1,5 +1,5 @@
 const validate = (props: any) => {
-  const { address, city, postcode, country } = props;
+  const { address, city, postcode, countryCode } = props;
 
   let errors: any = {};
 
@@ -12,12 +12,12 @@ const validate = (props: any) => {
   if (!postcode) {
     errors.postcode = 'postcode is a required field!';
   }
-  if (!country) {
-    errors.country = 'country is required!';
+  if (!countryCode) {
+    errors.countryCode = 'iso country code is required!';
   } else {
     const countryRegex = /^CH|DE|AT|NL$/;
-    if (!countryRegex.test(String(country))) {
-      errors.country = 'country is invalid!';
+    if (!countryRegex.test(String(countryCode))) {
+      errors.countryCode = 'Invalid ISO country code. Valid codes: CH, DE, AT or NL';
     }
   }
 

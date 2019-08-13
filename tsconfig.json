@@ -10,7 +10,7 @@
     "declaration": false,
     "removeComments": true,
     "noImplicitReturns": true,
-    "noUnusedLocals": false,
+    "noUnusedLocals": true,
     "strict": true,
     "outDir": "dist",
     "lib": ["es6", "dom"],
