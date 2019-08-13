@@ -33,8 +33,7 @@
   },
   "dependencies": {
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "symbol-observable": "^1.2.0"
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

@@ -144,7 +144,6 @@ var FormBuilder = function (_a) {
     var _c = react_1.useState(setFormObject()), formData = _c[0], setFormData = _c[1];
     var _d = react_1.useState({}), formErrors = _d[0], setFormErrors = _d[1];
     var _e = react_1.useState({
-        isSubscribed: false,
         isValidating: false,
         isSubmitting: false,
         hasSubmitted: false
