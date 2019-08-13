@@ -59,7 +59,8 @@ module.exports = (env, argv) => {
       extensions: ['.ts', '.tsx', '.js', '.json', '.css'],
       alias: {
         '@reform': path.resolve(__dirname),
-        'components': path.resolve(__dirname, 'src', 'components'),
+        components: path.resolve(__dirname, 'src', 'components'),
+        utils: path.resolve(__dirname, 'src', 'utils')
       }
     },
     devServer: {
