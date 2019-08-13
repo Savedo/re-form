@@ -1,7 +1,4 @@
 import React from 'react';
-//import createFormObservable from './createFormObservable';
-
-//const formState = createFormObservable({ isSubmitting: false });
 
 export const FormContextScope = React.createContext({});
 
