@@ -96,135 +96,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/symbol-observable/es/index.js":
-/*!****************************************************!*\
-  !*** ./node_modules/symbol-observable/es/index.js ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global, module) {/* harmony import */ var _ponyfill_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ponyfill.js */ "./node_modules/symbol-observable/es/ponyfill.js");
-/* global window */
-
-
-var root;
-
-if (typeof self !== 'undefined') {
-  root = self;
-} else if (typeof window !== 'undefined') {
-  root = window;
-} else if (typeof global !== 'undefined') {
-  root = global;
-} else if (true) {
-  root = module;
-} else {}
-
-var result = Object(_ponyfill_js__WEBPACK_IMPORTED_MODULE_0__["default"])(root);
-/* harmony default export */ __webpack_exports__["default"] = (result);
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../../webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
-
-/***/ }),
-
-/***/ "./node_modules/symbol-observable/es/ponyfill.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/symbol-observable/es/ponyfill.js ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return symbolObservablePonyfill; });
-function symbolObservablePonyfill(root) {
-	var result;
-	var Symbol = root.Symbol;
-
-	if (typeof Symbol === 'function') {
-		if (Symbol.observable) {
-			result = Symbol.observable;
-		} else {
-			result = Symbol('observable');
-			Symbol.observable = result;
-		}
-	} else {
-		result = '@@observable';
-	}
-
-	return result;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/webpack/buildin/global.js":
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ "./node_modules/webpack/buildin/harmony-module.js":
-/*!*******************************************!*\
-  !*** (webpack)/buildin/harmony-module.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function(originalModule) {
-	if (!originalModule.webpackPolyfill) {
-		var module = Object.create(originalModule);
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		Object.defineProperty(module, "exports", {
-			enumerable: true
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-
 /***/ "./src/components/FormBuilder/FormBuilder.tsx":
 /*!****************************************************!*\
   !*** ./src/components/FormBuilder/FormBuilder.tsx ***!
@@ -279,13 +150,6 @@ var FormBuilder = function (_a) {
         hasSubmitted: false
     }), formOptions = _e[0], setFormOptions = _e[1];
     var formContext = react_1.useContext(FormContext_1.FormContextScope);
-    if (formContext && formContext.subscribe && !formOptions.isSubscribed) {
-        formContext.subscribe(function (_a) {
-            var isSubmitting = _a.isSubmitting;
-            setFormOptions(__assign({}, formOptions, { isSubmitting: isSubmitting }));
-        });
-        setFormOptions(__assign({}, formOptions, { isSubscribed: true }));
-    }
     react_1.useEffect(function () {
         var isValidating = formOptions.isValidating, isSubmitting = formOptions.isSubmitting, hasSubmitted = formOptions.hasSubmitted;
         if (Object.keys(formErrors).length === 0 && isValidating && isSubmitting && !hasSubmitted) {
@@ -371,106 +235,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
-var createFormObservable_1 = __importDefault(__webpack_require__(/*! ./createFormObservable */ "./src/components/FormContext/createFormObservable.ts"));
-var formState = createFormObservable_1.default({ isSubmitting: false });
-exports.FormContextScope = react_1.default.createContext(formState);
+exports.FormContextScope = react_1.default.createContext({});
 var FormContext = function (_a) {
-    var children = _a.children;
+    var children = _a.children, formState = _a.formState;
     return (react_1.default.createElement(exports.FormContextScope.Provider, { value: formState }, children));
 };
 exports.default = FormContext;
-
-
-/***/ }),
-
-/***/ "./src/components/FormContext/createFormObservable.ts":
-/*!************************************************************!*\
-  !*** ./src/components/FormContext/createFormObservable.ts ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var symbol_observable_1 = __importDefault(__webpack_require__(/*! symbol-observable */ "./node_modules/symbol-observable/es/index.js"));
-function createFormObservable(state) {
-    var _a;
-    var currentState = state;
-    var currentListeners = [];
-    var nextListeners = currentListeners;
-    function ensureCanMutateNextListeners() {
-        if (nextListeners === currentListeners) {
-            nextListeners = currentListeners.slice();
-        }
-    }
-    function getState() {
-        return currentState;
-    }
-    function setState(updateState) {
-        currentState = Object.assign({}, currentState, updateState);
-        var listeners = (currentListeners = nextListeners);
-        for (var i = 0; i < listeners.length; i++) {
-            var listener = listeners[i];
-            listener(currentState);
-        }
-    }
-    function subscribe(listener) {
-        if (typeof listener !== 'function') {
-            throw new Error('Expected the listener to be a function.');
-        }
-        var isSubscribed = true;
-        if (currentListeners.some(function (currentListener) { return currentListener === listener; })) {
-            return;
-        }
-        ensureCanMutateNextListeners();
-        nextListeners.push(listener);
-        return function unsubscribe() {
-            if (!isSubscribed) {
-                return;
-            }
-            isSubscribed = false;
-            ensureCanMutateNextListeners();
-            var index = nextListeners.indexOf(listener);
-            nextListeners.splice(index, 1);
-            currentListeners = [];
-        };
-    }
-    function observable() {
-        var _a;
-        var outerSubscribe = subscribe;
-        return _a = {
-                subscribe: function (observer) {
-                    if (typeof observer !== 'object' || observer === null) {
-                        throw new TypeError('Expected the observer to be an object.');
-                    }
-                    function observeState() {
-                        if (observer.next) {
-                            observer.next(getState());
-                        }
-                    }
-                    observeState();
-                    var unsubscribe = outerSubscribe(observeState);
-                    return { unsubscribe: unsubscribe };
-                }
-            },
-            _a[symbol_observable_1.default] = function () {
-                return this;
-            },
-            _a;
-    }
-    return _a = {
-            subscribe: subscribe,
-            getState: getState,
-            setState: setState
-        },
-        _a[symbol_observable_1.default] = observable,
-        _a;
-}
-exports.default = createFormObservable;
 
 
 /***/ }),

@@ -34,12 +34,12 @@ const FormBuilder: FormBuilderType<any> = (
   // Activates multiple form submission by using FormContext component
   const formContext: any = useContext(FormContextScope);
 
-  if (formContext && formContext.subscribe && !formOptions.isSubscribed) {
+/*  if (formContext && formContext.subscribe && !formOptions.isSubscribed) {
     formContext.subscribe(({ isSubmitting }: { isSubmitting: boolean }) => {
       setFormOptions({ ...formOptions, isSubmitting });
     });
     setFormOptions({ ...formOptions, isSubscribed: true });
-  }
+  }*/
 
   /**
    * This block runs when formErrors scope variable changes.

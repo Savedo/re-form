@@ -1,11 +1,11 @@
 import React from 'react';
-import createFormObservable from './createFormObservable';
+//import createFormObservable from './createFormObservable';
 
-const formState = createFormObservable({ isSubmitting: false });
+//const formState = createFormObservable({ isSubmitting: false });
 
-export const FormContextScope = React.createContext(formState);
+export const FormContextScope = React.createContext({});
 
-const FormContext = ({ children }: { children: any }) => {
+const FormContext = ({ children, formState }: { children: any, formState: any }) => {
   return (
     <FormContextScope.Provider value={ formState }>
       { ...children }
