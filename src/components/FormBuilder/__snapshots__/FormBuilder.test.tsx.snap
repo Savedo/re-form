@@ -38,12 +38,6 @@ exports[`FormBuilder component renders matches last snapshot 1`] = `
         />
       </label>
     </div>
-    <button
-      class="submit"
-      type="submit"
-    >
-      Submit
-    </button>
   </form>
 </div>
 `;
