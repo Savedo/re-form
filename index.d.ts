@@ -47,4 +47,3 @@ export interface FormFieldType<T extends string> {
 export { default as FormField } from './src/components/FormField/FormField';
 export { default as FormBuilder } from './src/components/FormBuilder/FormBuilder';
 export { default as FormContext } from './src/components/FormContext/FormContext';
-export { default as createFormObservable } from './src/utils/createFormObservable';

@@ -371,106 +371,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
-exports.FormContextScope = react_1.default.createContext({});
+var createFormObservable_1 = __importDefault(__webpack_require__(/*! ./createFormObservable */ "./src/components/FormContext/createFormObservable.ts"));
+var formState = createFormObservable_1.default({ isSubmitting: false });
+exports.FormContextScope = react_1.default.createContext(formState);
 var FormContext = function (_a) {
-    var children = _a.children, formContext = _a.formContext;
-    return (react_1.default.createElement(exports.FormContextScope.Provider, { value: formContext }, children));
+    var children = _a.children;
+    return (react_1.default.createElement(exports.FormContextScope.Provider, { value: formState }, children));
 };
 exports.default = FormContext;
 
 
 /***/ }),
 
-/***/ "./src/components/FormField/FormField.tsx":
-/*!************************************************!*\
-  !*** ./src/components/FormField/FormField.tsx ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
-var FormField = function (_a) {
-    var options = _a.options, value = _a.value, name = _a.name, setValue = _a.setValue, error = _a.error;
-    var _b = options || {}, _c = _b.element, element = _c === void 0 ? 'input' : _c, _d = _b.type, type = _d === void 0 ? 'text' : _d, _e = _b.keyValues, keyValues = _e === void 0 ? {} : _e, _f = _b.className, className = _f === void 0 ? '' : _f, _g = _b.label, label = _g === void 0 ? '' : _g, _h = _b.disabled, disabled = _h === void 0 ? false : _h;
-    var onChange = function (event) {
-        event.preventDefault();
-        setValue(event.currentTarget.value);
-    };
-    var getError = function (error) { return (react_1.default.createElement("div", { className: "error" }, error)); };
-    switch (element) {
-        case 'select': {
-            return (react_1.default.createElement("div", null,
-                react_1.default.createElement("label", null,
-                    label,
-                    react_1.default.createElement("select", __assign({}, { disabled: disabled, className: className, onChange: onChange, defaultValue: value }), Object.keys(keyValues).map(function (key) {
-                        return react_1.default.createElement("option", { key: key, value: key }, keyValues[key]);
-                    }))),
-                error && getError(error)));
-        }
-        case 'textarea': {
-            return (react_1.default.createElement("div", null,
-                react_1.default.createElement("label", null,
-                    label,
-                    react_1.default.createElement("textarea", __assign({}, { disabled: disabled, className: className, name: name, defaultValue: value, onChange: onChange, placeholder: options.placeholder }))),
-                error && getError(error)));
-        }
-        default: {
-            return (react_1.default.createElement("div", null,
-                react_1.default.createElement("label", null,
-                    label,
-                    react_1.default.createElement("input", __assign({}, { disabled: disabled, type: type, className: className, name: name, defaultValue: value, onChange: onChange, placeholder: options.placeholder }))),
-                error && getError(error)));
-        }
-    }
-};
-exports.default = FormField;
-
-
-/***/ }),
-
-/***/ "./src/index.ts":
-/*!**********************!*\
-  !*** ./src/index.ts ***!
-  \**********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var FormField_1 = __webpack_require__(/*! ./components/FormField/FormField */ "./src/components/FormField/FormField.tsx");
-exports.FormField = FormField_1.default;
-var FormBuilder_1 = __webpack_require__(/*! ./components/FormBuilder/FormBuilder */ "./src/components/FormBuilder/FormBuilder.tsx");
-exports.FormBuilder = FormBuilder_1.default;
-var FormContext_1 = __webpack_require__(/*! ./components/FormContext/FormContext */ "./src/components/FormContext/FormContext.tsx");
-exports.FormContext = FormContext_1.default;
-var createFormObservable_1 = __webpack_require__(/*! ./utils/createFormObservable */ "./src/utils/createFormObservable.ts");
-exports.createFormObservable = createFormObservable_1.default;
-
-
-/***/ }),
-
-/***/ "./src/utils/createFormObservable.ts":
-/*!*******************************************!*\
-  !*** ./src/utils/createFormObservable.ts ***!
-  \*******************************************/
+/***/ "./src/components/FormContext/createFormObservable.ts":
+/*!************************************************************!*\
+  !*** ./src/components/FormContext/createFormObservable.ts ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -555,6 +471,90 @@ function createFormObservable(state) {
         _a;
 }
 exports.default = createFormObservable;
+
+
+/***/ }),
+
+/***/ "./src/components/FormField/FormField.tsx":
+/*!************************************************!*\
+  !*** ./src/components/FormField/FormField.tsx ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var FormField = function (_a) {
+    var options = _a.options, value = _a.value, name = _a.name, setValue = _a.setValue, error = _a.error;
+    var _b = options || {}, _c = _b.element, element = _c === void 0 ? 'input' : _c, _d = _b.type, type = _d === void 0 ? 'text' : _d, _e = _b.keyValues, keyValues = _e === void 0 ? {} : _e, _f = _b.className, className = _f === void 0 ? '' : _f, _g = _b.label, label = _g === void 0 ? '' : _g, _h = _b.disabled, disabled = _h === void 0 ? false : _h;
+    var onChange = function (event) {
+        event.preventDefault();
+        setValue(event.currentTarget.value);
+    };
+    var getError = function (error) { return (react_1.default.createElement("div", { className: "error" }, error)); };
+    switch (element) {
+        case 'select': {
+            return (react_1.default.createElement("div", null,
+                react_1.default.createElement("label", null,
+                    label,
+                    react_1.default.createElement("select", __assign({}, { disabled: disabled, className: className, onChange: onChange, defaultValue: value }), Object.keys(keyValues).map(function (key) {
+                        return react_1.default.createElement("option", { key: key, value: key }, keyValues[key]);
+                    }))),
+                error && getError(error)));
+        }
+        case 'textarea': {
+            return (react_1.default.createElement("div", null,
+                react_1.default.createElement("label", null,
+                    label,
+                    react_1.default.createElement("textarea", __assign({}, { disabled: disabled, className: className, name: name, defaultValue: value, onChange: onChange, placeholder: options.placeholder }))),
+                error && getError(error)));
+        }
+        default: {
+            return (react_1.default.createElement("div", null,
+                react_1.default.createElement("label", null,
+                    label,
+                    react_1.default.createElement("input", __assign({}, { disabled: disabled, type: type, className: className, name: name, defaultValue: value, onChange: onChange, placeholder: options.placeholder }))),
+                error && getError(error)));
+        }
+    }
+};
+exports.default = FormField;
+
+
+/***/ }),
+
+/***/ "./src/index.ts":
+/*!**********************!*\
+  !*** ./src/index.ts ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var FormField_1 = __webpack_require__(/*! ./components/FormField/FormField */ "./src/components/FormField/FormField.tsx");
+exports.FormField = FormField_1.default;
+var FormBuilder_1 = __webpack_require__(/*! ./components/FormBuilder/FormBuilder */ "./src/components/FormBuilder/FormBuilder.tsx");
+exports.FormBuilder = FormBuilder_1.default;
+var FormContext_1 = __webpack_require__(/*! ./components/FormContext/FormContext */ "./src/components/FormContext/FormContext.tsx");
+exports.FormContext = FormContext_1.default;
 
 
 /***/ }),
