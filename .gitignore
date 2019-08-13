@@ -1,5 +1,6 @@
 node_modules
 log
+tmp
 .idea
 .opt-in
 .opt-out
