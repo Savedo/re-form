@@ -16,6 +16,18 @@ const MultipleForms = () => {
   const [contactDetails, setContactDetails] = useState();
   const [otherDetails, setOtherDetails] = useState();
 
+  const values = {
+    name: 'John Smith',
+    age: '33',
+    email: 'john@gmail.com',
+    idCard: 'Passport',
+    idNumber: 'U1234567890',
+    address: 'Alexanderplatz',
+    city: 'Berlin',
+    postCode: '13086',
+    countryCode: 'DE'
+  };
+
   const onSubmit = () => {
     setFormState({
       isValidating: true,
@@ -36,10 +48,10 @@ const MultipleForms = () => {
   return (
     <div className="form-container">
       <div className="pure-form pure-form-stacked">
-        <FormContext formState={ formState }>
-          <PersonalDetailsForm handleSubmit={ setPersonalDetails } />
-          <ContactDetailsForm handleSubmit={ setContactDetails } />
-          <OtherDetailsForm handleSubmit={ setOtherDetails } />
+        <FormContext { ...{ formState } }>
+          <PersonalDetailsForm handleSubmit={ setPersonalDetails } { ...{ values } } />
+          <ContactDetailsForm handleSubmit={ setContactDetails } { ...{ values } } />
+          <OtherDetailsForm handleSubmit={ setOtherDetails } { ...{ values } } />
           <button type="button" onClick={ onSubmit } className={ submitClass }>Submit</button>
         </FormContext>
       </div>

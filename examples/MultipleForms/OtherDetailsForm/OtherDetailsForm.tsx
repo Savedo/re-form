@@ -4,7 +4,7 @@ import validate from './validate';
 
 type OtherDetailsFieldsType = 'idCard' | 'idNumber';
 
-const OtherDetailsForm = ({ handleSubmit }: { handleSubmit?: (data: any) => any }) => {
+const OtherDetailsForm = ({ handleSubmit, values }: { values: any, handleSubmit?: (data: any) => any }) => {
   const inputClass = `shadow mb-2 appearance-none border rounded w-full \
     py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`;
   const fields: OtherDetailsFieldsType[] = [
@@ -28,11 +28,8 @@ const OtherDetailsForm = ({ handleSubmit }: { handleSubmit?: (data: any) => any 
     fields,
     fieldOptions,
     handleSubmit,
-    values: {
-      idCard: 'Passport',
-      idNumber: 'U1234567890'
-    },
-    validate
+    validate,
+    values
   };
 
   return (

@@ -2,15 +2,15 @@ import React from 'react';
 import { FormBuilder, FormBuilderPropsType } from '@reform';
 import validate from './validate';
 
-type ContactDetailsFieldsType = 'address' | 'city' | 'postcode' | 'countryCode';
+type ContactDetailsFieldsType = 'address' | 'city' | 'postCode' | 'countryCode';
 
-const ContactDetailsForm = ({ handleSubmit }: { handleSubmit?: (data: any) => any }) => {
+const ContactDetailsForm = ({ values, handleSubmit }: { values: any, handleSubmit?: (data: any) => any }) => {
   const inputClass = `shadow mb-2 appearance-none border rounded w-full \
     py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`;
   const fields: ContactDetailsFieldsType[] = [
     'address',
     'city',
-    'postcode',
+    'postCode',
     'countryCode'
   ];
 
@@ -23,8 +23,8 @@ const ContactDetailsForm = ({ handleSubmit }: { handleSubmit?: (data: any) => an
       label: 'City:',
       className: inputClass
     },
-    postcode: {
-      label: 'PostCode:',
+    postCode: {
+      label: 'Post Code:',
       className: inputClass
     },
     countryCode: {
@@ -38,7 +38,8 @@ const ContactDetailsForm = ({ handleSubmit }: { handleSubmit?: (data: any) => an
     fields,
     fieldOptions,
     handleSubmit,
-    validate
+    validate,
+    values
   };
 
   return (
