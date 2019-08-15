@@ -50,9 +50,9 @@ const MultipleForms = () => {
     <div className="form-container">
       <div className="pure-form pure-form-stacked">
         <FormContext { ...{ formState } }>
-          <PersonalDetailsForm handleSubmit={ setPersonalDetails } { ...{ values } } />
-          <ContactDetailsForm handleSubmit={ setContactDetails } { ...{ values } } />
-          <OtherDetailsForm handleSubmit={ setOtherDetails } { ...{ values } } />
+          <PersonalDetailsForm { ...{ values, handleSubmit: setPersonalDetails } } />
+          <ContactDetailsForm { ...{ values, handleSubmit: setContactDetails } } />
+          <OtherDetailsForm { ...{ values, handleSubmit: setOtherDetails } } />
           <button type="button" onClick={ onSubmit } className={ submitClass }>Submit</button>
         </FormContext>
       </div>
