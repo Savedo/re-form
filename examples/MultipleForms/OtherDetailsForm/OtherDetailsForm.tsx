@@ -7,6 +7,7 @@ type OtherDetailsFieldsType = 'idCard' | 'idNumber';
 const OtherDetailsForm = ({ handleSubmit, values }: { values: any, handleSubmit?: (data: any) => any }) => {
   const inputClass = `shadow mb-2 appearance-none border rounded w-full \
     py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`;
+
   const fields: OtherDetailsFieldsType[] = [
     'idCard',
     'idNumber'

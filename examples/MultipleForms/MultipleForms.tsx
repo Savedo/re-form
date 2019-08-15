@@ -8,6 +8,7 @@ import './styles.css';
 const MultipleForms = () => {
   const submitClass = `shadow mt-2 bg-blue-500 hover:bg-blue-700 text-white \
     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`;
+
   const [formState, setFormState] = useState({
     isValidating: false,
     isSubmitting: false
