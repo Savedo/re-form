@@ -28,6 +28,8 @@ const FormPartial: any = ({ id, fields, fieldOptions = {} }) => {
     );
   };
 
+  console.log(formValues);
+
   return fields.map(field => fieldOptions[field] && getFieldComponent(field));
 };
 
