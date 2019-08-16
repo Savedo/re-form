@@ -122,11 +122,20 @@ const FormBuilder: FormBuilderType<any> = (
       componentOptions = { ...commonComponentOptions, value: formData[field] };
     }
 
-    return (
-      <React.Fragment key={ field }>
-        { component ? component(componentOptions) : <FormField { ...componentOptions } /> }
-      </React.Fragment>
-    );
+    if (formContext.isPreview) {
+      return (
+        <div className="field">
+          <h3>{ options.label }</h3>
+          <p>{ formData[field] }</p>
+        </div>
+      );
+    } else {
+      return (
+        <React.Fragment key={ field }>
+          { component ? component(componentOptions) : <FormField { ...componentOptions } /> }
+        </React.Fragment>
+      );
+    }
   };
 
   const activateFormSubmission = () => {

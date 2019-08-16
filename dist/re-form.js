@@ -210,7 +210,14 @@ var FormBuilder = function (_a) {
         else {
             componentOptions = __assign({}, commonComponentOptions, { value: formData[field] });
         }
-        return (react_1.default.createElement(react_1.default.Fragment, { key: field }, component ? component(componentOptions) : react_1.default.createElement(FormField_1.default, __assign({}, componentOptions))));
+        if (formContext.isPreview) {
+            return (react_1.default.createElement("div", { className: "field" },
+                react_1.default.createElement("h3", null, options.label),
+                react_1.default.createElement("p", null, formData[field])));
+        }
+        else {
+            return (react_1.default.createElement(react_1.default.Fragment, { key: field }, component ? component(componentOptions) : react_1.default.createElement(FormField_1.default, __assign({}, componentOptions))));
+        }
     };
     var activateFormSubmission = function () {
         setFormOptions({ isValidating: true, isSubmitting: true });

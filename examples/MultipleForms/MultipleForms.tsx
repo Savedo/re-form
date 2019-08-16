@@ -11,7 +11,8 @@ const MultipleForms = () => {
 
   const [formState, setFormState] = useState({
     isValidating: false,
-    isSubmitting: false
+    isSubmitting: false,
+    isPreview: false
   });
   const [personalDetails, setPersonalDetails] = useState();
   const [contactDetails, setContactDetails] = useState();
@@ -31,10 +32,15 @@ const MultipleForms = () => {
 
   const onSubmit = () => {
     setFormState({
+      ...formState,
       isValidating: true,
-      isSubmitting: true
+      isSubmitting: true,
     });
   };
+
+  const changePreviewMode = (event: any) => {
+    setFormState({ ...formState, isPreview: event.currentTarget.checked });
+  }
 
   useEffect(() => {
     if (personalDetails && contactDetails && otherDetails) {
@@ -48,6 +54,7 @@ const MultipleForms = () => {
 
   return (
     <div className="form-container">
+      <label><input type="checkbox" onChange={ changePreviewMode } /> Preview</label>
       <div className="pure-form pure-form-stacked">
         <FormContext { ...{ formState } }>
           <PersonalDetailsForm { ...{ values, handleSubmit: setPersonalDetails } } />
