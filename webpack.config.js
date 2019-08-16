@@ -54,11 +54,12 @@ module.exports = (env, argv) => {
       filename,
       libraryTarget: 'umd',
     },
-    devtool: isProduction ? 'hidden-source-map' : 'cheap-module-eval-source-map',
+    devtool: isProduction ? 'hidden-source-map' : 'source-map',
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', 'jsx', '.json', '.css'],
+      extensions: ['.ts', '.tsx', '.js', '.json', '.css'],
       alias: {
-        '@reform': path.resolve(__dirname, 'index.d.ts')
+        '@reform': path.resolve(__dirname),
+        components: path.resolve(__dirname, 'src', 'components')
       }
     },
     devServer: {

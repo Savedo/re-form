@@ -1,5 +1,6 @@
-import React, { FormEventHandler, useEffect, useState } from 'react';
+import React, { FormEventHandler, useEffect, useState, useContext } from 'react';
 import FormField from '../FormField/FormField';
+import { FormContextScope } from '../FormContext/FormContext';
 import {
   FieldOptionsValueType,
   FormFieldPropsType,
@@ -9,7 +10,12 @@ import {
 } from '@reform';
 
 const FormBuilder: FormBuilderType<any> = (
-  { fields, fieldOptions = {}, values, validate, handleSubmit, submitSection }) => {
+  { id, fields, fieldOptions = {}, values, validate, handleSubmit, submitSection }) => {
+  /**
+   * Generates form object by getting key/values from:
+   * "defaultValue" fields, "values" prop, "currentValues" current form values (overwrites all others)
+   * @param currentValues
+   */
   const setFormObject = (currentValues: any = {}) => {
     const defaults = fields.reduce((acc, field) => {
       let fieldOptForField = fieldOptions[field];
@@ -24,21 +30,36 @@ const FormBuilder: FormBuilderType<any> = (
 
   const [formData, setFormData] = useState(setFormObject());
   const [formErrors, setFormErrors]: [FormErrorsType, any ] = useState({});
-  const [isValidating, setIsValidating] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formOptions, setFormOptions] = useState({
+    isValidating: false,
+    isSubmitting: false
+  });
+  // Activates multiple form submission by using FormContext component
+  const formContext: any = useContext(FormContextScope);
+
+  /**
+   * This block runs when formErrors scope variable changes.
+   * If there is no error, validation/submission are in effect and if form has not submitted
+   * then it calls handleSubmit method of FormBuilder and marks form as submitted.
+   */
   useEffect(() => {
+    const { isValidating, isSubmitting } = formOptions;
     if (Object.keys(formErrors).length === 0 && isValidating && isSubmitting) {
       handleSubmit && handleSubmit(formData);
     }
-    if (isSubmitting) {
-      setIsSubmitting(false);
-    }
   }, [formErrors]);
 
+  useEffect(() => {
+    const { isSubmitting } = formContext;
+    if (isSubmitting && !formOptions.isSubmitting) {
+      activateFormSubmission();
+    }
+  }, [formContext]);
+
   /**
-   * calls validate function with form data if it's defined.
-   * Updates the  form Errors with lates errors.
-   * @param newFormData the latest update form data
+   * Calls validate function with form data if it's defined.
+   * Updates the form Errors with latest errors.
+   * @param newFormData
    */
 
   const setErrors = (errors: FormErrorsType | Promise<FormErrorsType>) => {
@@ -71,7 +92,7 @@ const FormBuilder: FormBuilderType<any> = (
         const newFormData = setFormObject({ ...formData, [field]: value });
         if (newFormData !== formData) {
           setFormData(newFormData);
-          if (isValidating) {
+          if (formOptions.isValidating) {
             validateFormData(newFormData);
           }
         }
@@ -108,19 +129,22 @@ const FormBuilder: FormBuilderType<any> = (
     );
   };
 
+  const activateFormSubmission = () => {
+    setFormOptions({ isValidating: true, isSubmitting: true });
+    validateFormData(formData);
+  };
+
   const onSubmit: FormEventHandler = (event) => {
     if (event) {
       event.preventDefault();
     }
-    setIsSubmitting(true);
-    setIsValidating(true);
-    validateFormData(formData);
+    activateFormSubmission();
   };
 
   return (
     <form onSubmit={ onSubmit } noValidate={ true }>
       { fields.map(field => fieldOptions[field] && getFieldComponent(field)) }
-      { (submitSection && submitSection({})) || <button type="submit" className="submit">Submit</button> }
+      { submitSection && submitSection({}) }
     </form>
   );
 };

@@ -1,8 +1,8 @@
 import React from 'react';
+import { FormBuilder } from '@reform';
 import BulmaSelect from './components/BulmaSelect';
 import BulmaInput from './components/BulmaInput';
 import BulmaCheckbox from './components/BulmaCheckbox';
-import FormBuilder from '../../src/components/FormBuilder/FormBuilder';
 import validate from './validate';
 
 type FieldsType = 'name' | 'city' | 'email' | 'termsAndConditions';
