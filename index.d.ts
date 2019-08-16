@@ -48,6 +48,17 @@ export interface FormFieldType<T extends string> {
   (props: FormFieldPropsType<T>): ReactElement;
 }
 
+// <FormPartial />
+export interface FormPartialPropsType<T extends string> {
+  id: string;
+  fields: T[];
+  fieldOptions?: { [K in T]?: FieldOptionsValueType<T> };
+}
+export interface FormPartialType<T extends string> {
+  (props: FormPartialPropsType<T>): ReactElement;
+}
+
 export { default as FormField } from './src/components/FormField/FormField';
 export { default as FormBuilder } from './src/components/FormBuilder/FormBuilder';
 export { default as FormContext } from './src/components/FormContext/FormContext';
+export { default as FormPartial } from './src/components/FormPartial/FormPartial';

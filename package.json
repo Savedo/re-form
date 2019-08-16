@@ -28,7 +28,7 @@
     "test": "./node_modules/jest/bin/jest.js -u --config=jest.config.js",
     "build": "yarn clean && yarn build:umd && yarn build:umd:min",
     "build:umd": "webpack --mode=development",
-    "develop": "webpack-dev-server --open --devServer",
+    "develop": "webpack-dev-server --open --hot --devServer",
     "build:umd:min": "webpack --mode=production"
   },
   "dependencies": {

@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import PartialForms from './PartialForms';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<PartialForms />, document.getElementById('root'));
