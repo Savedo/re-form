@@ -346,7 +346,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var FormField_1 = __importDefault(__webpack_require__(/*! ../FormField/FormField */ "./src/components/FormField/FormField.tsx"));
 var FormPartial = function (_a) {
-    var fields = _a.fields, _b = _a.fieldOptions, fieldOptions = _b === void 0 ? {} : _b, getValue = _a.getValue, setValue = _a.setValue, validationErrors = _a.validationErrors;
+    var _b = _a.fields, fields = _b === void 0 ? [] : _b, _c = _a.fieldOptions, fieldOptions = _c === void 0 ? {} : _c, getValue = _a.getValue, setValue = _a.setValue, validationErrors = _a.validationErrors;
     var getFieldComponent = function (field) {
         var options = fieldOptions[field];
         var error = validationErrors && validationErrors[field];

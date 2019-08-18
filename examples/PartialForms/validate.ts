@@ -1,4 +1,4 @@
-import validator from 'validator';
+import { isEmpty, isEmail } from 'validator';
 
 const validate = (props: any) => {
   const fields = [
@@ -12,13 +12,13 @@ const validate = (props: any) => {
   ];
 
   return fields.reduce((errors, field) => {
-    if (!props[field] || validator.isEmpty(props[field])) {
+    if (!props[field] || isEmpty(props[field])) {
       return {
         ...errors,
         [field]: `${field} field is required!`
       };
     }
-    if (field === 'email' && !validator.isEmail(props[field])) {
+    if (field === 'email' && !isEmail(props[field])) {
       return {
         ...errors,
         email: 'Email is invalid'

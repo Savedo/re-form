@@ -1,9 +1,9 @@
 import React from 'react';
-import { FieldOptionsValueType } from '@reform';
+import { FieldOptionsValueType, FormPartialType } from '@reform';
 import FormField from '../FormField/FormField';
 
-const FormPartial: any = (
-  { fields, fieldOptions = {}, getValue, setValue, validationErrors }) => {
+const FormPartial: FormPartialType<any> = (
+  { fields = [], fieldOptions = {}, getValue, setValue, validationErrors }) => {
   const getFieldComponent = (field: string) => {
     const options = fieldOptions[field] as FieldOptionsValueType<string>;
     const error = validationErrors && validationErrors[field];

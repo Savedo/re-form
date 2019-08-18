@@ -1,11 +1,13 @@
 import React from 'react';
-import { FormPartial } from '@reform';
+import { FormPartial, FormPartialPropsType } from '@reform';
 
-const ContactDetailsForm = ({ getValue, setValue, validationErrors }) => {
+type ContactDetailsFieldsType = 'address' | 'city' | 'postCode' | 'country';
+
+const ContactDetailsForm = ({ getValue, setValue, validationErrors }: FormPartialPropsType<any>) => {
   const inputClass = `shadow mb-2 appearance-none border rounded w-full \
     py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`;
 
-  const fields: string[] = [ 'address', 'city', 'postCode', 'country' ];
+  const fields: ContactDetailsFieldsType[] = [ 'address', 'city', 'postCode', 'country' ];
 
   const fieldOptions = {
     address: {
@@ -26,7 +28,7 @@ const ContactDetailsForm = ({ getValue, setValue, validationErrors }) => {
     }
   };
 
-  const props: any = {
+  const props: FormPartialPropsType<any> = {
     fields,
     fieldOptions,
     getValue,
