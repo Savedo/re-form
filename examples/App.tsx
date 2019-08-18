@@ -3,7 +3,7 @@ import SimpleForm from './SimpleForm/SimpleForm';
 import BulmaForm from './BulmaForm/BulmaForm';
 import ValidatedForm from './Validation.js/ValidatedForm';
 import AsyncIbanForm from './AsyncIbanForm/AsyncIbanForm';
-import MultipleForms from './MultipleForms/MultipleForms';
+import PartialForms from './PartialForms';
 
 const App = () => {
   return (
@@ -77,9 +77,9 @@ const App = () => {
             <div className="tile is-child">
               <div className="box">
                 <p className="subtitle has-text-centered">
-                  Handling Multiple Form Sections
+                  Multiple Form Sections
                 </p>
-                <MultipleForms />
+                <PartialForms />
               </div>
             </div>
           </div>

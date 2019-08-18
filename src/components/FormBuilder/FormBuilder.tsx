@@ -1,6 +1,5 @@
-import React, { FormEventHandler, useEffect, useState, useContext } from 'react';
+import React, { FormEventHandler, useEffect, useState } from 'react';
 import FormField from '../FormField/FormField';
-import { FormContextScope } from '../FormContext/FormContext';
 import {
   FieldOptionsValueType,
   FormFieldPropsType,
@@ -10,7 +9,7 @@ import {
 } from '@reform';
 
 const FormBuilder: FormBuilderType<any> = (
-  { id, fields, fieldOptions = {}, values, validate, handleSubmit, submitSection }) => {
+  { fields, fieldOptions = {}, values, validate, handleSubmit, submitSection }) => {
   /**
    * Generates form object by getting key/values from:
    * "defaultValue" fields, "values" prop, "currentValues" current form values (overwrites all others)
@@ -34,8 +33,6 @@ const FormBuilder: FormBuilderType<any> = (
     isValidating: false,
     isSubmitting: false
   });
-  // Activates multiple form submission by using FormContext component
-  const formContext: any = useContext(FormContextScope);
 
   /**
    * This block runs when formErrors scope variable changes.
@@ -48,13 +45,6 @@ const FormBuilder: FormBuilderType<any> = (
       handleSubmit && handleSubmit(formData);
     }
   }, [formErrors]);
-
-  useEffect(() => {
-    const { isSubmitting } = formContext;
-    if (isSubmitting && !formOptions.isSubmitting) {
-      activateFormSubmission();
-    }
-  }, [formContext]);
 
   /**
    * Calls validate function with form data if it's defined.
