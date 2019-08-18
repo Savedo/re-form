@@ -63,10 +63,8 @@ module.exports = (env, argv) => {
       }
     },
     devServer: {
-      contentBase: path.join(__dirname, 'dist'),
-      compress: true,
-      port: 9100,
-      watchContentBase: true
+      contentBase: './dist',
+      port: 9100
     },
     module: {
       rules: [

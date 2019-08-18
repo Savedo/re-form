@@ -1,18 +1,11 @@
 import React from 'react';
-import { FormPartial, FormPartialPropsType } from '@reform';
+import { FormPartial } from '@reform';
 
-type ContactDetailsFieldsType = 'address' | 'city' | 'postCode' | 'countryCode';
-
-const ContactDetailsForm = () => {
+const ContactDetailsForm = ({ getValue, setValue, validationErrors }) => {
   const inputClass = `shadow mb-2 appearance-none border rounded w-full \
     py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`;
 
-  const fields: ContactDetailsFieldsType[] = [
-    'address',
-    'city',
-    'postCode',
-    'countryCode'
-  ];
+  const fields: string[] = [ 'address', 'city', 'postCode', 'country' ];
 
   const fieldOptions = {
     address: {
@@ -24,26 +17,24 @@ const ContactDetailsForm = () => {
       className: inputClass
     },
     postCode: {
-      label: 'Post Code:',
+      label: 'Zip Code:',
       className: inputClass
     },
-    countryCode: {
-      label: 'ISO Country Code:',
+    country: {
+      label: 'Country:',
       className: inputClass
     }
   };
 
-  const props: FormPartialPropsType<ContactDetailsFieldsType> = {
-    id: 'contactDetails',
+  const props: any = {
     fields,
-    fieldOptions
+    fieldOptions,
+    getValue,
+    setValue,
+    validationErrors
   };
 
-  return (
-    <>
-      <FormPartial { ...props } />
-    </>
-  );
+  return (<FormPartial { ...props } />);
 };
 
 export default ContactDetailsForm;

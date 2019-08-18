@@ -1,17 +1,11 @@
 import React from 'react';
-import { FormPartial, FormPartialPropsType } from '@reform';
+import { FormPartial } from '@reform';
 
-type PersonalDetailsFieldsType = 'name' | 'age' | 'email';
-
-const PersonalDetailsForm = () => {
+const PersonalDetailsForm = ({ getValue, setValue, validationErrors }) => {
   const inputClass = `shadow mb-2 appearance-none border rounded w-full \
     py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`;
 
-  const fields: PersonalDetailsFieldsType[] = [
-    'name',
-    'age',
-    'email'
-  ];
+  const fields: string[] = [ 'name', 'age', 'email' ];
 
   const fieldOptions = {
     name: {
@@ -30,17 +24,15 @@ const PersonalDetailsForm = () => {
     }
   };
 
-  const props: FormPartialPropsType<PersonalDetailsFieldsType> = {
-    id: 'personalDetails',
+  const props: any = {
     fields,
-    fieldOptions
+    fieldOptions,
+    getValue,
+    setValue,
+    validationErrors
   };
 
-  return (
-    <>
-      <FormPartial { ...props } />
-    </>
-  );
+  return (<FormPartial { ...props } />);
 };
 
 export default PersonalDetailsForm;

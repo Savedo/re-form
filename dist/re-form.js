@@ -339,40 +339,27 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var FormField_1 = __importDefault(__webpack_require__(/*! ../FormField/FormField */ "./src/components/FormField/FormField.tsx"));
 var FormPartial = function (_a) {
-    var id = _a.id, fields = _a.fields, _b = _a.fieldOptions, fieldOptions = _b === void 0 ? {} : _b;
-    var _c = react_1.useState({}), formValues = _c[0], setFormValues = _c[1];
-    var setFormDataValue = function (field) { return function (value) {
-        var _a;
-        setFormValues(__assign({}, formValues, (_a = {}, _a[field] = value, _a)));
-    }; };
+    var fields = _a.fields, _b = _a.fieldOptions, fieldOptions = _b === void 0 ? {} : _b, getValue = _a.getValue, setValue = _a.setValue, validationErrors = _a.validationErrors;
     var getFieldComponent = function (field) {
         var options = fieldOptions[field];
-        var error = null;
+        var error = validationErrors && validationErrors[field];
         var component = options.component;
         var componentOptions = {
             name: field,
             options: options,
-            value: formValues[field],
-            setValue: setFormDataValue(field),
+            value: getValue(field),
+            setValue: setValue(field),
             error: error
         };
         return (react_1.default.createElement(react_1.default.Fragment, { key: field }, component ? component(componentOptions) : react_1.default.createElement(FormField_1.default, __assign({}, componentOptions))));
     };
-    console.log(formValues);
     return fields.map(function (field) { return fieldOptions[field] && getFieldComponent(field); });
 };
 exports.default = FormPartial;
