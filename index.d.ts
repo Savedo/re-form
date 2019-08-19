@@ -42,12 +42,24 @@ export interface FormFieldPropsType<T extends string> extends JSX.IntrinsicAttri
   value?: string | string[] | undefined;
   checked?: boolean;
   name: string;
-  error: string;
+  error?: string;
 }
 export interface FormFieldType<T extends string> {
   (props: FormFieldPropsType<T>): ReactElement;
 }
 
+// <FormPartial />
+export interface FormPartialPropsType<T extends string> {
+  fields?: T[];
+  fieldOptions?: { [K in T]?: FieldOptionsValueType<T> };
+  getValue: Function;
+  setValue: Function;
+  validationErrors?: { [K in T]?: string };
+}
+export interface FormPartialType<T extends string> {
+  (props: FormPartialPropsType<T>): any;
+}
+
 export { default as FormField } from './src/components/FormField/FormField';
 export { default as FormBuilder } from './src/components/FormBuilder/FormBuilder';
-export { default as FormContext } from './src/components/FormContext/FormContext';
+export { default as FormPartial } from './src/components/FormPartial/FormPartial';

@@ -129,9 +129,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var FormField_1 = __importDefault(__webpack_require__(/*! ../FormField/FormField */ "./src/components/FormField/FormField.tsx"));
-var FormContext_1 = __webpack_require__(/*! ../FormContext/FormContext */ "./src/components/FormContext/FormContext.tsx");
 var FormBuilder = function (_a) {
-    var id = _a.id, fields = _a.fields, _b = _a.fieldOptions, fieldOptions = _b === void 0 ? {} : _b, values = _a.values, validate = _a.validate, handleSubmit = _a.handleSubmit, submitSection = _a.submitSection;
+    var fields = _a.fields, _b = _a.fieldOptions, fieldOptions = _b === void 0 ? {} : _b, values = _a.values, validate = _a.validate, handleSubmit = _a.handleSubmit, submitSection = _a.submitSection;
     var setFormObject = function (currentValues) {
         if (currentValues === void 0) { currentValues = {}; }
         var defaults = fields.reduce(function (acc, field) {
@@ -151,19 +150,12 @@ var FormBuilder = function (_a) {
         isValidating: false,
         isSubmitting: false
     }), formOptions = _e[0], setFormOptions = _e[1];
-    var formContext = react_1.useContext(FormContext_1.FormContextScope);
     react_1.useEffect(function () {
         var isValidating = formOptions.isValidating, isSubmitting = formOptions.isSubmitting;
         if (Object.keys(formErrors).length === 0 && isValidating && isSubmitting) {
             handleSubmit && handleSubmit(formData);
         }
     }, [formErrors]);
-    react_1.useEffect(function () {
-        var isSubmitting = formContext.isSubmitting;
-        if (isSubmitting && !formOptions.isSubmitting) {
-            activateFormSubmission();
-        }
-    }, [formContext]);
     var setErrors = function (errors) {
         if (Object.keys(errors).length > 0) {
             if (errors !== formErrors) {
@@ -227,30 +219,6 @@ var FormBuilder = function (_a) {
         submitSection && submitSection({})));
 };
 exports.default = FormBuilder;
-
-
-/***/ }),
-
-/***/ "./src/components/FormContext/FormContext.tsx":
-/*!****************************************************!*\
-  !*** ./src/components/FormContext/FormContext.tsx ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
-exports.FormContextScope = react_1.default.createContext({});
-var FormContext = function (_a) {
-    var children = _a.children, formState = _a.formState;
-    return (react_1.default.createElement(exports.FormContextScope.Provider, { value: formState }, children));
-};
-exports.default = FormContext;
 
 
 /***/ }),
@@ -319,6 +287,54 @@ exports.default = FormField;
 
 /***/ }),
 
+/***/ "./src/components/FormPartial/FormPartial.tsx":
+/*!****************************************************!*\
+  !*** ./src/components/FormPartial/FormPartial.tsx ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var FormField_1 = __importDefault(__webpack_require__(/*! ../FormField/FormField */ "./src/components/FormField/FormField.tsx"));
+var FormPartial = function (_a) {
+    var _b = _a.fields, fields = _b === void 0 ? [] : _b, _c = _a.fieldOptions, fieldOptions = _c === void 0 ? {} : _c, getValue = _a.getValue, setValue = _a.setValue, validationErrors = _a.validationErrors;
+    var getFieldComponent = function (field) {
+        var options = fieldOptions[field];
+        var error = validationErrors && validationErrors[field];
+        var component = options.component;
+        var componentOptions = {
+            name: field,
+            options: options,
+            value: getValue(field),
+            setValue: setValue(field),
+            error: error
+        };
+        return (react_1.default.createElement(react_1.default.Fragment, { key: field }, component ? component(componentOptions) : react_1.default.createElement(FormField_1.default, __assign({}, componentOptions))));
+    };
+    return fields.map(function (field) { return fieldOptions[field] && getFieldComponent(field); });
+};
+exports.default = FormPartial;
+
+
+/***/ }),
+
 /***/ "./src/index.ts":
 /*!**********************!*\
   !*** ./src/index.ts ***!
@@ -333,8 +349,8 @@ var FormField_1 = __webpack_require__(/*! ./components/FormField/FormField */ ".
 exports.FormField = FormField_1.default;
 var FormBuilder_1 = __webpack_require__(/*! ./components/FormBuilder/FormBuilder */ "./src/components/FormBuilder/FormBuilder.tsx");
 exports.FormBuilder = FormBuilder_1.default;
-var FormContext_1 = __webpack_require__(/*! ./components/FormContext/FormContext */ "./src/components/FormContext/FormContext.tsx");
-exports.FormContext = FormContext_1.default;
+var FormPartial_1 = __webpack_require__(/*! ./components/FormPartial/FormPartial */ "./src/components/FormPartial/FormPartial.tsx");
+exports.FormPartial = FormPartial_1.default;
 
 
 /***/ }),

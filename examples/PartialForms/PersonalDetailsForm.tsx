@@ -1,18 +1,13 @@
 import React from 'react';
-import { FormBuilder, FormBuilderPropsType } from '@reform';
-import validate from './validate';
+import { FormPartial, FormPartialPropsType } from '@reform';
 
 type PersonalDetailsFieldsType = 'name' | 'age' | 'email';
 
-const PersonalDetailsForm = ({ values, handleSubmit }: { values: any, handleSubmit?: (data: any) => any }) => {
+const PersonalDetailsForm = ({ getValue, setValue, validationErrors }: FormPartialPropsType<any>) => {
   const inputClass = `shadow mb-2 appearance-none border rounded w-full \
     py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`;
 
-  const fields: PersonalDetailsFieldsType[] = [
-    'name',
-    'age',
-    'email'
-  ];
+  const fields: PersonalDetailsFieldsType[] = [ 'name', 'age', 'email' ];
 
   const fieldOptions = {
     name: {
@@ -31,20 +26,15 @@ const PersonalDetailsForm = ({ values, handleSubmit }: { values: any, handleSubm
     }
   };
 
-  const props: FormBuilderPropsType<PersonalDetailsFieldsType> = {
-    id: 'personalDetails',
+  const props: FormPartialPropsType<any> = {
     fields,
     fieldOptions,
-    handleSubmit,
-    validate,
-    values
+    getValue,
+    setValue,
+    validationErrors
   };
 
-  return (
-    <div>
-      <FormBuilder { ...props } />
-    </div>
-  );
+  return (<FormPartial { ...props } />);
 };
 
 export default PersonalDetailsForm;

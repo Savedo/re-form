@@ -1,6 +1,6 @@
 {
   "name": "@savedo/re-form",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "react form builder library",
   "author": "Savedo GmbH. <it@savedo.de> (https://www.savedo.de)",
   "license": "MIT",
@@ -40,6 +40,7 @@
     "@types/jest": "^24.0.11",
     "@types/react": "^16.8.13",
     "@types/react-dom": "^16.8.3",
+    "@types/validator": "^10.11.2",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
@@ -54,6 +55,7 @@
     "tslint-react": "^4.0.0",
     "typescript": "^3.4.3",
     "validate.js": "^0.13.1",
+    "validator": "^11.1.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.3.1"
