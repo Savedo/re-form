@@ -13,6 +13,16 @@ const PartialForms = () => {
   const [isValidating, setIsValidating] = useState(false);
 
   useEffect(() => {
+    // demonstrates async data binding to the form
+    const asyncData = {
+      name: 'John Smith',
+      email: 'john.smith@savedo.com',
+      city: 'Berlin'
+    };
+    setTimeout(() => setFormValues({ ...formValues, ...asyncData }), 1000);
+  }, []);
+
+  useEffect(() => {
     if (isValidating) {
       setValidationErrors(validate(formValues));
     }
