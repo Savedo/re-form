@@ -8,10 +8,21 @@ const validate = (props: any) => {
     'address',
     'city',
     'postCode',
-    'country'
+    'country',
+    'termsAndCondition'
   ];
 
   return fields.reduce((errors, field) => {
+    if (field === 'termsAndCondition') {
+      if (!props[field]){
+        return {
+          ...errors,
+          termsAndCondition:
+            'Acceptance of Terms & Condition is required'
+        };
+      }
+      return errors;
+    }
     if (!props[field] || isEmpty(props[field])) {
       return {
         ...errors,
