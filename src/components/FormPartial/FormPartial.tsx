@@ -8,14 +8,21 @@ const FormPartial: FormPartialType<any> = (
     const options = fieldOptions[field] as FieldOptionsValueType<string>;
     const error = validationErrors && validationErrors[field];
     const { component } = options;
-    const componentOptions = {
+
+    const commonComponentOptions = {
       name: field,
       options,
-      value: getValue(field),
       setValue: setValue(field),
       error
     };
 
+    let componentOptions;
+    if (options.type === 'checkbox'){
+      componentOptions = { ...commonComponentOptions, checked: !!getValue(field) };
+    }
+    else {
+      componentOptions = { ...commonComponentOptions, value: getValue(field) };
+    }
     return (
       <React.Fragment key={ field }>
         { component ? component(componentOptions) : <FormField { ...componentOptions } /> }

@@ -319,13 +319,19 @@ var FormPartial = function (_a) {
         var options = fieldOptions[field];
         var error = validationErrors && validationErrors[field];
         var component = options.component;
-        var componentOptions = {
+        var commonComponentOptions = {
             name: field,
             options: options,
-            value: getValue(field),
             setValue: setValue(field),
             error: error
         };
+        var componentOptions;
+        if (options.type === 'checkbox') {
+            componentOptions = __assign({}, commonComponentOptions, { checked: !!getValue(field) });
+        }
+        else {
+            componentOptions = __assign({}, commonComponentOptions, { value: getValue(field) });
+        }
         return (react_1.default.createElement(react_1.default.Fragment, { key: field }, component ? component(componentOptions) : react_1.default.createElement(FormField_1.default, __assign({}, componentOptions))));
     };
     return fields.map(function (field) { return fieldOptions[field] && getFieldComponent(field); });
