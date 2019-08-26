@@ -9,7 +9,7 @@ const FormPartial: FormPartialType<any> = (
     const error = validationErrors && validationErrors[field];
     const { component } = options;
 
-    let commonComponentOptions = {
+    const commonComponentOptions = {
       name: field,
       options,
       setValue: setValue(field),

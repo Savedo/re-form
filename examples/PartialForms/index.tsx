@@ -18,7 +18,7 @@ const PartialForms = () => {
       name: 'John Smith',
       email: 'john.smith@savedo.com',
       city: 'Berlin',
-      termsAndCondition: true
+      termsAndConditions: true
     };
     setTimeout(() => setFormValues({ ...formValues, ...asyncData }), 1000);
   }, []);

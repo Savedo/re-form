@@ -1,14 +1,14 @@
 import React from 'react';
-import { FormPartialPropsType, FormPartial } from '@reform';
+import { FormPartial, FormPartialPropsType } from '@reform';
 import Checkbox from './Checkbox';
 
-type ContactDetailsFieldsType = 'address' | 'city' | 'postCode' | 'country' | 'termsAndCondition';
+type ContactDetailsFieldsType = 'address' | 'city' | 'postCode' | 'country' | 'termsAndConditions';
 
 const ContactDetailsForm = ({ getValue, setValue, validationErrors }: FormPartialPropsType<any>) => {
   const inputClass = `shadow mb-2 appearance-none border rounded w-full \
     py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`;
 
-  const fields: ContactDetailsFieldsType[] = ['address', 'city', 'postCode', 'country', 'termsAndCondition'];
+  const fields: ContactDetailsFieldsType[] = ['address', 'city', 'postCode', 'country', 'termsAndConditions'];
 
   const fieldOptions = {
     address: {
@@ -27,7 +27,7 @@ const ContactDetailsForm = ({ getValue, setValue, validationErrors }: FormPartia
       label: 'Country:',
       className: inputClass
     },
-    termsAndCondition: {
+    termsAndConditions: {
       label: 'T&C:',
       type: 'checkbox',
       component: Checkbox,
