@@ -5,6 +5,7 @@ export interface FieldOptionsValueType<T extends string> {
   label?: string;
   type?: string;
   element?: string;
+  hidden?: boolean;
   component?: (props: FormFieldPropsType<T>) => ReactElement;
   keyValues?: { [key: string]: any };
   className?: string;

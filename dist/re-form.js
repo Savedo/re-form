@@ -334,7 +334,10 @@ var FormPartial = function (_a) {
         }
         return (react_1.default.createElement(react_1.default.Fragment, { key: field }, component ? component(componentOptions) : react_1.default.createElement(FormField_1.default, __assign({}, componentOptions))));
     };
-    return fields.map(function (field) { return fieldOptions[field] && getFieldComponent(field); });
+    return fields.map(function (field) {
+        var options = fieldOptions[field];
+        return options && !options.hidden && getFieldComponent(field);
+    });
 };
 exports.default = FormPartial;
 
