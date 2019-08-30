@@ -1,7 +1,8 @@
 import { isEmpty, isEmail } from 'validator';
 
+
 const validate = (props: any) => {
-  const fields = [
+  let fields = [
     'name',
     'age',
     'email',
@@ -11,6 +12,8 @@ const validate = (props: any) => {
     'country',
     'termsAndConditions'
   ];
+
+  fields = [...fields, (props.country === 'CH' ? 'placeOfOrigin' : 'placeOfBirth')];
 
   return fields.reduce((errors, field) => {
     if (field === 'termsAndConditions') {
