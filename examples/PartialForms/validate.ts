@@ -13,12 +13,7 @@ const validate = (props: any) => {
     'termsAndConditions'
   ];
 
-  if (props.country === 'CH'){
-    fields = [...fields, 'placeOfOrigin'];
-  }
-  else {
-    fields = [...fields, 'placeOfBirth'];
-  }
+  fields = [...fields, (props.country === 'CH' ? 'placeOfOrigin' : 'placeOfBirth')];
 
   return fields.reduce((errors, field) => {
     if (field === 'termsAndConditions') {

@@ -2,9 +2,16 @@ import React from 'react';
 import Checkbox from './Checkbox';
 import { FormPartialPropsType, FormPartial } from '@reform';
 
-type ContactDetailsFieldsType = 'address' | 'city' | 'postCode' | 'country' | 'placeOfBirth' | 'placeOfOrigin' |'termsAndConditions';
+type ContactDetailsFieldsType =
+  | 'address'
+  | 'city'
+  | 'postCode'
+  | 'country'
+  | 'placeOfBirth'
+  | 'placeOfOrigin'
+  | 'termsAndConditions';
 
-const optionCountries = {
+const countryOptions = {
   DE: 'Germany',
   CH: 'Switzerland',
   IE: 'Ireland',
@@ -36,7 +43,7 @@ const ContactDetailsForm = ({ getValue, setValue, validationErrors }: FormPartia
       label: 'Country:',
       className: inputClass,
       element: 'select',
-      keyValues: optionCountries
+      keyValues: countryOptions
     },
     city: {
       label: 'City:',
