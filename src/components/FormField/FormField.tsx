@@ -33,7 +33,7 @@ const FormField: FormFieldType<string> = (
       return (
         <div>
           <label>{ label }
-            <select { ...{ disabled, className, onChange, defaultValue: value } }>
+            <select { ...{ disabled, className, onChange, defaultValue: value || options.defaultValue } }>
               {
                 Object.keys(keyValues).map((key: string) =>
                   <option key={ key } value={ key }>{ keyValues[key] }</option>)
@@ -48,7 +48,16 @@ const FormField: FormFieldType<string> = (
       return (
         <div>
           <label>{ label }
-            <textarea { ...{ disabled, className, name, defaultValue: value, onChange, placeholder: options.placeholder } } />
+            <textarea
+              { ...{
+                disabled,
+                className,
+                name,
+                defaultValue: value || options.defaultValue,
+                onChange,
+                placeholder: options.placeholder
+              } }
+            />
           </label>
           { error && getError(error) }
         </div>
@@ -57,7 +66,17 @@ const FormField: FormFieldType<string> = (
     default: {
       return (
         <div>
-          <label>{ label }<input { ...{ disabled, type, className, name, defaultValue: value, onChange, placeholder: options.placeholder } } /></label>
+          <label>{ label }<input
+            { ...{
+              disabled,
+              type,
+              className,
+              name,
+              defaultValue: value || options.defaultValue,
+              onChange,
+              placeholder: options.placeholder
+            } }
+          /></label>
           { error && getError(error) }
         </div>
       );

@@ -1,6 +1,5 @@
 import { isEmpty, isEmail } from 'validator';
 
-
 const validate = (props: any) => {
   let fields = [
     'name',
