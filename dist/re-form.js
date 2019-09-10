@@ -275,7 +275,8 @@ var FormField = function (_a) {
                         className: className,
                         name: name,
                         defaultValue: value || options.defaultValue,
-                        onChange: onChange, placeholder: options.placeholder
+                        onChange: onChange,
+                        placeholder: options.placeholder
                     }))),
                 error && getError(error)));
         }
@@ -289,7 +290,8 @@ var FormField = function (_a) {
                         className: className,
                         name: name,
                         defaultValue: value || options.defaultValue,
-                        onChange: onChange, placeholder: options.placeholder
+                        onChange: onChange,
+                        placeholder: options.placeholder
                     }))),
                 error && getError(error)));
         }

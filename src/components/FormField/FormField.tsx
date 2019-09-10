@@ -54,7 +54,8 @@ const FormField: FormFieldType<string> = (
                 className,
                 name,
                 defaultValue: value || options.defaultValue,
-                onChange, placeholder: options.placeholder
+                onChange,
+                placeholder: options.placeholder
               } }
             />
           </label>
@@ -72,7 +73,8 @@ const FormField: FormFieldType<string> = (
               className,
               name,
               defaultValue: value || options.defaultValue,
-              onChange, placeholder: options.placeholder
+              onChange,
+              placeholder: options.placeholder
             } }
           /></label>
           { error && getError(error) }
