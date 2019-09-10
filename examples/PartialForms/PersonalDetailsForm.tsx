@@ -17,7 +17,8 @@ const PersonalDetailsForm = ({ getValue, setValue, validationErrors }: FormParti
     age: {
       label: 'Age:',
       type: 'number',
-      className: inputClass
+      className: inputClass,
+      defaultValue: '18'
     },
     email: {
       label: 'E-mail:',

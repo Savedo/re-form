@@ -261,7 +261,7 @@ var FormField = function (_a) {
             return (react_1.default.createElement("div", null,
                 react_1.default.createElement("label", null,
                     label,
-                    react_1.default.createElement("select", __assign({}, { disabled: disabled, className: className, onChange: onChange, defaultValue: value }), Object.keys(keyValues).map(function (key) {
+                    react_1.default.createElement("select", __assign({}, { disabled: disabled, className: className, onChange: onChange, defaultValue: value || options.defaultValue }), Object.keys(keyValues).map(function (key) {
                         return react_1.default.createElement("option", { key: key, value: key }, keyValues[key]);
                     }))),
                 error && getError(error)));
@@ -270,14 +270,27 @@ var FormField = function (_a) {
             return (react_1.default.createElement("div", null,
                 react_1.default.createElement("label", null,
                     label,
-                    react_1.default.createElement("textarea", __assign({}, { disabled: disabled, className: className, name: name, defaultValue: value, onChange: onChange, placeholder: options.placeholder }))),
+                    react_1.default.createElement("textarea", __assign({}, {
+                        disabled: disabled,
+                        className: className,
+                        name: name,
+                        defaultValue: value || options.defaultValue,
+                        onChange: onChange, placeholder: options.placeholder
+                    }))),
                 error && getError(error)));
         }
         default: {
             return (react_1.default.createElement("div", null,
                 react_1.default.createElement("label", null,
                     label,
-                    react_1.default.createElement("input", __assign({}, { disabled: disabled, type: type, className: className, name: name, defaultValue: value, onChange: onChange, placeholder: options.placeholder }))),
+                    react_1.default.createElement("input", __assign({}, {
+                        disabled: disabled,
+                        type: type,
+                        className: className,
+                        name: name,
+                        defaultValue: value || options.defaultValue,
+                        onChange: onChange, placeholder: options.placeholder
+                    }))),
                 error && getError(error)));
         }
     }

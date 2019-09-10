@@ -31,7 +31,7 @@ const FormPartial: FormPartialType<any> = (
   };
 
   return fields.map(field => {
-    const options = fieldOptions[field]
+    const options = fieldOptions[field];
     return options && !options.hidden && getFieldComponent(field);
   });
 };

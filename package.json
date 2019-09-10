@@ -1,6 +1,6 @@
 {
   "name": "@savedo/re-form",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "react form builder library",
   "author": "Savedo GmbH. <it@savedo.de> (https://www.savedo.de)",
   "license": "MIT",
