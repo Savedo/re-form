@@ -1,12 +1,12 @@
 {
   "name": "@savedo/re-form",
-  "version": "1.9.1",
+  "version": "2.0.0",
   "description": "react form builder library",
   "author": "Savedo GmbH. <it@savedo.de> (https://www.savedo.de)",
   "license": "MIT",
   "homepage": "https://github.com/Savedo/re-form#readme",
   "main": "dist/re-form.js",
-  "types": "./index.d.ts",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Savedo/re-form.git"
@@ -26,14 +26,8 @@
     "clean": "rimraf dist",
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json '**/*.ts?(x)'",
     "test": "./node_modules/jest/bin/jest.js -u --config=jest.config.js",
-    "build": "yarn clean && yarn build:umd && yarn build:umd:min",
-    "build:umd": "webpack --mode=development",
-    "develop": "webpack-dev-server --open --devServer",
-    "build:umd:min": "webpack --mode=production"
-  },
-  "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "build": "yarn clean && webpack --mode=production",
+    "start": "webpack-dev-server --open --devServer"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -45,6 +39,8 @@
     "css-loader": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.7.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-testing-library": "^6.1.2",
     "rimraf": "^2.6.3",
     "style-loader": "^0.23.1",
@@ -61,7 +57,7 @@
     "webpack-dev-server": "^3.3.1"
   },
   "peerDependencies": {
-    "react": ">=16.8.3",
-    "react-dom": ">=16.8.3"
+    "react": ">=16.8.6",
+    "react-dom": ">=16.8.6"
   }
 }

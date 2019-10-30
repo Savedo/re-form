@@ -2,59 +2,55 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-let entry = './src/index.ts';
-
-let plugins = [
-  new webpack.EnvironmentPlugin({
-    NODE_ENV: 'development',
-    DEBUG: false
-  })
-];
-
-const devServerPlugins = [
-  new HtmlWebpackPlugin({
-    title: 'Re-form library demos',
-    template: './examples/template.html'
-  })
-];
-
-let externals = {
-  'react': {
-    root: 'React',
-    commonjs: 'react',
-    commonjs2: 'react'
-  },
-  'react-dom': {
-    root: 'ReactDOM',
-    commonjs: 'react-dom',
-    commonjs2: 'react-dom'
-  }
-};
-
 module.exports = (env, argv) => {
   const { mode, devServer } = argv;
-
   process.env.NODE_ENV = env || mode;
+  const isProduction = process.env.NODE_ENV === 'production';
 
-  const { NODE_ENV } = process.env;
-  const isProduction = NODE_ENV === 'production';
-  const filename = `re-form${isProduction ? '.min' : ''}.js`;
+  let plugins = [
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: process.env.NODE_ENV,
+      DEBUG: false
+    })
+  ];
 
+  const devServerPlugins = [
+    new HtmlWebpackPlugin({
+      title: 'Re-form library demos',
+      template: './examples/template.html'
+    })
+  ];
+
+  let externals = {
+    'react': {
+      root: 'React',
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'react'
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      amd: 'react-dom'
+    }
+  };
+
+  let entry = './src/index.ts';
   if (typeof devServer !== 'undefined') {
     plugins = plugins.concat(devServerPlugins);
-    externals = {};
     entry ='./examples/index.tsx';
   }
 
   return {
     mode,
-    entry: entry,
+    entry,
     output: {
       path: path.join(__dirname, 'dist'),
-      filename,
+      filename: 're-form.js',
       libraryTarget: 'umd',
     },
-    devtool: isProduction ? 'hidden-source-map' : 'source-map',
+    devtool: isProduction ? false : 'source-map',
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.json', '.css'],
       alias: {
@@ -83,7 +79,7 @@ module.exports = (env, argv) => {
         }
       ]
     },
-    externals: externals,
-    plugins: plugins
+    externals,
+    plugins
   };
 };
